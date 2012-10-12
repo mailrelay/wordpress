@@ -1,0 +1,87 @@
+---------------------------------------------------------------
+------ Instación del plugin de MailRelay para Wordpress -------
+---------------------------------------------------------------
+
+La instalación del plugin de MailRelay para Wordpress es muy simple. Solo lleva unos pocos pasos para conseguirlo. Esto incluye el subir algunos ficheros por FTP,
+y llevar a cabo unos pasos de configuración en el panel de control.
+
+Después de instalar la extensión aparecerá un nuevo menú en el panel izquierdo, este menú te dejará sincronizar todos tus usuarios Wordpress con tu cuenta Mailrelay.
+Esto te ahorrará tiempo para sincronizar y organizar tus usuarios en grupos.
+
+Vamos a comentar con el proceso de instalación:
+
+-----------------------
+Primer paso obligatorio
+-----------------------
+
+El primer paso, para poder usar la extensión, es habilitar la clave API de nuestra cuenta Mailrelay. Para eso tenemos que entrar en el panel de control de 
+nuestra cuenta Mailrelay. Una vez allí iremos al menú de configuración, y "Acceso API". En esa pantalla hay que pulsar en el botón de "Generar nueva clave API".
+No es necesario el escribir esta clave, una vez generada, la extensión podrá obtenerla usando los datos de usuario y contraseña.
+
+----------------------------------------
+Sube los archivos necesarios al servidor
+----------------------------------------
+
+Para subir los archivos podemos usar un software FTP, como el software libre Filezilla ( http://filezilla-project.org/download.php?type=client ). 
+También necesitamos los datos de acceso de nuestra cuenta FTP, normalmente de tu proveedor de hosting, donde has instalado el software Wordpress, podrá proveerte estos datos.
+
+Los archivos que necesitamos subir son los siguientes (en la izquierda puedes ver el archivo origen, y en la derecha el archivo destino):
+
+- mailrelay/mailrelay.php       ==> wp-content/plugins/mailrelay/mailrelay.php
+- mailrelay/step1.php           ==> wp-content/plugins/mailrelay/step1.php
+- mailrelay/step2.php           ==> wp-content/plugins/mailrelay/step2.php
+- mailrelay/step3.php           ==> wp-content/plugins/mailrelay/step3.php
+
+--------------------------------------------------
+Instalación desde el panel de control de Wordpress
+--------------------------------------------------
+
+Una vez se han subido todos los archivos, necesitamos hacer algunas configuraciones en el panel de control:
+
+- Iremos a la opción de Plugins > Plugins instalados
+- Buscaremos el plugin de Mailrelay
+- Si muestra que está desactivado, clicaremos en Activar para habilitarlo
+
+Esto finaliza el proceso de instalación.
+
+-------------------------
+Configurando la extensión
+-------------------------
+
+Una vez la extensión ha sido instalada tenemos una nueva opción de configuración. Iremos a la opción de Configuración > Mailrelay.
+Clicando en esta opción nos llevará a un formulario donde tenemos que rellenar los siguientes datos:
+
+- Usuario (esto puede encontrarse en tu correo de bienvenida de Mailrelay)
+- Contraseña (esto puede encontrarse en tu correo de bienvenida de Mailrelay)
+- Host (esto puede encontrarse en tu correo de bienvenida de Mailrelay). Por favor ten en cuenta que el host tiene que introducirse sin el http:// inicial.
+
+Una vez los datos se han grabado con éxito podemos iniciar la sincronización de usuarios.
+
+--------------------------
+Sincronización de usuarios
+--------------------------
+
+Después de la configuración, podemos clicar en el botón de Enviar. Si la configuración es correcta, esto nos llevará a una pantalla donde podemos seleccionar los grupos 
+de nuestra cuenta Mailrelay que deben ser sincronizados con la cuenta Wordpress. Seleccionaremos los que necesitemos y pulsaremos en el botón de Enviar.
+
+Veremos la siguiente pantalla, que simplemente nos muestra el proceso de sincronización. Nos mostrará el total de usuarios sincronizados.
+
+[ NOTA: Dependiendo del número de usuarios a sincronizar, el proceso puede tardar de algunos segundos a varios minutos. ]
+
+--------------
+Desinstalación
+--------------
+
+Desinstalar la extensión es tan fácil como instalarla. Solo tienes que ir a Plugins > Plugins instalados.
+Tienes que buscar el módulo Mailrelay y pulsar en Desactivar. Seleccionando esta opción, la extensión estará deshabilitada.
+Los archivos no serán borrados del ftp, para hacerlos tienes que borrar la carpeta adecuada dentro de wp-content/plugins.
+
+-----------------
+Notas adicionales
+-----------------
+- Esta extensión ha sido testeada usando Wordpress 3.4.2
+
+- Este software se proporciona "TAL CUAL" por los propietarios del copyright, y con ningun garantía expresa o implícita, incluyendo, pero no limitado a, 
+las garantías de comercialización y aptitud para un proposito en particular. En ningún caso el propietario del copyright o los colaborados serán responsables 
+por daños directos, indirectos, accidentales, especiales, ejemplares o derivados (incluyendo, sin limitaciones a la obtención de bienes o servicios, la pérdida de uso, 
+de datos o de beneficios; o interrupción de negocio), de cualquier causa a partir del uso de este software, incluso si se ha advertido de la posibilidad de tales daños.
