@@ -10,7 +10,11 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 ?>
 
 <div class="wrap">
-<?php    echo "<h2>" . __( 'Web services Steps', 'webserve_trdom' ) . "</h2>"; ?>
+<?php
+        screen_icon('options-general'); 
+        echo "<h2 id='mailrelay_settings'>";
+        echo _x( 'Mairelay Step 2 - Choose groups', 'webserve_trdom' ) . "</h2>"; 
+?>
 
 <form name="webservices_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input type="hidden" name="chk_hidden" value="Y" />
@@ -18,14 +22,24 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 	<input type="hidden" name="usrname" value="<?php echo $usrname; ?>">
 	<input type="hidden" name="pwd" value="<?php echo $pwd; ?>" />
 	<input type="hidden" name="userhost" value="<?php echo $userhost; ?>">
-	<?php    echo "<h4>" . __( 'Please Select Group', 'webserve_trdom' ) . "</h4>"; ?>
-	<select multiple="multiple" name="group[]" size="5" style="height:auto;">
-		<?php foreach($data as $x=>$value){ ?>
-		<option value="<?php echo $data[$x]->id; ?>"><?php echo $data[$x]->name; ?></option>
-		<?php } ?>
-	</select>
+
+	<table class="form-table">
+		<tr><th scope="row">
+		<label for="group"><?php _e( 'Please Select Group', 'webserve_trdom' ); ?></label></th>
+		<td>
+		<select multiple="multiple" name="group[]" size="5" style="height:auto;">
+			<?php foreach($data as $x=>$value){ ?>
+			<option value="<?php echo $data[$x]->id; ?>"><?php echo $data[$x]->name; ?></option>
+			<?php } ?>
+		</select>
+		<p><?php _e("All your Wordpress users will be synced with the groups you are choosing now."); ?><br />
+		<?php _e("To create new groups in Mailrelay, you must login into the control panel and click into the Mail Relay > Subscribers groups"); ?><br />
+		<?php _e("Once there you can add a new group for your Wordpress users, or edit an existing one"); ?></p>
+		</td></tr>
+	</table>
+
 	<p class="submit">
-	<input type="button" onclick="return chk_form();" name="Submit" value="<?php _e('Submit', 'webserve_trdom' ) ?>" />
+	<input type="button" onclick="return chk_form();" name="Select groups" value="<?php _e('Select groups', 'webserve_trdom' ) ?>" class="button-primary" />
 	</p>
 </form>
 

@@ -89,7 +89,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 	{
 		add_action('admin_menu', 'web_admin_actions1');
 		?>
-		<div class="error"><p><strong><?php _e('Invalid host, username or password. Please Retry.' ); ?></strong></p></div>
+		<div class="error"><ul><li><?php _e('Invalid host, username or password. Please Retry.' ); ?></li></ul></div>
 		<?php
 	}
 	else
@@ -106,9 +106,6 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 			$result = curl_exec($curl);
 			$jsonResult = json_decode($result);
 			update_option('jsonResult', $jsonResult);
-			?>
-			<div class="updated"><p><strong><?php _e('Thanks. You are in.' ); ?></strong></p></div>
-			<?php
 			add_action('admin_menu', 'web_admin_actions2');
 		}
 		else

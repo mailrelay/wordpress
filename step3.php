@@ -9,10 +9,19 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step3') )
 ?>
 
 <div class="wrap">
-<?php    echo "<h2>" . __( 'Synced Users', 'webserve_trdom' ) . "</h2>"; ?>
-
-New users synced: <?php echo $added; ?><br />
-Updated users:  <?php echo $updated; ?><br />
-Failed users:  <?php echo $fail; ?><br />
-
+<?php
+        screen_icon('options-general'); 
+        echo "<h2 id='mailrelay_settings'>";
+        echo _x( 'Mairelay Step 3 - Sync finished', 'webserve_trdom' ) . "</h2>"; 
+?>
+<div class="wrap">
+<h3><?php _e("The Mailrelay sync has finished successfully. Next you can check the results of the sync:"); ?></h3>
+<ul>
+	<li><?php _e("New users synced"); ?>:&nbsp;<?php echo $added; ?></li>
+	<li><?php _e("Updated users"); ?>:&nbsp;<?php echo $updated; ?></li>
+	<li><?php _e("Failed users"); ?>:&nbsp;<?php echo $fail; ?></li>
+</ul>
+<p><?php echo 
+sprintf( __( 'To retry the Mailrelay sync process please click <a href="%s">here</a>.' ), esc_url( admin_url( 'options-general.php?page=Mailrelay' ) ) ) ; ?></p>
+</div>
 <?php } ?>

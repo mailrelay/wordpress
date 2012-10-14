@@ -7,36 +7,36 @@ $userhost = get_option('userhost');
 ?>
 
 <div class="wrap">
-	<div class="updated">
-		<p><?php _e("Please enter your Mailrelay connection data."); ?></p>
-                <p><?php _e("Note that host must be filled without initial http://"); ?></p>
-	</div>
-
-<?php    echo "<h2>" . __( 'Web services Steps', 'webserve_trdom' ) . "</h2>"; ?>
+<?php
+	screen_icon('options-general'); 
+	echo "<h2 id='mailrelay_settings'>";
+	echo _x( 'Mairelay Step 1 - Sync settings', 'webserve_trdom' ) . "</h2>"; 
+?>
 
 <form name="webservices_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 	<input type="hidden" name="chk_hidden" value="Y">
 	<input type="hidden" name="page" value="web2">
 	<input type="hidden" name="step" value="step2">
-	<?php    echo "<h4>" . __( 'Please Fill This Form', 'webserve_trdom' ) . "</h4>"; ?>
-	<table width="400" border="0">
-	  <tr>
-		<td><?php _e("Username: " ); ?></td>
-		<td><input type="text" name="usrname" value="<?php echo $usrname; ?>" size="20" /></td>
-	  </tr>
-	  <tr>
-		<td><?php _e("Password: " ); ?></td>
-		<td><input type="password" name="pwd" value="<?php echo $pwd; ?>" size="20" /></td>
-	  </tr>
-	  <tr>
-		<td><?php _e("Host: " ); ?></td>
-		<td><input type="text" name="userhost" value="<?php echo $userhost; ?>" size="20" /></td>
-	  </tr>
-	</table>
 
-	<p class="submit">
-	<input type="submit" name="Submit" value="<?php _e('Submit', 'webserve_trdom' ) ?>" />
-	</p>
+	<table class="form-table">
+		<tr><th scope="row"><label for="usrname"><?php _e("Username: " ); ?></label></th>
+		<td><input type="text" name="usrname" value="<?php echo $usrname; ?>" size="20" /><p><?php 
+			_e("Please enter the username the you have in your Mailrelay welcome email."); ?></p>
+		</td></tr>
+
+		<tr><th scope="row"><label for="password"><?php _e("Password: " ); ?></label></th>
+		<td><input type="password" name="pwd" value="<?php echo $pwd; ?>" size="20" /><p>
+		<?php _e("Please enter the password that you have in your Mailrelay welcome email."); ?></p></td></tr>
+
+		<tr><th scope="row"><label for="userhost"><?php _e("Host:"); ?></label></th>
+		<td><input type="text" name="userhost" value="<?php echo $userhost; ?>" size="20" /><p>
+		<?php _e("Please enter the host that you have in your Mairelay welcome email. Please enter it without the initial http:// (for example demo.ip-zone.com)"); ?>
+		</p></td></tr>
+	</table>
+	<?php 
+	$submit_text = __( 'Save Changes', 'webserve_trdom' );
+	submit_button($submit_text, 'primary', 'options');
+	?>
 </form>
 </div>
 <?php } ?>
