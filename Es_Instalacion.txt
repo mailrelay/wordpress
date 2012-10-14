@@ -22,15 +22,9 @@ No es necesario el escribir esta clave, una vez generada, la extensión podrá o
 Sube los archivos necesarios al servidor
 ----------------------------------------
 
-Para subir los archivos podemos usar un software FTP, como el software libre Filezilla ( http://filezilla-project.org/download.php?type=client ). 
-También necesitamos los datos de acceso de nuestra cuenta FTP, normalmente de tu proveedor de hosting, donde has instalado el software Wordpress, podrá proveerte estos datos.
-
-Los archivos que necesitamos subir son los siguientes (en la izquierda puedes ver el archivo origen, y en la derecha el archivo destino):
-
-- mailrelay/mailrelay.php       ==> wp-content/plugins/mailrelay/mailrelay.php
-- mailrelay/step1.php           ==> wp-content/plugins/mailrelay/step1.php
-- mailrelay/step2.php           ==> wp-content/plugins/mailrelay/step2.php
-- mailrelay/step3.php           ==> wp-content/plugins/mailrelay/step3.php
+El plugin Mailrelay viene en un archivo formato .zip. Para subirlo iremos al menú izquierdo de Plugins > Añadir nuevo. Entonces pulsas en el submenú de Subir que te 
+permitirá el instalar el plugin desde un archivo. Una caja de tipo fichero de aparecerá donde porás subir el archivo zip. El plugin será subido en tu blog e instalado.
+Por favor ten en cuenta que tienes que dar permisos de escritura a tu carpeta de wp-content/plugins.
 
 --------------------------------------------------
 Instalación desde el panel de control de Wordpress

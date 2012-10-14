@@ -22,16 +22,9 @@ It's not necessary for us to write down this key, once it's generated, the exten
 Upload the necessary files to the server
 ----------------------------------------
 
-For uploading these files we can use an FTP software, like the free Filezilla ( http://filezilla-project.org/download.php?type=client ). 
-We will also require the access data to our FTP account, usually your hosting provider, where you have installed your Wordpress software, 
-will be able to provide you with this data.
-
-The files we need to upload are the following ( to the left you can see the source file, and to the right the destination file ):
-
-- mailrelay/mailrelay.php       ==> wp-content/plugins/mailrelay/mailrelay.php
-- mailrelay/step1.php           ==> wp-content/plugins/mailrelay/step1.php
-- mailrelay/step2.php           ==> wp-content/plugins/mailrelay/step2.php
-- mailrelay/step3.php           ==> wp-content/plugins/mailrelay/step3.php
+The Mailrelay plugins comes into a .zip file. To upload it we will go to the left menu Plugins > Add new. Then you click on the Upload tab that will allow you to 
+install a plugin from archive. A file box will appear where you can upload the mailrelay zip file. The plugin will be uploaded to your blog and installed.
+Please note that you have to give write access to your wp-content/plugins folder.
 
 ---------------------------------------
 Installation from Wordpress admin panel
