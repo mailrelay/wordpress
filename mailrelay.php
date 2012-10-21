@@ -100,7 +100,9 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 			// Call getGroups
 			$params = array(
 				'function' => 'getGroups',
-				'apiKey' => $apiKey
+				'apiKey' => $apiKey,
+				'sortField' => 'name',
+				'sortOrder' => 'ASC'
 			);
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
 			$result = curl_exec($curl);
