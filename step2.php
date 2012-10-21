@@ -25,21 +25,21 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 
 	<table class="form-table">
 		<tr><th scope="row">
-		<label for="group"><?php _e( 'Please Select Group', 'webserve_trdom' ); ?></label></th>
+		<label for="group"><?php _e( 'Please Select Group', 'mailrelay' ); ?></label></th>
 		<td>
 		<select multiple="multiple" name="group[]" size="5" style="height:auto;">
 			<?php foreach($data as $x=>$value){ ?>
 			<option value="<?php echo $data[$x]->id; ?>"><?php echo $data[$x]->name; ?></option>
 			<?php } ?>
 		</select>
-		<p><?php _e("All your Wordpress users will be synced with the groups you are choosing now."); ?><br />
-		<?php _e("To create new groups in Mailrelay, you must login into the control panel and click into the Mail Relay > Subscribers groups"); ?><br />
-		<?php _e("Once there you can add a new group for your Wordpress users, or edit an existing one"); ?></p>
+		<p><?php _e("All your Wordpress users will be synced with the groups you are choosing now.", "mailrelay"); ?><br />
+		<?php _e("To create new groups in Mailrelay, you must login into the control panel and click into the Mail Relay > Subscribers groups", "mailrelay"); ?><br />
+		<?php _e("Once there you can add a new group for your Wordpress users, or edit an existing one", "mailrelay"); ?></p>
 		</td></tr>
 	</table>
 
 	<p class="submit">
-	<input type="button" onclick="return chk_form();" name="Select groups" value="<?php _e('Select groups', 'webserve_trdom' ) ?>" class="button-primary" />
+	<input type="button" onclick="return chk_form();" name="Select groups" value="<?php _e('Select groups', 'mailrelay' ) ?>" class="button-primary" />
 	</p>
 </form>
 

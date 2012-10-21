@@ -45,6 +45,12 @@ function web_admin_actions3()
 	add_options_page("Mailrelay", "Mailrelay", 1, "Mailrelay", "step3");
 }
 
+function mailrelay_init()
+{
+	$result = load_plugin_textdomain('mailrelay', false, dirname(plugin_basename(__FILE__)).'/languages');
+}
+add_action('init', 'mailrelay_init');
+
 if(!isset($_REQUEST['step']) || ($_REQUEST['step']=='step1') )
 {
 	add_action('admin_menu', 'web_admin_actions');
@@ -89,7 +95,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 	{
 		add_action('admin_menu', 'web_admin_actions1');
 		?>
-		<div class="error"><ul><li><?php _e('Invalid host, username or password. Please Retry.' ); ?></li></ul></div>
+		<div class="error"><ul><li><?php _e('Invalid host, username or password. Please Retry.', "mailrelay" ); ?></li></ul></div>
 		<?php
 	}
 	else
@@ -114,7 +120,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 		{
 			// error with API
 			add_action('admin_menu', 'web_admin_actions1'); ?>
-			<div class="error"><p><strong><?php _e('Invalid host, username or password. Please Retry.' ); ?></strong></p></div><?php
+			<div class="error"><p><strong><?php _e('Invalid host, username or password. Please Retry.', "mailrelay" ); ?></strong></p></div><?php
 		}
 	}
 } 
