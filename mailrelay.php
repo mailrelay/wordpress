@@ -2,9 +2,9 @@
 
 /*
 Plugin Name: Mailrelay
-Plugin URI: http://www.consultorpc.com
+Plugin URI: http://mailrelay.com
 Description: This is Mailrelay services plugin
-Author: Yolanda Robla
+Author: Mailrelay
 Version: 1.1
 */
 
