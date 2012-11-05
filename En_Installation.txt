@@ -2,8 +2,7 @@
 ------ Installing MailRelay plugin for Wordpress -------
 --------------------------------------------------------
 
-The installation of the MailRelay plugin product for Wordpress is very simple. It only takes a few steps to do it. This includes uploading some files by FTP, 
-and doing some configuration in the admin panel.
+The installation of the MailRelay plugin product for Wordpress is very simple. It only takes a few steps to do it.
 
 After installing the extension a new menu will appear on the left panel, this menu will let you sync all your Wordpress users with your Mailrelay account. 
 This will save you time when syncing and organizing your users in groups.
