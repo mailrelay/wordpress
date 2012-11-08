@@ -1,77 +1,37 @@
 === Mailrelay ===
-Contributors: Mailrelay
+Contributors: Mailrelay.com
 Donate link: 
 Tags: mailrelay
 Requires at least: 3.3
 Tested up to: 3.4
-Stable tag: 
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This is Mailrelay services plugin
+Easily sync your wordpress users with Mailrelay.com.
 
 == Description ==
 
-Sync your WordPress users with Mailrelay, with this plugin. Download it and create a new campaign. Always keep your users informed about your site.
+This plugin allows you to sync all Wordpress users with one or more groups in Mailrelay allowing your website users to receive newsletters, notifications etc.
 
 == Installation ==
 
-The installation of the MailRelay plugin product for Wordpress is very simple. It only takes a few steps to do it.
-After installing the extension a new menu will appear on the left panel, this menu will let you sync all your Wordpress users with your Mailrelay account. 
-This will save you time when syncing and organizing your users in groups.
+Before starting, make sure you have an active Mailrelay.com account and your account have a valid Api Key. 
 
-Let's start with the installation process:
+1. Upload mailrelay folder to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Go to Settings -> Mailrelay and configure your account details
 
--------------------
-First required step
--------------------
-The first step, in order for us to be able to use the extension, is to enable the API key of our Mailrelay account. For that we need to log in our Mailrelay account 
-admin panel. Once we are there we will go to the "Settings" menu, then "API access". On that screen click on the "Generate new API key" button. 
-It's not necessary for us to write down this key, once it's generated, the extension will be able to get it using your user and password data.
+== Configuration ==
 
-----------------------------------------
-Upload the necessary files to the server
-----------------------------------------
-The Mailrelay plugins comes into a .zip file. To upload it we will go to the left menu Plugins > Add new. Then you click on the Upload tab that will allow you to 
-install a plugin from archive. A file box will appear where you can upload the mailrelay zip file. The plugin will be uploaded to your blog and installed.
-Please note that you have to give write access to your wp-content/plugins folder.
+Once the extension is installed you will have a new settings option: Settings > Mailrelay
 
----------------------------------------
-Installation from Wordpress admin panel
----------------------------------------
-Once we have uploaded all the required files, we need to do some configs from the admin panel:
+At this page, you will need to fill in the following data:
 
-- We will go to the Plugins > Installed plugins option
-- We will search for the Mailrelay plugin
-- If it shows it's deactivated, we click on Activate to enable it
+- Username
+- Password
+- Host
 
-This finishes the installation process.
+This information can be found in your Mailrelay's welcome email. Please note that the host must be entered without initial http://.
 
--------------------------
-Configuring the extension
--------------------------
-Once the extension is installed we will have a new settings option. We will go to Settings > Mailrelay option. 
-Clicking on this option will take us to a form where we need to fill the following data:
-
-- Username (this can be found in your Mailrelay welcome email)
-- Password (this can be found in your Mailrelay welcome email)
-- Host (this can be found in your Mailrelay welcome email). Please note that the host must be entered without initial http://
-
-Once this data is successfully saved we can start the user sync.
-
-----------
-Sync users
-----------
-After the configuration, we will click on Submit button. If settings are correct, this will take us to a screen where we can select the groups of our 
-Mailrelay account that must be sync with the Wordpress users. We will click them and will press the Submit button.
-
-We will see the following screen, that simply shows us the sync process. It shows the total users synced.
-
-[ NOTE: Depending on the number of users to sync, the process can take from some seconds to several minutes. ]
-
----------
-Uninstall
----------
-Uninstalling the extension is as easy as installing it. You only have to go to Plugins > Installed plugins. 
-You must search for the Mailrelay module and click on Deactivate. Selecting this option, the extension will be disabled. 
-The files won't be removed from ftp, to do that you must remove the right folder under wp-content/plugins.
+Once this data is successfully saved you can run the user sync.

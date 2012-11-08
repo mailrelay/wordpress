@@ -13,7 +13,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 <?php
         screen_icon('options-general'); 
         echo "<h2 id='mailrelay_settings'>";
-        echo _x( 'Mairelay Step 2 - Choose groups', 'webserve_trdom' ) . "</h2>"; 
+        echo _e( 'Mairelay Step 2 - Choose groups', 'mailrelay' ) . "</h2>"; 
 ?>
 
 <form name="webservices_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
@@ -56,8 +56,10 @@ function chk_form()
 }
      function check() {
 		if(document.webservices_form["group[]"].value == "")
-		{alert('Please select at least one Group.');
-		return false; }
+		{
+			alert("<?php echo _e('Please select at least one Group.', 'mailrelay'); ?>");
+			return false; 
+		}
 		return true;
 	}
   </script>

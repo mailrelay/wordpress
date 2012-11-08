@@ -1,16 +1,23 @@
 <?php
+global $message;
 if(!isset($_REQUEST['step']) || ($_REQUEST['step']=='step1') )
 { 
 $usrname = get_option('usrname');
 $pwd = get_option('pwd');
 $userhost = get_option('userhost');
+
+if ($message)
+{
+	?>
+	<div class="error"><p><?php echo _e($message, "mailrelay"); ?></p></div><?php
+}
 ?>
 
 <div class="wrap">
 <?php
 	screen_icon('options-general'); 
 	echo "<h2 id='mailrelay_settings'>";
-	echo _x( 'Mairelay Step 1 - Sync settings', 'webserve_trdom' ) . "</h2>"; 
+	echo _e( 'Mailrelay Step 1 - Sync settings', 'mailrelay' ) . "</h2>"; 
 ?>
 
 <form name="webservices_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">

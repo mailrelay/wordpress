@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: mailrelay wordpress addon\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-21 12:37+0100\n"
-"PO-Revision-Date: 2012-10-21 12:43+0100\n"
-"Last-Translator: Yolanda <info@ysoft.biz>\n"
+"PO-Revision-Date: 2012-11-08 10:17-0300\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e\n"
 "X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SearchPath-0: /var/www/addons_wordpress/wordpress\n"
 
 #: /var/www/addons_wordpress/wordpress/step2.php:28
@@ -19,16 +19,27 @@ msgid "Please Select Group"
 msgstr "Por favor selecciona el grupo"
 
 #: /var/www/addons_wordpress/wordpress/step2.php:35
-msgid "All your Wordpress users will be synced with the groups you are choosing now."
-msgstr "Todos tus usuarios de Wordpress serán sincronizados con los grupos que escojas ahora."
+msgid ""
+"All your Wordpress users will be synced with the groups you are choosing now."
+msgstr ""
+"Todos tus usuarios de Wordpress serán sincronizados con los grupos que "
+"escojas ahora."
 
 #: /var/www/addons_wordpress/wordpress/step2.php:36
-msgid "To create new groups in Mailrelay, you must login into the control panel and click into the Mail Relay > Subscribers groups"
-msgstr "Para crear nuevos grupos en Mailrelay, debes logarte en el panel de control y hacer click en Mai Relay > Grupos de suscriptores"
+msgid ""
+"To create new groups in Mailrelay, you must login into the control panel and "
+"click into the Mail Relay > Subscribers groups"
+msgstr ""
+"Para crear nuevos grupos en Mailrelay, debes logarte en el panel de control "
+"y hacer click en Mai Relay > Grupos de suscriptores"
 
 #: /var/www/addons_wordpress/wordpress/step2.php:37
-msgid "Once there you can add a new group for your Wordpress users, or edit an existing one"
-msgstr "Una vez allí puedes añadir un nuevo grupo para tus usuarios de Wordpress, o editar uno existente"
+msgid ""
+"Once there you can add a new group for your Wordpress users, or edit an "
+"existing one"
+msgstr ""
+"Una vez allí puedes añadir un nuevo grupo para tus usuarios de Wordpress, o "
+"editar uno existente"
 
 #: /var/www/addons_wordpress/wordpress/step2.php:42
 msgid "Select groups"
@@ -40,27 +51,41 @@ msgstr "Nombre de usuario:"
 
 #: /var/www/addons_wordpress/wordpress/step1.php:24
 msgid "Please enter the username the you have in your Mailrelay welcome email."
-msgstr "Por favor introduce el nombre de usuario que tienes en tu e-mail de bienvenida de Mailrelay."
+msgstr ""
+"Por favor introduce el nombre de usuario que tienes en tu e-mail de "
+"bienvenida de Mailrelay."
 
 #: /var/www/addons_wordpress/wordpress/step1.php:27
 msgid "Password: "
-msgstr "Contraseña:"
+msgstr "Contraseña: "
 
 #: /var/www/addons_wordpress/wordpress/step1.php:29
-msgid "Please enter the password that you have in your Mailrelay welcome email."
-msgstr "Por favor introduce la contraseña que tienes en tu e-mail de bienvenida de Mailrelay."
+msgid ""
+"Please enter the password that you have in your Mailrelay welcome email."
+msgstr ""
+"Por favor introduce la contraseña que tienes en tu e-mail de bienvenida de "
+"Mailrelay."
 
 #: /var/www/addons_wordpress/wordpress/step1.php:31
 msgid "Host:"
 msgstr "Servidor:"
 
 #: /var/www/addons_wordpress/wordpress/step1.php:33
-msgid "Please enter the host that you have in your Mairelay welcome email. Please enter it without the initial http:// (for example demo.ip-zone.com)"
-msgstr "Por favor introduce el servidor que tienes en tu e-mail de bienvenida de Mailrelay. Por favor introdúcelo sin el http:// inicial (por ejemplo demo.ip-zone.com)"
+msgid ""
+"Please enter the host that you have in your Mairelay welcome email. Please "
+"enter it without the initial http:// (for example demo.ip-zone.com)"
+msgstr ""
+"Por favor introduce el servidor que tienes en tu e-mail de bienvenida de "
+"Mailrelay. Por favor introdúcelo sin el http:// inicial (por ejemplo demo.ip-"
+"zone.com)"
 
 #: /var/www/addons_wordpress/wordpress/step3.php:18
-msgid "The Mailrelay sync has finished successfully. Next you can check the results of the sync:"
-msgstr "La sincronización de Mailrelay ha finalizado con éxito. Ahora puedes ver el resultado de la sincronización:"
+msgid ""
+"The Mailrelay sync has finished successfully. Next you can check the results "
+"of the sync:"
+msgstr ""
+"La sincronización de Mailrelay ha finalizado con éxito. Ahora puedes ver el "
+"resultado de la sincronización:"
 
 #: /var/www/addons_wordpress/wordpress/step3.php:20
 msgid "New users synced"
@@ -79,3 +104,30 @@ msgstr "Usuarios fallidos"
 msgid "Invalid host, username or password. Please Retry."
 msgstr "Servidor, nombre de usuario o contraseña incorrectos. Por favor, inténtalo de nuevo."
 
+#: /var/www/addons_wordpress/wordpress/mailrelay.php:99
+msgid ""
+"Your account does not have an API key. Please, generate one in your "
+"Mailrelay's account: Settings -> API access -> Generate new API key."
+msgstr ""
+"Su cuenta no tiene una clave API. Por favor, genere una clave en su cuenta "
+"Mailrelay: Configuración -> Acceso a API  -> Generar nueva clave API."
+
+#: /var/www/addons_wordpress/wordpress/step1.php:13
+msgid "Mailrelay Step 1 - Sync settings"
+msgstr "Mailrelay Paso 1 - Parámetros de sincronización"
+
+#: /var/www/addons_wordpress/wordpress/step2.php:16
+msgid "Mairelay Step 2 - Choose groups"
+msgstr "Mailrelay Paso 2 - Escoge grupos"
+
+#: /var/www/addons_wordpress/wordpress/step2.php:60
+msgid "Please select at least one Group."
+msgstr "Por favor selecciona al menos un grupo"
+
+#: /var/www/addons_wordpress/wordpress/step3.php:15
+msgid "Mailrelay Step 3 - Sync finished"
+msgstr "Mailrelay Paso 3 - Sincronización finalizada"
+
+#: /var/www/addons_wordpress/wordpress/step3.php:25
+msgid "To retry the Mailrelay sync process please click <a href='%s'>here</a>."
+msgstr "Para repetir el proceso de sincronización de Mailrelay pulsa <a href='%s'>aquí</a>."

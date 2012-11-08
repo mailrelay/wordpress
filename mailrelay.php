@@ -3,9 +3,9 @@
 /*
 Plugin Name: Mailrelay
 Plugin URI: http://mailrelay.com
-Description: This is Mailrelay services plugin
-Author: Mailrelay
-Version: 1.1
+Description: Easily sync your Wordpress users with Mailrelay.
+Author: Mailrelay.com
+Version: 1.1.1
 */
 
 //*************** Admin function ***************
@@ -49,12 +49,12 @@ function mailrelay_init()
 {
 	$result = load_plugin_textdomain('mailrelay', false, dirname(plugin_basename(__FILE__)).'/languages');
 }
-add_action('init', 'mailrelay_init');
 
 if(!isset($_REQUEST['step']) || ($_REQUEST['step']=='step1') )
 {
 	add_action('admin_menu', 'web_admin_actions');
 }
+add_action('init', 'mailrelay_init');
 
 if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 {
@@ -93,10 +93,14 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 
 	if (!$jsonResult || trim($jsonResult->status)!=1)
 	{
+		global $message;
 		add_action('admin_menu', 'web_admin_actions1');
-		?>
-		<div class="error"><ul><li><?php _e('Invalid host, username or password. Please Retry.', "mailrelay" ); ?></li></ul></div>
-		<?php
+
+		if ($jsonResult->error == 'Your account does not have an API key.') {
+			$message = "Your account does not have an API key. Please, generate one in your Mailrelay's account: Settings -> API access -> Generate new API key.";
+		} else {
+			$message = 'Invalid host, username or password. Please Retry.';
+		}
 	}
 	else
 	{
@@ -119,8 +123,8 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 		else
 		{
 			// error with API
-			add_action('admin_menu', 'web_admin_actions1'); ?>
-			<div class="error"><p><strong><?php _e('Invalid host, username or password. Please Retry.', "mailrelay" ); ?></strong></p></div><?php
+			add_action('admin_menu', 'web_admin_actions1');
+			$message = 'Invalid host, username or password. Please Retry.';
 		}
 	}
 } 
