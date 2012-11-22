@@ -88,7 +88,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 	curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
 
         $headers = array(
-        	'X-Request-Origin' => 'Wordpress|1.1.1|'.$wp_version 
+        	'X-Request-Origin: Wordpress|1.1.1|'.$wp_version 
         );
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -122,7 +122,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step2') )
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
 
        			$headers = array(
-                		'X-Request-Origin' => 'Wordpress|1.1.1|'.$wp_version 
+                		'X-Request-Origin: Wordpress|1.1.1|'.$wp_version 
         		);
         		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -183,7 +183,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step3') )
 	curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
 
         $headers = array(
-                'X-Request-Origin' => 'Wordpress|1.1.1|'.$wp_version 
+                'X-Request-Origin: Wordpress|1.1.1|'.$wp_version 
         );
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -218,7 +218,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step3') )
 			curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
 
         		$headers = array(
-                		'X-Request-Origin' => 'Wordpress|1.1.1|'.$wp_version 
+                		'X-Request-Origin: Wordpress|1.1.1|'.$wp_version 
         		);
         		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -238,7 +238,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step3') )
 				curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
 
         			$headers = array(
-                			'X-Request-Origin' => 'Wordpress|1.1.1|'.$wp_version 
+                			'X-Request-Origin: Wordpress|1.1.1|'.$wp_version 
         			);
         			curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -267,7 +267,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step3') )
 				curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
 
         			$headers = array(
-                			'X-Request-Origin' => 'Wordpress|1.1.1|'.$wp_version 
+                			'X-Request-Origin: Wordpress|1.1.1|'.$wp_version 
         			);
         			curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
