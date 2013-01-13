@@ -1,17 +1,18 @@
+<?php if( $this->step === 'step1' ) : ?>
 <?php
-global $message;
-if(!isset($_REQUEST['step']) || ($_REQUEST['step']=='step1') )
-{ 
-$usrname = get_option('usrname');
-$pwd = get_option('pwd');
-$userhost = get_option('userhost');
 
-if ($message)
-{
-	?>
-	<div class="error"><p><?php echo _e($message, "mailrelay"); ?></p></div><?php
-}
+    $usrname    = get_option('usrname');   
+    $pwd        = get_option('pwd');
+    $userhost   = get_option('userhost');
+
 ?>
+
+<?php endif; ?>
+
+
+<?php if( $this->message ) : ?>
+    <div class="error"><p><?php echo _e($this->message, $this->slug); ?></p></div>
+<?php endif; ?>
 
 <div class="wrap">
 <?php
@@ -46,4 +47,4 @@ if ($message)
 	?>
 </form>
 </div>
-<?php } ?>
+<?php // } ?>
