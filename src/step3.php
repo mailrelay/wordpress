@@ -1,13 +1,3 @@
-<?php 
-if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step3') )
-{
-
-	$added = get_option('added');
-	$updated = get_option('updated');
-	$fail = get_option('fail');
-	
-?>
-
 <div class="wrap">
 <?php
         screen_icon('options-general'); 
@@ -21,7 +11,5 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step']=='step3') )
 	<li><?php _e("Updated users", "mailrelay"); ?>:&nbsp;<?php echo $updated; ?></li>
 	<li><?php _e("Failed users", "mailrelay"); ?>:&nbsp;<?php echo $fail; ?></li>
 </ul>
-<p><?php echo 
-sprintf(__("To retry the Mailrelay sync process please click <a href='%s'>here</a>.", 'mailrelay' ), esc_url( admin_url( 'options-general.php?page=Mailrelay' ) ) ) ; ?></p>
+<p><?php printf(__("To retry the Mailrelay sync process please click <a href='%s'>here</a>.", 'mailrelay' ), esc_url( admin_url( '?page=mailrelay' ) ) ) ; ?></p>
 </div>
-<?php } ?>
