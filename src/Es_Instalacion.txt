@@ -13,7 +13,7 @@ Vamos a comentar con el proceso de instalación:
 Primer paso obligatorio
 -----------------------
 
-El primer paso, para poder usar la extensión, es habilitar la clave API de nuestra cuenta Mailrelay. Para eso tenemos que entrar en el panel de control de 
+El primer paso, para poder usar la extensión, es habilitar la clave API de nuestra cuenta Mailrelay. Para eso tenemos que entrar en el panel de control de
 nuestra cuenta Mailrelay. Una vez allí iremos al menú de configuración, y "Acceso API". En esa pantalla hay que pulsar en el botón de "Generar nueva clave API".
 No es necesario el escribir esta clave, una vez generada, la extensión podrá obtenerla usando los datos de usuario y contraseña.
 
@@ -21,7 +21,7 @@ No es necesario el escribir esta clave, una vez generada, la extensión podrá o
 Sube los archivos necesarios al servidor
 ----------------------------------------
 
-El plugin Mailrelay viene en un archivo formato .zip. Para subirlo iremos al menú izquierdo de Plugins > Añadir nuevo. Entonces pulsas en el submenú de Subir que te 
+El plugin Mailrelay viene en un archivo formato .zip. Para subirlo iremos al menú izquierdo de Plugins > Añadir nuevo. Entonces pulsas en el submenú de Subir que te
 permitirá el instalar el plugin desde un archivo. Una caja de tipo fichero de aparecerá donde porás subir el archivo zip. El plugin será subido en tu blog e instalado.
 Por favor ten en cuenta que tienes que dar permisos de escritura a tu carpeta de wp-content/plugins.
 
@@ -43,10 +43,9 @@ Configurando la extensión
 
 Una vez la extensión ha sido instalada tenemos una nueva opción de configuración. Iremos a la opción de Configuración > Mailrelay.
 Clicando en esta opción nos llevará a un formulario donde tenemos que rellenar los siguientes datos:
-
-- Usuario (esto puede encontrarse en tu correo de bienvenida de Mailrelay)
-- Contraseña (esto puede encontrarse en tu correo de bienvenida de Mailrelay)
-- Host (esto puede encontrarse en tu correo de bienvenida de Mailrelay). Por favor ten en cuenta que el host tiene que introducirse sin el http:// inicial.
+
+- Host (esto puede encontrarse en tu correo de bienvenida de Mailrelay). Por favor ten en cuenta que el host tiene que introducirse sin el http:// inicial
+- API key (la clave API generada de nuestra cuenta Mailrelay).
 
 Una vez los datos se han grabado con éxito podemos iniciar la sincronización de usuarios.
 
@@ -54,7 +53,7 @@ Una vez los datos se han grabado con éxito podemos iniciar la sincronización d
 Sincronización de usuarios
 --------------------------
 
-Después de la configuración, podemos clicar en el botón de Enviar. Si la configuración es correcta, esto nos llevará a una pantalla donde podemos seleccionar los grupos 
+Después de la configuración, podemos clicar en el botón de Enviar. Si la configuración es correcta, esto nos llevará a una pantalla donde podemos seleccionar los grupos
 de nuestra cuenta Mailrelay que deben ser sincronizados con la cuenta Wordpress. Seleccionaremos los que necesitemos y pulsaremos en el botón de Enviar.
 
 Veremos la siguiente pantalla, que simplemente nos muestra el proceso de sincronización. Nos mostrará el total de usuarios sincronizados.
@@ -72,9 +71,9 @@ Los archivos no serán borrados del ftp, para hacerlos tienes que borrar la carp
 -----------------
 Notas adicionales
 -----------------
-- Esta extensión ha sido testeada usando Wordpress 3.4.2
+- Esta extensión ha sido testeada usando Wordpress 3.5.1
 
-- Este software se proporciona "TAL CUAL" por los propietarios del copyright, y con ningun garantía expresa o implícita, incluyendo, pero no limitado a, 
-las garantías de comercialización y aptitud para un proposito en particular. En ningún caso el propietario del copyright o los colaborados serán responsables 
-por daños directos, indirectos, accidentales, especiales, ejemplares o derivados (incluyendo, sin limitaciones a la obtención de bienes o servicios, la pérdida de uso, 
+- Este software se proporciona "TAL CUAL" por los propietarios del copyright, y con ningun garantía expresa o implícita, incluyendo, pero no limitado a,
+las garantías de comercialización y aptitud para un proposito en particular. En ningún caso el propietario del copyright o los colaborados serán responsables
+por daños directos, indirectos, accidentales, especiales, ejemplares o derivados (incluyendo, sin limitaciones a la obtención de bienes o servicios, la pérdida de uso,
 de datos o de beneficios; o interrupción de negocio), de cualquier causa a partir del uso de este software, incluso si se ha advertido de la posibilidad de tales daños.
