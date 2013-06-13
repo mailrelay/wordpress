@@ -70,7 +70,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step'] == 'step2'))
     $mailrelay_api_key = get_option('mailrelay_api_key');
 
     // First thing, authenticate
-    $url = 'http://'. $hostname .'/ccm/admin/api/version/2/&type=json';
+    $url = 'https://'. $hostname .'/ccm/admin/api/version/2/&type=json';
     $curl = curl_init($url);
 
     // Call getGroups
@@ -83,6 +83,8 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step'] == 'step2'))
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POST, 1);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($curl, CURLOPT_SSLVERSION, 3);
 
     $headers = array(
         'X-Request-Origin: Wordpress|1.2.0|'.$wp_version
@@ -126,8 +128,8 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step'] == 'step3'))
     //Form data sent
     $userhost = $_POST['userhost'];
     $mailrelay_api_key = $_POST['mailrelay_api_key'];
-    update_option('userhost', $userhost);
-    update_option('mailrelay_api_key', $mailrelay_api_key);
+    update_option('userhost', trim($userhost));
+    update_option('mailrelay_api_key', trim($mailrelay_api_key));
     update_option('step', 'step2');
 
     // These will be entered by user.
@@ -135,7 +137,7 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step'] == 'step3'))
     $mailrelay_api_key = get_option('mailrelay_api_key');
 
     // First thing, authenticate
-    $url = 'http://'. $hostname .'/ccm/admin/api/version/2/&type=json';
+    $url = 'https://'. $hostname .'/ccm/admin/api/version/2/&type=json';
     $curl = curl_init($url);
 
     $added = 0;
@@ -154,6 +156,8 @@ if(isset($_REQUEST['step']) && ($_REQUEST['step'] == 'step3'))
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSLVERSION, 3);
 
         $headers = array(
             'X-Request-Origin: Wordpress|1.2.0|'.$wp_version
