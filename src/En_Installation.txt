@@ -5,7 +5,7 @@
 The installation of the MailRelay plugin product for Wordpress is very simple. It only takes a few steps to do it.
 
 After installing the extension a new menu will appear on the left panel, this menu will let you sync all your Wordpress users with your Mailrelay account.
-This will save you time when syncing and organizing your users in groups.
+This will save you time when syncing and organizing your users in groups and configure if you want to send posts or feeds as newsletters.
 
 Let's start with the installation process:
 
@@ -41,13 +41,29 @@ This finishes the installation process.
 Configuring the extension
 -------------------------
 
-Once the extension is installed we will have a new settings option. We will go to Settings > Mailrelay option.
+Once the extension is installed we will have a new settings option. We will go to Mailrelay > Connection Settings option.
 Clicking on this option will take us to a form where we need to fill the following data:
 
 - Host (this can be found in your Mailrelay welcome email). Please note that the host must be entered without initial http://
 - API key (the API key generated for our Mailrelay account)
 
 Once this data is successfully saved we can start the user sync.
+
+----------------
+Configure posts
+----------------
+
+On this section you can enable and configure the sending of posts as newsletters , when it is enabled a new section displays when a post is created/edited , where you will be able to select the group the post will be sent, and optionally an alternative title to replace the original title of the post.
+
+Also,it is posible to configure which will be the from and reply to the mail will sent, and which will be the mail where reports of sending and if the post will have alink to unsuscribe.
+
+--------------
+Feeds settings
+--------------
+
+On this section you can enable and configure the sending of feeds as newsletters, it has the same settings options than the post settings and one additonal option, where it is possible to select the group to sent the feeds, this options is for all feeds what is different for posts, where it is possible to select a group for each different post.
+
+The sending of the newsletter is doing when the post is published for the first time as a feed.
 
 ----------
 Sync users

@@ -1,11 +1,12 @@
 ---------------------------------------------------------------
------- Instación del plugin de MailRelay para Wordpress -------
+------ Instalación del plugin de MailRelay para Wordpress -------
 ---------------------------------------------------------------
 
 La instalación del plugin de MailRelay para Wordpress es muy simple. Solo lleva unos pocos pasos para conseguirlo.
 
-Después de instalar la extensión aparecerá un nuevo menú en el panel izquierdo, este menú te dejará sincronizar todos tus usuarios Wordpress con tu cuenta Mailrelay.
-Esto te ahorrará tiempo para sincronizar y organizar tus usuarios en grupos.
+Después de instalar la extensión aparecerá un nuevo menú en el panel izquierdo, este menú te dejará sincronizar todos tus usuarios Wordpress con tu cuenta Mailrelay y configurar si deseas mandar posts o feeds como boletines.
+
+Esto te ahorrará tiempo para sincronizar y organizar tus usuarios en grupos, además de enviar boletines basados en posts.
 
 Vamos a comentar con el proceso de instalación:
 
@@ -41,20 +42,37 @@ Esto finaliza el proceso de instalación.
 Configurando la extensión
 -------------------------
 
-Una vez la extensión ha sido instalada tenemos una nueva opción de configuración. Iremos a la opción de Configuración > Mailrelay.
+Una vez la extensión ha sido instalada tenemos una nueva opción de configuración. Iremos a la opción de Mailrelay > Connection Settings.
 Clicando en esta opción nos llevará a un formulario donde tenemos que rellenar los siguientes datos:
-
+
 - Host (esto puede encontrarse en tu correo de bienvenida de Mailrelay). Por favor ten en cuenta que el host tiene que introducirse sin el http:// inicial
 - API key (la clave API generada de nuestra cuenta Mailrelay).
 
 Una vez los datos se han grabado con éxito podemos iniciar la sincronización de usuarios.
 
+------------------
+Configurando Posts
+------------------
+
+En esta sección puedes habilitar y configurar el envio de posts como boletines, cuando se habilita aparece una nueva sección al momento de crear/editar posts, donde podrás seleccionar a que grupo se desea enviar el post y opcionalmente un título alterno al título original del post.
+
+Es posible también configurar con que from y reply to serían enviados los correo, y a que correo se enviarán los reportes de envio y si el post enviado contará con un link para desuscribirse.
+
+El envio del boletin se realiza al momento de publicar el post, ya sea está de manera manual o programada.
+
+------------------
+Configurando Feeds
+------------------
+
+En esta sección puedes habilitar y configurar el envio de feeds como boletines, tiene las mismas opciones de configuración que para el envio de posts y una opción adicional, en la que se selecciona al grupo al que desees que se envién los feeds, este grupo es para todos los feeds a diferencia que la configuración para posts, donde es posible seleccionar un grupo diferente para cada post.
+
+El envio del boletin se realiza cuando el post es publicado por primera vez como un feed.
+
 --------------------------
 Sincronización de usuarios
 --------------------------
 
-Después de la configuración, podemos clicar en el botón de Enviar. Si la configuración es correcta, esto nos llevará a una pantalla donde podemos seleccionar los grupos
-de nuestra cuenta Mailrelay que deben ser sincronizados con la cuenta Wordpress. Seleccionaremos los que necesitemos y pulsaremos en el botón de Enviar.
+Después de la configuración, podemos clicar en la opción Sync Users. Si la configuración es correcta, esto nos llevará a una pantalla donde podemos seleccionar los grupos de nuestra cuenta Mailrelay que deben ser sincronizados con la cuenta Wordpress. Seleccionaremos los que necesitemos y pulsaremos en el botón de Start Sync.
 
 Veremos la siguiente pantalla, que simplemente nos muestra el proceso de sincronización. Nos mostrará el total de usuarios sincronizados.
 
