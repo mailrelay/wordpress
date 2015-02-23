@@ -1,11 +1,9 @@
 <?php
-
 /*
 Plugin Name: Mailrelay
 Plugin URI: http://mailrelay.com
 Description: Easily sync your Wordpress users with Mailrelay.
 Author: Mailrelay.com
-Version: '. MAILRELAY_PLUGIN_VERSION .'
 */
 
 if (!function_exists('is_admin') || !is_admin()) {
