@@ -8,6 +8,10 @@ Author: Mailrelay.com
 Version: 1.4.0
 */
 
+if (!function_exists('is_admin') || !is_admin()) {
+    die('Invalid access.');
+}
+
 function mailrelay_init() {
     $result = load_plugin_textdomain('mailrelay', false, dirname(plugin_basename(__FILE__)) . '/languages');
 }

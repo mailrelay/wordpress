@@ -1,4 +1,8 @@
 <?php
+if (!function_exists('is_admin') || !is_admin()) {
+    die('Invalid access.');
+}
+
 global $message;
 
 if (!empty($message)) {
