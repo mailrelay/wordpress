@@ -44,7 +44,7 @@ curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($curl, CURLOPT_SSLVERSION, 3);
 
 $headers = array(
-    'X-Request-Origin: Wordpress|1.4.0|'.$wp_version
+    'X-Request-Origin: Wordpress|1.4.0|'. get_bloginfo('version')
 );
 curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 

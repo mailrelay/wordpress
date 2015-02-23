@@ -64,7 +64,7 @@ function mailrelay_get_groups() {
     curl_setopt($curl, CURLOPT_SSLVERSION, 3);
 
     $headers = array(
-        'X-Request-Origin: Wordpress|1.4.0|'.$wp_version
+        'X-Request-Origin: Wordpress|1.4.0|'. get_bloginfo('version')
     );
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -194,7 +194,7 @@ function mailrelay_publish_post($post_id, $post) {
     curl_setopt($curl, CURLOPT_SSLVERSION, 3);
 
     $headers = array(
-        'X-Request-Origin: Wordpress|1.4.0|'.$wp_version
+        'X-Request-Origin: Wordpress|1.4.0|'. get_bloginfo('version')
     );
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -211,7 +211,7 @@ function mailrelay_publish_post($post_id, $post) {
             );
             curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
             $headers = array(
-                'X-Request-Origin: Wordpress|1.4.0|'.$wp_version
+                'X-Request-Origin: Wordpress|1.4.0|'. get_bloginfo('version')
             );
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
             $result = curl_exec($curl);
@@ -262,7 +262,7 @@ function mailrelay_publish_feed($post_id, $post) {
     curl_setopt($curl, CURLOPT_SSLVERSION, 3);
 
     $headers = array(
-        'X-Request-Origin: Wordpress|1.4.0|'.$wp_version
+        'X-Request-Origin: Wordpress|1.4.0|'. get_bloginfo('version')
     );
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -279,7 +279,7 @@ function mailrelay_publish_feed($post_id, $post) {
             );
             curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
             $headers = array(
-                'X-Request-Origin: Wordpress|1.4.0|'.$wp_version
+                'X-Request-Origin: Wordpress|1.4.0|'. get_bloginfo('version')
             );
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
             $result = curl_exec($curl);
@@ -418,7 +418,7 @@ if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'mailrelay_save_connec
     curl_setopt($curl, CURLOPT_SSLVERSION, 3);
 
     $headers = array(
-        'X-Request-Origin: Wordpress|1.4.0|'.$wp_version
+        'X-Request-Origin: Wordpress|1.4.0|'. get_bloginfo('version')
     );
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -516,7 +516,7 @@ if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'mailrelay_sync_users_
         curl_setopt($curl, CURLOPT_SSLVERSION, 3);
 
         $headers = array(
-            'X-Request-Origin: Wordpress|1.4.0|'.$wp_version
+            'X-Request-Origin: Wordpress|1.4.0|'. get_bloginfo('version')
         );
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -535,7 +535,7 @@ if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'mailrelay_sync_users_
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
             $headers = array(
-                'X-Request-Origin: Wordpress|1.4.0|'.$wp_version
+                'X-Request-Origin: Wordpress|1.4.0|'. get_bloginfo('version')
            );
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -559,7 +559,7 @@ if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'mailrelay_sync_users_
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
             $headers = array(
-                'X-Request-Origin: Wordpress|1.4.0|'.$wp_version
+                'X-Request-Origin: Wordpress|1.4.0|'. get_bloginfo('version')
             );
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
