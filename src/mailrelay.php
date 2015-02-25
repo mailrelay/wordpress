@@ -6,7 +6,7 @@ Description: Easily sync your Wordpress users with Mailrelay.
 Author: Mailrelay.com
 */
 
-if (!function_exists('is_admin') || !is_admin()) {
+if (!defined('ABSPATH')) {
     die('Invalid access.');
 }
 
