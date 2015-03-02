@@ -1,7 +1,7 @@
 === Mailrelay ===
 Contributors: Mailrelay.com
 Donate link: 
-Tags: mailrelay
+Tags: mailrelay,newsletter,email marketing
 Requires at least: 3.3
 Tested up to: 4.1.1
 Stable tag: 1.5

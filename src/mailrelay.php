@@ -3,6 +3,7 @@
 Plugin Name: Mailrelay
 Plugin URI: http://mailrelay.com
 Description: Easily sync your Wordpress users with Mailrelay.
+Version: 1.5
 Author: Mailrelay.com
 */
 
