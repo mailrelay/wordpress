@@ -327,13 +327,17 @@ if (function_exists('is_admin') && is_admin()) {
         } else {
             $unsubscribe_link = '';
         }
+        
+        $more = '' . __('View more', 'mailrelay') . '';
+        $date = '' . __('Posted: ', 'mailrelay') . date('Y-m-d H:i:s');
 
         $aux     = pathinfo(__FILE__);
         $content = file_get_contents($aux['dirname'] . '/newletter.html');
         $content = str_replace('{$title}', $post_title, $content);
-        $content = str_replace('{$date}', date('Y-m-d H:i:s'), $content);
+        $content = str_replace('{$date}', $date, $content);
         $content = str_replace('{$content}', $post_content, $content);
         $content = str_replace('{$link}', $post_link, $content);
+        $content = str_replace('{$more}', $more, $content);
         $content = str_replace('{$unsubscribe}', $unsubscribe_link, $content);
 
         return $content;
