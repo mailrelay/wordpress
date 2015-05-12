@@ -18,148 +18,148 @@ msgstr ""
 
 #: ../connection_settings.php:22
 msgid "Connection Settings"
-msgstr "Configuración de Conección"
+msgstr "Connection Settings"
 
 #: ../connection_settings.php:28
 msgid "Host:"
-msgstr "Servidor:"
+msgstr "Host:"
 
 #: ../connection_settings.php:30
 msgid "Please enter the host that you have in your Mairelay welcome email. Please enter it without the initial http:// (for example demo.ip-zone.com)"
-msgstr "Por favor inserte el host que has recibido en el email de bienvenida de Mailrelay. Por favor, inserte-o sin la inicial http:// (por ejemplo: demo.ip-zone.com)"
+msgstr "Please enter the host that you have in your Mairelay welcome email. Please enter it without the initial http:// (for example demo.ip-zone.com)"
 
 #: ../connection_settings.php:32
 msgid "API Key: "
-msgstr "Clave API: "
+msgstr "API Key: "
 
 #: ../connection_settings.php:34
 msgid "Please enter your API key. You can generate your API key on your Mailrelay panel, Configuration -> API access -> Generate API key"
-msgstr "Por favor inserte su clave API. Puedes gneerar su clave API en tu panel Mailrelay, Configuración -> acceso API -> Gneerar clave API"
+msgstr "Please enter your API key. You can generate your API key on your Mailrelay panel, Configuration -> API access -> Generate API key"
 
 #: ../connection_settings.php:40 ../feeds_settings.php:151
 #: ../posts_settings.php:130
 msgid "Save Changes"
-msgstr "Guardar Cambios"
+msgstr "Save Changes"
 
 #: ../feeds_settings.php:18
 msgid "Feeds Settings"
-msgstr "Configuraciones de los Feeds"
+msgstr "Feeds Settings"
 
 #: ../feeds_settings.php:82
 msgid "Feeds like newsletters:"
-msgstr "Feeds como Boletines"
+msgstr "Feeds as newsletters:"
 
 #: ../feeds_settings.php:84 ../feeds_settings.php:104
 msgid "To send feeds like newsletters"
-msgstr "Para enviar los feeds como Boletines"
+msgstr "To send feeds as newsletters"
 
 #: ../feeds_settings.php:86
 msgid "Please select a group to send the feeds"
-msgstr "Por favor, selecciona un grupo para enviar los feeds"
+msgstr "Please select a group to send the feeds"
 
 #: ../feeds_settings.php:106 ../posts_settings.php:85
 msgid "Newsletter From:"
-msgstr "Boletín De:"
+msgstr "Newsletter From:"
 
 #: ../feeds_settings.php:117 ../posts_settings.php:96
 msgid "Use this field like Newsletter From"
-msgstr "Usa este campo como boletín De"
+msgstr "Use this field as Newsletter From"
 
 #: ../feeds_settings.php:119 ../posts_settings.php:98
 msgid "Newsletter Reply To:"
-msgstr "Responder boletín para:"
+msgstr "Newsletter Reply To:"
 
 #: ../feeds_settings.php:130 ../posts_settings.php:109
 msgid "Use this field like Newsletter Reply To"
-msgstr "Usa este campo como Respuesta del Boletín para"
+msgstr "Use this field as Newsletter Reply To"
 
 #: ../feeds_settings.php:132 ../posts_settings.php:111
 msgid "Newsletter Report To:"
-msgstr "Informe de Boletín Para:"
+msgstr "Newsletter Report To:"
 
 #: ../feeds_settings.php:143 ../posts_settings.php:122
 msgid "Use this field like Newsletter Report To"
-msgstr "Usa este campo para el envío del informe del Boletín"
+msgstr "Use this field as Newsletter Report To"
 
 #: ../feeds_settings.php:145 ../posts_settings.php:124
 msgid "Allow users to unsubscribe:"
-msgstr "Permitir usuarios cancelar la suscripción"
+msgstr "Allow users to unsubscribe:"
 
 #: ../feeds_settings.php:147
 msgid "Enable users to unsubscribe from the feeds"
-msgstr "Permitir usuarios a cancelar la suscripción de los  feeds"
+msgstr "Enable users to unsubscribe from the feeds"
 
 #: ../mailrelay.php:87
 msgid "Please select a group to send this post"
-msgstr "Por favor selecciona un grupo para enviar este post"
+msgstr "Please select a group to send this post"
 
 #: ../mailrelay.php:90
 msgid "- Don't send -"
-msgstr "No enviar"
+msgstr "- Don't send -"
 
 #: ../mailrelay.php:109
 msgid "Alternative Title"
-msgstr "Título Alternativo"
+msgstr "Alternative Title"
 
 #: ../mailrelay.php:111
 msgid "If you enter a value in this field it will be used instead of post title"
-msgstr "Si usted insertar un valor en este campo será usado en lugar del título del post"
+msgstr "If you enter a value in this field it will be used instead of post title"
 
 #: ../mailrelay.php:326
 msgid "Unsubscribe"
-msgstr "Cancelar suscripción"
+msgstr "Unsubscribe"
 
 #: ../mailrelay.php:331
 msgid "View more"
-msgstr "Ver más"
+msgstr "View more"
 
 #: ../mailrelay.php:332
 msgid "Posted: "
-msgstr "Publicado: "
+msgstr "Posted: "
 
 #: ../posts_settings.php:18
 msgid "Posts Settings"
-msgstr "Configuración de Posts"
+msgstr "Posts Settings"
 
 #: ../posts_settings.php:81
 msgid "Posts like newsletters:"
-msgstr "Posts como Boletín"
+msgstr "Posts as newsletters:"
 
 #: ../posts_settings.php:83
 msgid "Enable posts like newsletters"
-msgstr "Activar posts como Boletines"
+msgstr "Enable posts as newsletters"
 
 #: ../posts_settings.php:126
 msgid "Enable users to unsubscribe from the newsletters"
-msgstr "Activar usuarios a cancelar la suscripción de los Boletines"
+msgstr "Enable users to unsubscribe from the newsletters"
 
 #: ../sync_users.php:22
 msgid "Sync Users"
-msgstr "Sincronizar Usuarios"
+msgstr "Sync Users"
 
 #: ../sync_users.php:73
 msgid "Please Select Group"
-msgstr "Por favor selecciona el grupo"
+msgstr "Please Select Group"
 
 #: ../sync_users.php:80
 msgid "All your Wordpress users will be synced with the groups you are choosing now."
-msgstr "Todos tus usuarios Wordpress serán sincronizados con los grupos que estás seleccionando ahora."
+msgstr "All your Wordpress users will be synced with the groups you are choosing now."
 
 #: ../sync_users.php:81
 msgid "To create new groups in Mailrelay, you must login into the control panel and click into the Mail Relay > Subscribers groups"
-msgstr "Para crear nuevos grupos en Mailrelay, debes logear en el panel de control y clicar en MailRelay > Grupos de suscriptores"
+msgstr "To create new groups in Mailrelay, you must login on your control panel and click on Mailrelay > Subscribers groups"
 
 #: ../sync_users.php:82
 msgid "Once there you can add a new group for your Wordpress users, or edit an existing one"
-msgstr "Una vez lá podrás añadir un nuevo grupo para los usuarios del WordPress, o editar un ya existente"
+msgstr "Once there you can add a new group for your Wordpress users, or edit an existing one"
 
 #: ../sync_users.php:87
 msgid "Start Sync"
-msgstr "Iniciar Sincronización"
+msgstr "Start Sync"
 
 #: ../sync_users.php:102
 msgid "Please select at least one Group."
-msgstr "Por favor selecciona al menos un grupo"
+msgstr "Please select at least one Group."
 
 #~ msgid "Select groups"
 #~ msgstr "Selecciona los grupos"

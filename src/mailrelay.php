@@ -3,7 +3,7 @@
 Plugin Name: Mailrelay
 Plugin URI: http://mailrelay.com
 Description: Easily sync your Wordpress users with Mailrelay.
-Version: 1.5
+Version: 1.6
 Author: Mailrelay.com
 */
 
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('MAILRELAY_PLUGIN_VERSION')) {
-    define('MAILRELAY_PLUGIN_VERSION', '1.5.0');
+    define('MAILRELAY_PLUGIN_VERSION', '1.6.0');
 }
 
 if (function_exists('is_admin') && is_admin()) {
@@ -22,10 +22,10 @@ if (function_exists('is_admin') && is_admin()) {
 
     function mailrelay_menu() {
         add_menu_page('Mailrelay', 'Mailrelay', 'manage_options', 'mailrelay', null, plugins_url('mailrelay/mailrelay.png'));
-        add_submenu_page('mailrelay', 'Connection Settings', 'Connection Settings', 'manage_options', 'mailrelay_connection_settings', 'mailrelay_connection_settings');
-        add_submenu_page('mailrelay', 'Posts Settings', 'Posts Settings', 'manage_options', 'mailrelay_posts_settings', 'mailrelay_posts_settings');
-        add_submenu_page('mailrelay', 'Feeds Settings', 'Feeds Settings', 'manage_options', 'mailrelay_feeds_settings', 'mailrelay_feeds_settings');
-        add_submenu_page('mailrelay', 'Sync Users', 'Sync Users', 'manage_options', 'mailrelay_sync_users', 'mailrelay_sync_users');
+        add_submenu_page('mailrelay', __('Connection Settings', 'mailrelay'), __('Connection Settings', 'mailrelay'), 'manage_options', 'mailrelay_connection_settings', 'mailrelay_connection_settings');
+        add_submenu_page('mailrelay', __('Posts Settings', 'mailrelay'), __('Posts Settings', 'mailrelay'), 'manage_options', 'mailrelay_posts_settings', 'mailrelay_posts_settings');
+        add_submenu_page('mailrelay', __('Feeds Settings', 'mailrelay'), __('Feeds Settings', 'mailrelay'), 'manage_options', 'mailrelay_feeds_settings', 'mailrelay_feeds_settings');
+        add_submenu_page('mailrelay', __('Sync Users', 'mailrelay'), __('Sync Users', 'mailrelay'), 'manage_options', 'mailrelay_sync_users', 'mailrelay_sync_users');
         remove_submenu_page('mailrelay', 'mailrelay');
     }
 
