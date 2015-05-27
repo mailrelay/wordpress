@@ -1,0 +1,209 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: mailrelay wordpress addon\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-11 01:54-0300\n"
+"PO-Revision-Date: 2015-05-23 09:34+0200\n"
+"Last-Translator: Merianos Nikos <info@web-resources.eu>\n"
+"Language-Team: WP Lion Ltd <info@wp-lion.com>\n"
+"Language: el_GR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../connection_settings.php:22
+msgid "Connection Settings"
+msgstr "Ρυθμίσεις σύνδεσης"
+
+#: ../connection_settings.php:28
+msgid "Host:"
+msgstr "Κόμβος:"
+
+#: ../connection_settings.php:30
+msgid "Please enter the host that you have in your Mairelay welcome email. Please enter it without the initial http:// (for example demo.ip-zone.com)"
+msgstr "Παρακαλούμε εισάγετε του κεντρικού υπολογιστή που έχετε στο email καλωσορίσματος του Mairelay. Παρακαλώ πληκτρολογήστε τον χωρίς το αρχικό http:// (για παράδειγμα demo.ip-zone.com)"
+
+#: ../connection_settings.php:32
+msgid "API Key: "
+msgstr "Κλειδί API: "
+
+#: ../connection_settings.php:34
+msgid "Please enter your API key. You can generate your API key on your Mailrelay panel, Configuration -> API access -> Generate API key"
+msgstr "Παρακαλώ εισάγετε το κλειδί API. Μπορείτε να παράγετε το δικό σας κλειδί API στον πίνακα ελέγχου του λογαριασμού σας στο Mailrelay, στην σελίδα Configuration -> API access -> Generate API key"
+
+#: ../connection_settings.php:40 ../feeds_settings.php:151
+#: ../posts_settings.php:130
+msgid "Save Changes"
+msgstr "Αποθήκευση Αλλαγών"
+
+#: ../feeds_settings.php:18
+msgid "Feeds Settings"
+msgstr "Ρυθμίσεις τροφοδοσίας"
+
+#: ../feeds_settings.php:82
+msgid "Feeds like newsletters:"
+msgstr "Τροφές όπως ενημερωτικά δελτία:"
+
+#: ../feeds_settings.php:84 ../feeds_settings.php:104
+msgid "To send feeds like newsletters"
+msgstr "Να στείλει μηνύματα όπως ενημερωτικά δελτία"
+
+#: ../feeds_settings.php:86
+msgid "Please select a group to send the feeds"
+msgstr "Παρακαλώ επιλέξτε μια ομάδα για να στείλετε τα μηνύματα"
+
+#: ../feeds_settings.php:106 ../posts_settings.php:85
+msgid "Newsletter From:"
+msgstr "Ενημερωτικό δελτίο από:"
+
+#: ../feeds_settings.php:117 ../posts_settings.php:96
+msgid "Use this field like Newsletter From"
+msgstr "Χρησιμοποιήστε αυτό το πεδίο όπως το ενημερωτικό δελτίο από"
+
+#: ../feeds_settings.php:119 ../posts_settings.php:98
+msgid "Newsletter Reply To:"
+msgstr "Απάντηση πρός:"
+
+#: ../feeds_settings.php:130 ../posts_settings.php:109
+msgid "Use this field like Newsletter Reply To"
+msgstr "Χρησιμοποιήστε το πεδίο αυτό σαν απάντηση σε ενημερωτικό δελτίο"
+
+#: ../feeds_settings.php:132 ../posts_settings.php:111
+msgid "Newsletter Report To:"
+msgstr "Αναφορά ενημερωτικού δελτίου σε:"
+
+#: ../feeds_settings.php:143 ../posts_settings.php:122
+msgid "Use this field like Newsletter Report To"
+msgstr "Χρησιμοποιήστε αυτό το πεδίο ως αναφορά σε ενημερωτικού δελτίου"
+
+#: ../feeds_settings.php:145 ../posts_settings.php:124
+msgid "Allow users to unsubscribe:"
+msgstr "Επιτρέπουν στους χρήστες να διαγραφείτε από τη συνδρομή:"
+
+#: ../feeds_settings.php:147
+msgid "Enable users to unsubscribe from the feeds"
+msgstr "Επιτρέπουν στους χρήστες να διαγραφείτε από την τροφοδοσία"
+
+#: ../mailrelay.php:87
+msgid "Please select a group to send this post"
+msgstr "Παρακαλώ επιλέξτε μια ομάδα για να στείλετε αυτό το post"
+
+#: ../mailrelay.php:90
+msgid "- Don't send -"
+msgstr "-Μην στέλνετε-"
+
+#: ../mailrelay.php:109
+msgid "Alternative Title"
+msgstr "Εναλλακτικός τίτλος"
+
+#: ../mailrelay.php:111
+msgid "If you enter a value in this field it will be used instead of post title"
+msgstr "Εάν εισαγάγετε μια τιμή σε αυτό το πεδίο θα χρησιμοποιηθεί αντί του τίτλου του άρθρου"
+
+#: ../mailrelay.php:326
+msgid "Unsubscribe"
+msgstr "Ακύρωση συνδρομής"
+
+#: ../mailrelay.php:331
+msgid "View more"
+msgstr "Δείτε περισσότερα"
+
+#: ../mailrelay.php:332
+msgid "Posted: "
+msgstr "Δημοσιεύθηκε"
+
+#: ../posts_settings.php:18
+msgid "Posts Settings"
+msgstr "Ρυθμίσeiς άρθρων"
+
+#: ../posts_settings.php:81
+msgid "Posts like newsletters:"
+msgstr "Άρθρα ως ενημερωτικά δελτία:"
+
+#: ../posts_settings.php:83
+msgid "Enable posts like newsletters"
+msgstr "Ενεργοποίηση άρθρων ως ενημερωτικά δελτία"
+
+#: ../posts_settings.php:126
+msgid "Enable users to unsubscribe from the newsletters"
+msgstr "Επιτρέπετε οι χρήστες να διαγράφονται από ενημερωτικά δελτία"
+
+#: ../sync_users.php:22
+msgid "Sync Users"
+msgstr "Συγχρονισμός χρηστών"
+
+#: ../sync_users.php:73
+msgid "Please Select Group"
+msgstr "Παρακαλώ επιλέξτε ομάδα"
+
+#: ../sync_users.php:80
+msgid "All your Wordpress users will be synced with the groups you are choosing now."
+msgstr "Όλοι οι χρήστες του Wordpress σας θα συγχρονιστούν με τις ομάδες που επιλέγετε τώρα."
+
+#: ../sync_users.php:81
+msgid "To create new groups in Mailrelay, you must login into the control panel and click into the Mail Relay > Subscribers groups"
+msgstr "Για να δημιουργήσετε νέες ομάδες Mailrelay, θα πρέπει να συνδεθείτε στο πίνακα ελέγχου και κάντε κλικ σε Mail Relay > Subscribers groups"
+
+#: ../sync_users.php:82
+msgid "Once there you can add a new group for your Wordpress users, or edit an existing one"
+msgstr "Αφού εκεί, μπορείτε να προσθέσετε μια νέα ομάδα για τους χρήστες του Wordpress σας, ή να επεξεργαστείτε μια ήδη υπάρχουσα"
+
+#: ../sync_users.php:87
+msgid "Start Sync"
+msgstr "Έναρξη συγχρονισμού"
+
+#: ../sync_users.php:102
+msgid "Please select at least one Group."
+msgstr "Παρακαλώ επιλέξτε τουλάχιστον μία ομάδα."
+
+#~ msgid "Select groups"
+#~ msgstr "Selecciona los grupos"
+
+#~ msgid "Username: "
+#~ msgstr "Nombre de usuario:"
+
+#~ msgid "Please enter the username the you have in your Mailrelay welcome email."
+#~ msgstr "Por favor introduce el nombre de usuario que tienes en tu e-mail de bienvenida de Mailrelay."
+
+#~ msgid "Password: "
+#~ msgstr "Contraseña: "
+
+#~ msgid "Please enter the password that you have in your Mailrelay welcome email."
+#~ msgstr "Por favor introduce la contraseña que tienes en tu e-mail de bienvenida de Mailrelay."
+
+#~ msgid "The Mailrelay sync has finished successfully. Next you can check the results of the sync:"
+#~ msgstr "La sincronización de Mailrelay ha finalizado con éxito. Ahora puedes ver el resultado de la sincronización:"
+
+#~ msgid "New users synced"
+#~ msgstr "Nuevos usuarios sincronizados"
+
+#~ msgid "Updated users"
+#~ msgstr "Usuarios actualizados"
+
+#~ msgid "Failed users"
+#~ msgstr "Usuarios fallidos"
+
+#~ msgid "Invalid host, username or password. Please Retry."
+#~ msgstr "Servidor, nombre de usuario o contraseña incorrectos. Por favor, inténtalo de nuevo."
+
+#~ msgid "Your account does not have an API key. Please, generate one in your Mailrelay's account: Settings -> API access -> Generate new API key."
+#~ msgstr "Su cuenta no tiene una clave API. Por favor, genere una clave en su cuenta Mailrelay: Configuración -> Acceso a API  -> Generar nueva clave API."
+
+#~ msgid "Mailrelay Step 1 - Sync settings"
+#~ msgstr "Mailrelay Paso 1 - Parámetros de sincronización"
+
+#~ msgid "Mairelay Step 2 - Choose groups"
+#~ msgstr "Mailrelay Paso 2 - Escoge grupos"
+
+#~ msgid "Mailrelay Step 3 - Sync finished"
+#~ msgstr "Mailrelay Paso 3 - Sincronización finalizada"
+
+#~ msgid "To retry the Mailrelay sync process please click <a href='%s'>here</a>."
+#~ msgstr "Para repetir el proceso de sincronización de Mailrelay pulsa <a href='%s'>aquí</a>."
