@@ -85,7 +85,7 @@ if (!$jsonResult || trim($jsonResult->status) != 1) {
         if (mailrelay_woo_commmerce_installed()) {
             ?>
             <tr>
-                <th scope="row"><label for="only_woo_commerce"><?php _e('Only sync woocommerce customers', 'mailrelay'); ?></label></th>
+                <th scope="row"><label for="only_woo_commerce"><?php _e('Only sync WooCommerce customers', 'mailrelay'); ?></label></th>
                 <td>
                     <input type="checkbox" name="only_woo_commerce" />
                 </td>
