@@ -45,6 +45,10 @@ if (function_exists('is_admin') && is_admin()) {
         include 'sync_users.php';
     }
 
+    function mailrelay_woo_commmerce_installed() {
+        return in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')));
+    }
+
     function mailrelay_get_groups() {
         // Initialize variables
         $mailrelay_host = get_option('mailrelay_host');
@@ -489,8 +493,12 @@ if (function_exists('is_admin') && is_admin()) {
     }
 
     if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'mailrelay_sync_users_group')) {
-        $querystr = "SELECT * FROM $wpdb->users";
-        $users = $wpdb->get_results($querystr, OBJECT);
+        if ($_REQUEST['only_woo_commerce'] == 'on') {
+            $users = get_users('role=customer');
+        } else {
+            $users = get_users();
+        }
+        
         $groups = $_REQUEST['group'];
 
         // These will be entered by user.

@@ -80,6 +80,19 @@ if (!$jsonResult || trim($jsonResult->status) != 1) {
         <?php _e('To create new groups in Mailrelay, you must login into the control panel and click into the Mail Relay > Subscribers groups', 'mailrelay'); ?><br />
         <?php _e('Once there you can add a new group for your Wordpress users, or edit an existing one', 'mailrelay'); ?></p>
         </td></tr>
+
+        <?php
+        if (mailrelay_woo_commmerce_installed()) {
+            ?>
+            <tr>
+                <th scope="row"><label for="only_woo_commerce"><?php _e('Only sync woocommerce customers', 'mailrelay'); ?></label></th>
+                <td>
+                    <input type="checkbox" name="only_woo_commerce" />
+                </td>
+            </tr>
+            <?php
+        }
+        ?>
     </table>
 
     <p class="submit">
