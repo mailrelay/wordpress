@@ -30,7 +30,7 @@ echo _e('Connection Settings', 'mailrelay') . '</h2>';
         <?php _e('Please enter the host that you have in your Mairelay welcome email. Please enter it without the initial http:// (for example demo.ip-zone.com)', 'mailrelay'); ?>
         </p></td></tr>
         <tr><th scope="row"><label for="mailrelay_api_key"><?php _e('API Key: ', 'mailrelay'); ?></label></th>
-        <td><input type="text" name="mailrelay_api_key" value="<?php echo $mailrelay_api_key; ?>" size="50" /><p>
+        <td><input type="text" name="mailrelay_api_key" value="<?php echo $mailrelay_api_key; ?>" size="50" autocomplete="off" /><p>
         <?php _e('Please enter your API key. You can generate your API key on your Mailrelay panel, Configuration -> API access -> Generate API key',  'mailrelay'); ?>
         </p>
         </td>
