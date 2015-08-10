@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mailrelay wordpress addon\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-20 17:15-0300\n"
-"PO-Revision-Date: 2015-07-20 17:16-0300\n"
+"POT-Creation-Date: 2015-08-09 21:22-0300\n"
+"PO-Revision-Date: 2015-08-09 21:23-0300\n"
 "Last-Translator: Micheli <mailrelay.teste@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
@@ -106,33 +106,33 @@ msgstr "Configurações de Posts"
 msgid "Sync Users"
 msgstr "Sincronizar Usuários"
 
-#: ../mailrelay.php:90
+#: ../mailrelay.php:199
 msgid "Please select a group to send this post"
 msgstr "Por favor escolha um grupo para enviar este post"
 
-#: ../mailrelay.php:93
+#: ../mailrelay.php:202
 msgid "- Don't send -"
 msgstr "Não enviar"
 
-#: ../mailrelay.php:112
+#: ../mailrelay.php:221
 msgid "Alternative Title"
 msgstr "Título Alternativo"
 
-#: ../mailrelay.php:114
+#: ../mailrelay.php:223
 msgid ""
 "If you enter a value in this field it will be used instead of post title"
 msgstr ""
 "Se você inserir um valor neste campo será usado em vez do título do post"
 
-#: ../mailrelay.php:327
+#: ../mailrelay.php:436
 msgid "Unsubscribe"
 msgstr "Cancelar assinatura"
 
-#: ../mailrelay.php:332
+#: ../mailrelay.php:441
 msgid "View more"
 msgstr "Veja mais"
 
-#: ../mailrelay.php:333
+#: ../mailrelay.php:442
 msgid "Posted: "
 msgstr "Publicado: "
 
@@ -176,16 +176,31 @@ msgstr ""
 "ou editar um já existente"
 
 #: ../sync_users.php:88
-msgid "Only sync WooCommerce customers"
-msgstr "Apenas sincronizar clientes WooCommerce"
+msgid "WooCommerce options"
+msgstr "Opções WooCommerce"
 
-#: ../sync_users.php:99
+#: ../sync_users.php:91
+msgid "Sync all users and WooCommmerce customers"
+msgstr "Sincronizar todos os usuários e clientes WooCommerce"
+
+#: ../sync_users.php:92
+msgid "Sync only WooCommerce customers"
+msgstr "Sincronizar apenas clientes WooCommerce"
+
+#: ../sync_users.php:93
+msgid "Sync all users except WooCommerce customers"
+msgstr "Sincronizar todos os usuários exceto clientes WooCommerce"
+
+#: ../sync_users.php:103
 msgid "Start Sync"
 msgstr "Iniciar Sincronização"
 
-#: ../sync_users.php:114
+#: ../sync_users.php:118
 msgid "Please select at least one Group."
 msgstr "Por favor escolha ao menos um grupo"
+
+#~ msgid "Only sync WooCommerce customers"
+#~ msgstr "Apenas sincronizar clientes WooCommerce"
 
 #~ msgid "Select groups"
 #~ msgstr "Selecciona los grupos"
