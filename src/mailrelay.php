@@ -30,15 +30,15 @@ if (function_exists('is_admin') && is_admin()) {
     }
 
     function mailrelay_connection_settings() {
-        include 'connection_settings.php';
+        require 'connection_settings.php';
     }
 
     function mailrelay_posts_settings() {
-        include 'posts_settings.php';
+        require 'posts_settings.php';
     }
 
     function mailrelay_feeds_settings() {
-        include 'feeds_settings.php';
+        require 'feeds_settings.php';
     }
 
     function mailrelay_sync_users() {
@@ -151,7 +151,7 @@ if (function_exists('is_admin') && is_admin()) {
             $message .= '</ul></p></div>';
         }
 
-        include 'sync_users.php';
+        require 'sync_users.php';
     }
 
     function mailrelay_woo_commmerce_installed() {
