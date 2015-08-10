@@ -3,8 +3,8 @@ Contributors: Mailrelay.com
 Donate link: 
 Tags: mailrelay,newsletter,email marketing
 Requires at least: 3.3
-Tested up to: 4.2.2
-Stable tag: 1.7.2
+Tested up to: 4.2.4
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

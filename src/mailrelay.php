@@ -3,7 +3,7 @@
 Plugin Name: Mailrelay
 Plugin URI: http://mailrelay.com
 Description: Easily sync your Wordpress users with Mailrelay.
-Version: 1.7.2
+Version: 1.7.3
 Author: Mailrelay.com
 */
 
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('MAILRELAY_PLUGIN_VERSION')) {
-    define('MAILRELAY_PLUGIN_VERSION', '1.7.2');
+    define('MAILRELAY_PLUGIN_VERSION', '1.7.3');
 }
 
 if (function_exists('is_admin') && is_admin()) {
