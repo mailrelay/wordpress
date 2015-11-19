@@ -4,7 +4,7 @@ Donate link:
 Tags: mailrelay,newsletter,email marketing
 Requires at least: 3.3
 Tested up to: 4.4
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,3 +35,8 @@ At this page, you will need to fill in the following data:
 This information can be found in your Mailrelay's welcome email. Please note that the host must be entered without initial http://.
 
 Once this data is successfully saved you can run the user sync.
+
+== Changelog ==
+
+= 1.7.4 =
+* Add German translation
