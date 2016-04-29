@@ -73,7 +73,7 @@ if (!$jsonResult || trim($jsonResult->status) != 1) {
         <td>
         <select multiple="multiple" name="group[]" size="5" style="height:auto;">
             <?php foreach($data as $key => $value) { ?>
-            <option value="<?php echo $data[$key]->id; ?>"><?php echo $data[$key]->name; ?></option>
+            <option value="<?php echo $data[$key]->id; ?>"><?php echo esc_html($data[$key]->name); ?></option>
             <?php } ?>
         </select>
         <p><?php _e('All your Wordpress users will be synced with the groups you are choosing now.', 'mailrelay'); ?><br />
