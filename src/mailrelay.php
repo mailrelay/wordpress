@@ -563,7 +563,6 @@ if (function_exists('is_admin') && is_admin()) {
         // These will be entered by user.
         $mailrelay_host = get_option('mailrelay_host');
         $mailrelay_api_key = get_option('mailrelay_api_key');
-        $mailrelay_auto_sync = get_option('mailrelay_auto_sync');
 
         // First thing, init
         $url = 'https://' . $mailrelay_host . '/ccm/admin/api/version/2/&type=json';
