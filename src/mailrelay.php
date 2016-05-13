@@ -15,6 +15,91 @@ if (!defined('MAILRELAY_PLUGIN_VERSION')) {
     define('MAILRELAY_PLUGIN_VERSION', '1.7.4');
 }
 
+function mailrelay_sync_user($user, $groups) {
+    $mailrelay_host = get_option('mailrelay_host');
+    $mailrelay_api_key = get_option('mailrelay_api_key');
+
+    $url = 'https://' . $mailrelay_host . '/ccm/admin/api/version/2/&type=json';
+    $curl = curl_init($url);
+
+    // Call getSubscribers
+    $params = array(
+        'function' => 'getSubscribers',
+        'apiKey' => $mailrelay_api_key,
+        'email' => $user->user_email,
+    );
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    
+    $headers = array(
+        'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
+    );
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($curl);
+    $jsonResult = json_decode($result);
+
+    if (count($jsonResult->data) > 0) {
+        $params = array(
+            'function' => 'updateSubscriber',
+            'apiKey' => $mailrelay_api_key,
+            'id' => $jsonResult->data[0]->id,
+            'email' => $user->user_email,
+            'name' => $user->display_name,
+            'groups' => $groups
+        );
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+
+        $headers = array(
+            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
+       );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($curl);
+        $jsonResult = json_decode($result);
+
+        if ($jsonResult->status == 1) {
+            return array(
+                'status' => 'updated'
+            );
+        } else {
+            return array(
+                'status' => 'failed'
+            );
+        }
+    } else {
+        $params = array(
+            'function' => 'addSubscriber',
+            'apiKey' => $mailrelay_api_key,
+            'email' => $user->user_email,
+            'name' => $user->display_name,
+            'groups' => $groups
+        );
+
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+
+        $headers = array(
+            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
+        );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($curl);
+        $jsonResult = json_decode($result);
+
+        if ($jsonResult->status == 1) {
+            return array(
+                'status' => 'added'
+            );
+        } else {
+            return array(
+                'status' => 'failed'
+            );
+        }
+    }
+}
+
 function mailrelay_new_user_registration($user_id) {
     $user = new WP_User($user_id);
 
@@ -57,91 +142,6 @@ if (function_exists('is_admin') && is_admin()) {
 
     function mailrelay_feeds_settings() {
         require 'feeds_settings.php';
-    }
-
-    function mailrelay_sync_user($user, $groups) {
-        $mailrelay_host = get_option('mailrelay_host');
-        $mailrelay_api_key = get_option('mailrelay_api_key');
-
-        $url = 'https://' . $mailrelay_host . '/ccm/admin/api/version/2/&type=json';
-        $curl = curl_init($url);
-
-        // Call getSubscribers
-        $params = array(
-            'function' => 'getSubscribers',
-            'apiKey' => $mailrelay_api_key,
-            'email' => $user->user_email,
-        );
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        
-        $headers = array(
-            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-        );
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($curl);
-        $jsonResult = json_decode($result);
-
-        if (count($jsonResult->data) > 0) {
-            $params = array(
-                'function' => 'updateSubscriber',
-                'apiKey' => $mailrelay_api_key,
-                'id' => $jsonResult->data[0]->id,
-                'email' => $user->user_email,
-                'name' => $user->display_name,
-                'groups' => $groups
-            );
-            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
-
-            $headers = array(
-                'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-           );
-            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
-            $result = curl_exec($curl);
-            $jsonResult = json_decode($result);
-
-            if ($jsonResult->status == 1) {
-                return array(
-                    'status' => 'updated'
-                );
-            } else {
-                return array(
-                    'status' => 'failed'
-                );
-            }
-        } else {
-            $params = array(
-                'function' => 'addSubscriber',
-                'apiKey' => $mailrelay_api_key,
-                'email' => $user->user_email,
-                'name' => $user->display_name,
-                'groups' => $groups
-            );
-
-            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
-
-            $headers = array(
-                'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-            );
-            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
-            $result = curl_exec($curl);
-            $jsonResult = json_decode($result);
-
-            if ($jsonResult->status == 1) {
-                return array(
-                    'status' => 'added'
-                );
-            } else {
-                return array(
-                    'status' => 'failed'
-                );
-            }
-        }
     }
 
     function mailrelay_sync_users() {
