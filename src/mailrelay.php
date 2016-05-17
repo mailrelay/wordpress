@@ -15,6 +15,109 @@ if (!defined('MAILRELAY_PLUGIN_VERSION')) {
     define('MAILRELAY_PLUGIN_VERSION', '1.7.4');
 }
 
+function mailrelay_sync_user($user, $groups) {
+    $mailrelay_host = get_option('mailrelay_host');
+    $mailrelay_api_key = get_option('mailrelay_api_key');
+
+    $url = 'https://' . $mailrelay_host . '/ccm/admin/api/version/2/&type=json';
+    $curl = curl_init($url);
+
+    // Call getSubscribers
+    $params = array(
+        'function' => 'getSubscribers',
+        'apiKey' => $mailrelay_api_key,
+        'email' => $user->user_email,
+    );
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    
+    $headers = array(
+        'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
+    );
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($curl);
+    $jsonResult = json_decode($result);
+
+    if (count($jsonResult->data) > 0) {
+        $params = array(
+            'function' => 'updateSubscriber',
+            'apiKey' => $mailrelay_api_key,
+            'id' => $jsonResult->data[0]->id,
+            'email' => $user->user_email,
+            'name' => $user->display_name,
+            'groups' => $groups
+        );
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+
+        $headers = array(
+            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
+       );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($curl);
+        $jsonResult = json_decode($result);
+
+        if ($jsonResult->status == 1) {
+            return array(
+                'status' => 'updated'
+            );
+        } else {
+            return array(
+                'status' => 'failed'
+            );
+        }
+    } else {
+        $params = array(
+            'function' => 'addSubscriber',
+            'apiKey' => $mailrelay_api_key,
+            'email' => $user->user_email,
+            'name' => $user->display_name,
+            'groups' => $groups
+        );
+
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+
+        $headers = array(
+            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
+        );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($curl);
+        $jsonResult = json_decode($result);
+
+        if ($jsonResult->status == 1) {
+            return array(
+                'status' => 'added'
+            );
+        } else {
+            return array(
+                'status' => 'failed'
+            );
+        }
+    }
+}
+
+function mailrelay_new_user_registration($user_id) {
+    $user = new WP_User($user_id);
+
+    $groups = get_option('mailrelay_auto_sync_groups');
+
+    if (!empty($groups)) {
+        try {
+            mailrelay_sync_user($user, $groups);
+        } catch(Exception $e) {
+            // Ignore if something goes wrong to avoid showing errors to user
+        }
+    }
+}
+
+if (get_option('mailrelay_auto_sync')) {
+    add_action('user_register', 'mailrelay_new_user_registration');
+}
+
 if (function_exists('is_admin') && is_admin()) {
     function mailrelay_init() {
         $result = load_plugin_textdomain('mailrelay', false, dirname(plugin_basename(__FILE__)) . '/languages');
@@ -61,93 +164,28 @@ if (function_exists('is_admin') && is_admin()) {
             
             $groups = $_REQUEST['group'];
 
-            // These will be entered by user.
-            $mailrelay_host = get_option('mailrelay_host');
-            $mailrelay_api_key = get_option('mailrelay_api_key');
-
-            // First thing, init
-            $url = 'https://' . $mailrelay_host . '/ccm/admin/api/version/2/&type=json';
-            $curl = curl_init($url);
-
             $added = 0;
             $updated = 0;
-            $fail = 0;
+            $failed = 0;
 
             foreach ($users as $user) {
-                // Call getSubscribers
-                $params = array(
-                    'function' => 'getSubscribers',
-                    'apiKey' => $mailrelay_api_key,
-                    'email' => $user->user_email,
-                );
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                
-                $headers = array(
-                    'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-                );
-                curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+                $return = mailrelay_sync_user($user, $groups);
 
-                $result = curl_exec($curl);
-                $jsonResult = json_decode($result);
-
-                if (count($jsonResult->data) > 0) {
-                    $params = array(
-                        'function' => 'updateSubscriber',
-                        'apiKey' => $mailrelay_api_key,
-                        'id' => $jsonResult->data[0]->id,
-                        'email' => $user->user_email,
-                        'name' => $user->display_name,
-                        'groups' => $groups
-                    );
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
-
-                    $headers = array(
-                        'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-                   );
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
-                    $result = curl_exec($curl);
-                    $jsonResult = json_decode($result);
-
-                    if ($jsonResult->status == 1) {
-                        $updated++;
-                    } else {
-                        $fail++;
-                    }
+                if ($return['status'] == 'added') {
+                    $added++;
+                } elseif ($return['status'] == 'updated') {
+                    $updated++;
+                } elseif ($return['status'] == 'failed') {
+                    $failed++;
                 } else {
-                    $params = array(
-                        'function' => 'addSubscriber',
-                        'apiKey' => $mailrelay_api_key,
-                        'email' => $user->user_email,
-                        'name' => $user->display_name,
-                        'groups' => $groups
-                    );
-
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
-
-                    $headers = array(
-                        'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-                    );
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
-                    $result = curl_exec($curl);
-                    $jsonResult = json_decode($result);
-
-                    if ($jsonResult->status == 1) {
-                        $added++;
-                    } else {
-                        $fail++;
-                    }
+                    throw new Exception('Invalid return status.');
                 }
             }
 
             $message  = '<div class="updated"><p>The Mailrelay sync has finished successfully. Next you can check the results of the sync:<ul>';
             $message .= '<li>New users synced:&nbsp;' . $added . '</li>';
             $message .= '<li>Updated users:&nbsp;' . $updated . '</li>';
-            $message .= '<li>Failed users:&nbsp;' . $fail . '</li>';
+            $message .= '<li>Failed users:&nbsp;' . $failed . '</li>';
             $message .= '</ul></p></div>';
         }
 
@@ -513,6 +551,14 @@ if (function_exists('is_admin') && is_admin()) {
 
         $mailrelay_api_key = $_REQUEST['mailrelay_api_key'];
         update_option('mailrelay_api_key', trim($mailrelay_api_key));
+
+        $mailrelay_auto_sync = $_REQUEST['mailrelay_auto_sync'] == 'on';
+        update_option('mailrelay_auto_sync', $mailrelay_auto_sync);
+
+        if (!empty($_REQUEST['mailrelay_auto_sync_groups'])) {
+            $mailrelay_auto_sync_groups = $_REQUEST['mailrelay_auto_sync_groups'];
+            update_option('mailrelay_auto_sync_groups', $mailrelay_auto_sync_groups);
+        }
 
         // These will be entered by user.
         $mailrelay_host = get_option('mailrelay_host');
