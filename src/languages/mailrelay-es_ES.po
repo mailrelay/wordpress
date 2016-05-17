@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mailrelay wordpress addon\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-09 21:19-0300\n"
-"PO-Revision-Date: 2015-08-09 21:22-0300\n"
+"POT-Creation-Date: 2016-05-13 14:13-0300\n"
+"PO-Revision-Date: 2016-05-17 10:50-0300\n"
 "Last-Translator: Micheli <mailrelay.teste@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -12,45 +12,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.7.6\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
-#: ../connection_settings.php:22 ../mailrelay.php:25
+#: ../connection_settings.php:30
+#: ../mailrelay.php:128
 msgid "Connection Settings"
 msgstr "Configuración de Conexión"
 
-#: ../connection_settings.php:28
+#: ../connection_settings.php:36
 msgid "Host:"
 msgstr "Servidor:"
 
-#: ../connection_settings.php:30
-msgid ""
-"Please enter the host that you have in your Mairelay welcome email. Please "
-"enter it without the initial http:// (for example demo.ip-zone.com)"
-msgstr ""
-"Por favor inserte el host que has recibido en el email de bienvenida de "
-"Mailrelay. Por favor, inserte-o sin la inicial http:// (por ejemplo: demo.ip-"
-"zone.com)"
+#: ../connection_settings.php:38
+msgid "Please enter the host that you have in your Mairelay welcome email. Please enter it without the initial http:// (for example demo.ip-zone.com)"
+msgstr "Por favor inserte el host que has recibido en el email de bienvenida de Mailrelay. Por favor, inserte-o sin la inicial http:// (por ejemplo: demo.ip-zone.com)"
 
-#: ../connection_settings.php:32
+#: ../connection_settings.php:40
 msgid "API Key: "
 msgstr "Clave API: "
 
-#: ../connection_settings.php:34
-msgid ""
-"Please enter your API key. You can generate your API key on your Mailrelay "
-"panel, Configuration -> API access -> Generate API key"
-msgstr ""
-"Por favor inserte su clave API. Puedes gneerar su clave API en tu panel "
-"Mailrelay, Configuración -> acceso API -> Gneerar clave API"
+#: ../connection_settings.php:42
+msgid "Please enter your API key. You can generate your API key on your Mailrelay panel, Configuration -> API access -> Generate API key"
+msgstr "Por favor inserte su clave API. Puedes gneerar su clave API en tu panel Mailrelay, Configuración -> acceso API -> Gneerar clave API"
 
-#: ../connection_settings.php:40 ../feeds_settings.php:150
+#: ../connection_settings.php:52
+msgid "Sync new users automatically"
+msgstr "Sincronizar nuevos usuarios automáticamente"
+
+#: ../connection_settings.php:61
+msgid "Groups"
+msgstr "Grupos"
+
+#: ../connection_settings.php:69
+msgid "Groups that new users will be automatically synced to."
+msgstr "Grupos para los cuales los nuevos usuarios se sincronizarán automáticamente."
+
+#: ../connection_settings.php:77
+#: ../feeds_settings.php:150
 #: ../posts_settings.php:129
 msgid "Save Changes"
 msgstr "Guardar Cambios"
 
-#: ../feeds_settings.php:18 ../mailrelay.php:27
+#: ../feeds_settings.php:18
+#: ../mailrelay.php:130
 msgid "Feeds Settings"
 msgstr "Configuraciones de los Feeds"
 
@@ -58,7 +64,8 @@ msgstr "Configuraciones de los Feeds"
 msgid "Feeds like newsletters:"
 msgstr "Feeds como Boletines"
 
-#: ../feeds_settings.php:83 ../feeds_settings.php:103
+#: ../feeds_settings.php:83
+#: ../feeds_settings.php:103
 msgid "To send feeds like newsletters"
 msgstr "Para enviar los feeds como Boletines"
 
@@ -66,31 +73,38 @@ msgstr "Para enviar los feeds como Boletines"
 msgid "Please select a group to send the feeds"
 msgstr "Por favor, selecciona un grupo para enviar los feeds"
 
-#: ../feeds_settings.php:105 ../posts_settings.php:84
+#: ../feeds_settings.php:105
+#: ../posts_settings.php:84
 msgid "Newsletter From:"
 msgstr "Boletín De:"
 
-#: ../feeds_settings.php:116 ../posts_settings.php:95
+#: ../feeds_settings.php:116
+#: ../posts_settings.php:95
 msgid "Use this field like Newsletter From"
 msgstr "Usa este campo como boletín De"
 
-#: ../feeds_settings.php:118 ../posts_settings.php:97
+#: ../feeds_settings.php:118
+#: ../posts_settings.php:97
 msgid "Newsletter Reply To:"
 msgstr "Responder boletín para:"
 
-#: ../feeds_settings.php:129 ../posts_settings.php:108
+#: ../feeds_settings.php:129
+#: ../posts_settings.php:108
 msgid "Use this field like Newsletter Reply To"
 msgstr "Usa este campo como Respuesta del Boletín para"
 
-#: ../feeds_settings.php:131 ../posts_settings.php:110
+#: ../feeds_settings.php:131
+#: ../posts_settings.php:110
 msgid "Newsletter Report To:"
 msgstr "Informe de Boletín Para:"
 
-#: ../feeds_settings.php:142 ../posts_settings.php:121
+#: ../feeds_settings.php:142
+#: ../posts_settings.php:121
 msgid "Use this field like Newsletter Report To"
 msgstr "Usa este campo para el envío del informe del Boletín"
 
-#: ../feeds_settings.php:144 ../posts_settings.php:123
+#: ../feeds_settings.php:144
+#: ../posts_settings.php:123
 msgid "Allow users to unsubscribe:"
 msgstr "Permitir usuarios cancelar la suscripción"
 
@@ -98,42 +112,41 @@ msgstr "Permitir usuarios cancelar la suscripción"
 msgid "Enable users to unsubscribe from the feeds"
 msgstr "Permitir usuarios a cancelar la suscripción de los  feeds"
 
-#: ../mailrelay.php:26 ../posts_settings.php:18
+#: ../mailrelay.php:129
+#: ../posts_settings.php:18
 msgid "Posts Settings"
 msgstr "Configuración de Posts"
 
-#: ../mailrelay.php:28 ../sync_users.php:22
+#: ../mailrelay.php:131
+#: ../sync_users.php:22
 msgid "Sync Users"
 msgstr "Sincronizar Usuarios"
 
-#: ../mailrelay.php:199
+#: ../mailrelay.php:237
 msgid "Please select a group to send this post"
 msgstr "Por favor selecciona un grupo para enviar este post"
 
-#: ../mailrelay.php:202
+#: ../mailrelay.php:240
 msgid "- Don't send -"
 msgstr "No enviar"
 
-#: ../mailrelay.php:221
+#: ../mailrelay.php:259
 msgid "Alternative Title"
 msgstr "Título Alternativo"
 
-#: ../mailrelay.php:223
-msgid ""
-"If you enter a value in this field it will be used instead of post title"
-msgstr ""
-"Si usted insertar un valor en este campo será usado en lugar del título del "
-"post"
+#: ../mailrelay.php:261
+msgid "If you enter a value in this field it will be used instead of post title"
+msgstr "Si usted insertar un valor en este campo será usado en lugar del título del post"
 
-#: ../mailrelay.php:436
+#: ../mailrelay.php:474
 msgid "Unsubscribe"
 msgstr "Cancelar suscripción"
 
-#: ../mailrelay.php:441
+#: ../mailrelay.php:479
 msgid "View more"
 msgstr "Ver más"
 
-#: ../mailrelay.php:442
+#: ../mailrelay.php:480
 msgid "Posted: "
 msgstr "Publicado: "
 
@@ -154,27 +167,16 @@ msgid "Please Select Group"
 msgstr "Por favor selecciona el grupo"
 
 #: ../sync_users.php:79
-msgid ""
-"All your Wordpress users will be synced with the groups you are choosing now."
-msgstr ""
-"Todos tus usuarios Wordpress serán sincronizados con los grupos que estás "
-"seleccionando ahora."
+msgid "All your Wordpress users will be synced with the groups you are choosing now."
+msgstr "Todos tus usuarios Wordpress serán sincronizados con los grupos que estás seleccionando ahora."
 
 #: ../sync_users.php:80
-msgid ""
-"To create new groups in Mailrelay, you must login into the control panel and "
-"click into the Mail Relay > Subscribers groups"
-msgstr ""
-"Para crear nuevos grupos en Mailrelay, debes logear en el panel de control y "
-"clicar en MailRelay > Grupos de suscriptores"
+msgid "To create new groups in Mailrelay, you must login into the control panel and click into the Mail Relay > Subscribers groups"
+msgstr "Para crear nuevos grupos en Mailrelay, debes logear en el panel de control y clicar en MailRelay > Grupos de suscriptores"
 
 #: ../sync_users.php:81
-msgid ""
-"Once there you can add a new group for your Wordpress users, or edit an "
-"existing one"
-msgstr ""
-"Una vez lá podrás añadir un nuevo grupo para los usuarios del WordPress, o "
-"editar un ya existente"
+msgid "Once there you can add a new group for your Wordpress users, or edit an existing one"
+msgstr "Una vez lá podrás añadir un nuevo grupo para los usuarios del WordPress, o editar un ya existente"
 
 #: ../sync_users.php:88
 msgid "WooCommerce options"
@@ -190,8 +192,7 @@ msgstr "Sincronizar sólo clientes WooCommerce"
 
 #: ../sync_users.php:93
 msgid "Sync all users except WooCommerce customers"
-msgstr ""
-"Sincronizar todos los usuarios con excepción de los clientes WooCommerce"
+msgstr "Sincronizar todos los usuarios con excepción de los clientes WooCommerce"
 
 #: ../sync_users.php:103
 msgid "Start Sync"

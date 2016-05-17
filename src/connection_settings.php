@@ -49,7 +49,7 @@ echo _e('Connection Settings', 'mailrelay') . '</h2>';
             ?>
             <tr>
                 <th scope="row">
-                    <label for="mailrelay_auto_sync"><?php _e('Auto sync new users', 'mailrelay'); ?></label>
+                    <label for="mailrelay_auto_sync"><?php _e('Sync new users automatically', 'mailrelay'); ?></label>
                 </th>
                 <td>
                     <input type="checkbox" name="mailrelay_auto_sync" id="mailrelay_auto_sync" <?php echo $mailrelay_auto_sync ? 'checked' : '' ?> />
@@ -58,7 +58,7 @@ echo _e('Connection Settings', 'mailrelay') . '</h2>';
 
             <tr id="mailrelay_auto_sync_groups_wrapper">
                 <th scope="row">
-                    <label for="mailrelay_auto_sync_groups"><?php _e('Auto sync groups', 'mailrelay'); ?></label>
+                    <label for="mailrelay_auto_sync_groups"><?php _e('Groups', 'mailrelay'); ?></label>
                 </th>
                 <td>
                     <select multiple="multiple" name="mailrelay_auto_sync_groups[]" id="mailrelay_auto_sync_groups" size="5" style="height:auto;">
@@ -66,6 +66,7 @@ echo _e('Connection Settings', 'mailrelay') . '</h2>';
                         <option value="<?php echo $value->id; ?>" <?php echo in_array($value->id, $mailrelay_auto_sync_groups) ? 'selected' : '' ?>><?php echo esc_html($value->name); ?></option>
                         <?php } ?>
                     </select>
+                    <p><?php _e('Groups that new users will be automatically synced to.', 'mailrelay') ?></p>
                 </td>
             </tr>
             <?php

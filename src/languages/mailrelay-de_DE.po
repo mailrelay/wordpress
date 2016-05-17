@@ -2,30 +2,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mailrelay wordpress addon\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-09 20:01-0300\n"
-"PO-Revision-Date: 2015-10-28 11:31+0100\n"
+"POT-Creation-Date: 2016-05-13 14:12-0300\n"
+"PO-Revision-Date: 2016-05-13 14:13-0300\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.6\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 1.7.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de_DE\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
-#: ../connection_settings.php:22 ../mailrelay.php:25
+#: ../connection_settings.php:30 ../mailrelay.php:128
 msgid "Connection Settings"
 msgstr "Verbindungseinstellungen"
 
-#: ../connection_settings.php:28
+#: ../connection_settings.php:36
 msgid "Host:"
 msgstr "Host:"
 
-#: ../connection_settings.php:30
+#: ../connection_settings.php:38
 msgid ""
 "Please enter the host that you have in your Mairelay welcome email. Please "
 "enter it without the initial http:// (for example demo.ip-zone.com)"
@@ -33,11 +33,11 @@ msgstr ""
 "Bitte geben Sie den Host aus Ihrer Willkommensemail von Mailrelay ein. Bitte "
 "lassen Sie das http:// am Anfang weg (bspw. demo.ip-zone.com)"
 
-#: ../connection_settings.php:32
+#: ../connection_settings.php:40
 msgid "API Key: "
 msgstr "API-Schlüssel:"
 
-#: ../connection_settings.php:34
+#: ../connection_settings.php:42
 msgid ""
 "Please enter your API key. You can generate your API key on your Mailrelay "
 "panel, Configuration -> API access -> Generate API key"
@@ -46,12 +46,24 @@ msgstr ""
 "Ihrem Mailrelay-Panel unter Configuration -> API access -> Generate API key "
 "generieren. "
 
-#: ../connection_settings.php:40 ../feeds_settings.php:150
+#: ../connection_settings.php:52
+msgid "Sync new users automatically"
+msgstr ""
+
+#: ../connection_settings.php:61
+msgid "Groups"
+msgstr ""
+
+#: ../connection_settings.php:69
+msgid "Groups that new users will be automatically synced to."
+msgstr ""
+
+#: ../connection_settings.php:77 ../feeds_settings.php:150
 #: ../posts_settings.php:129
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: ../feeds_settings.php:18 ../mailrelay.php:27
+#: ../feeds_settings.php:18 ../mailrelay.php:130
 msgid "Feeds Settings"
 msgstr "Feeds-Einstellungen"
 
@@ -99,43 +111,43 @@ msgstr "Abonnenten können abbestellen:"
 msgid "Enable users to unsubscribe from the feeds"
 msgstr "Abonnenten ermöglichen, die Feeds abzubestellen"
 
-#: ../mailrelay.php:26 ../posts_settings.php:18
+#: ../mailrelay.php:129 ../posts_settings.php:18
 msgid "Posts Settings"
 msgstr "Einstellungen für Posts"
 
-#: ../mailrelay.php:28 ../sync_users.php:22
+#: ../mailrelay.php:131 ../sync_users.php:22
 msgid "Sync Users"
 msgstr "Benutzer synchronisieren"
 
-#: ../mailrelay.php:199
+#: ../mailrelay.php:237
 msgid "Please select a group to send this post"
 msgstr ""
 "Bitte wählen Sie eine Gruppe aus, an die dieser Post gesendet werden soll"
 
-#: ../mailrelay.php:202
+#: ../mailrelay.php:240
 msgid "- Don't send -"
 msgstr "- Nicht senden -"
 
-#: ../mailrelay.php:221
+#: ../mailrelay.php:259
 msgid "Alternative Title"
 msgstr "Alternativer Titel"
 
-#: ../mailrelay.php:223
+#: ../mailrelay.php:261
 msgid ""
 "If you enter a value in this field it will be used instead of post title"
 msgstr ""
 "Wenn Sie einen Wert in dieses Feld eingeben, wird er anstatt des Post-Titels "
 "verwendet"
 
-#: ../mailrelay.php:436
+#: ../mailrelay.php:474
 msgid "Unsubscribe"
 msgstr "Abbestellen"
 
-#: ../mailrelay.php:441
+#: ../mailrelay.php:479
 msgid "View more"
 msgstr "Mehr ansehen"
 
-#: ../mailrelay.php:442
+#: ../mailrelay.php:480
 msgid "Posted: "
 msgstr "Gepostet: "
 
@@ -202,64 +214,66 @@ msgstr "Synchronisation starten"
 msgid "Please select at least one Group."
 msgstr "Bitte wählen Sie mindestens eine Gruppe aus."
 
-msgid "Only sync WooCommerce customers"
-msgstr "Nur WooCommerce-Kunden synchronisieren"
+#~ msgid "Only sync WooCommerce customers"
+#~ msgstr "Nur WooCommerce-Kunden synchronisieren"
 
-msgid "Select groups"
-msgstr "Gruppen auswählen"
+#~ msgid "Select groups"
+#~ msgstr "Gruppen auswählen"
 
-msgid "Username: "
-msgstr "Benutzername:"
+#~ msgid "Username: "
+#~ msgstr "Benutzername:"
 
-msgid "Please enter the username the you have in your Mailrelay welcome email."
-msgstr ""
-"Bitte wählen Sie den Benutzernamen aus Ihrer Mailrelay-Willkommensemail. "
+#~ msgid ""
+#~ "Please enter the username the you have in your Mailrelay welcome email."
+#~ msgstr ""
+#~ "Bitte wählen Sie den Benutzernamen aus Ihrer Mailrelay-Willkommensemail. "
 
-msgid "Password: "
-msgstr "Passwort: "
+#~ msgid "Password: "
+#~ msgstr "Passwort: "
 
-msgid ""
-"Please enter the password that you have in your Mailrelay welcome email."
-msgstr ""
-"Bitte geben Sie das Passwort aus Ihrer Mailrelay-Willkommensemail ein. "
+#~ msgid ""
+#~ "Please enter the password that you have in your Mailrelay welcome email."
+#~ msgstr ""
+#~ "Bitte geben Sie das Passwort aus Ihrer Mailrelay-Willkommensemail ein. "
 
-msgid ""
-"The Mailrelay sync has finished successfully. Next you can check the results "
-"of the sync:"
-msgstr ""
-"Die Synchronisation mit Mailrelay war erfolgreich. Sie können nun die "
-"Ergebnisse überprüfen:"
+#~ msgid ""
+#~ "The Mailrelay sync has finished successfully. Next you can check the "
+#~ "results of the sync:"
+#~ msgstr ""
+#~ "Die Synchronisation mit Mailrelay war erfolgreich. Sie können nun die "
+#~ "Ergebnisse überprüfen:"
 
-msgid "New users synced"
-msgstr "Neue Benutzer synchronisiert"
+#~ msgid "New users synced"
+#~ msgstr "Neue Benutzer synchronisiert"
 
-msgid "Updated users"
-msgstr "Aktualisierte Benutzer"
+#~ msgid "Updated users"
+#~ msgstr "Aktualisierte Benutzer"
 
-msgid "Failed users"
-msgstr "Fehlgeschlagene Benutzer"
+#~ msgid "Failed users"
+#~ msgstr "Fehlgeschlagene Benutzer"
 
-msgid "Invalid host, username or password. Please Retry."
-msgstr ""
-"Falscher Host, Benutzername oder Passwort. Bitte versuchen Sie es erneut. "
+#~ msgid "Invalid host, username or password. Please Retry."
+#~ msgstr ""
+#~ "Falscher Host, Benutzername oder Passwort. Bitte versuchen Sie es erneut. "
 
-msgid ""
-"Your account does not have an API key. Please, generate one in your "
-"Mailrelay's account: Settings -> API access -> Generate new API key."
-msgstr ""
-"Ihr Konto hat keinen API-Schlüssel. Bitte generieren Sie einen in Ihrem "
-"Mailrelay-Konto: \"Settings -> API access -> Generate new API key.\""
+#~ msgid ""
+#~ "Your account does not have an API key. Please, generate one in your "
+#~ "Mailrelay's account: Settings -> API access -> Generate new API key."
+#~ msgstr ""
+#~ "Ihr Konto hat keinen API-Schlüssel. Bitte generieren Sie einen in Ihrem "
+#~ "Mailrelay-Konto: \"Settings -> API access -> Generate new API key.\""
 
-msgid "Mailrelay Step 1 - Sync settings"
-msgstr "Mailrelay Schritt 1 - Synchronisations-Einstellungen"
+#~ msgid "Mailrelay Step 1 - Sync settings"
+#~ msgstr "Mailrelay Schritt 1 - Synchronisations-Einstellungen"
 
-msgid "Mairelay Step 2 - Choose groups"
-msgstr "Mailrelay Schritt 2 - Gruppen auswählen"
+#~ msgid "Mairelay Step 2 - Choose groups"
+#~ msgstr "Mailrelay Schritt 2 - Gruppen auswählen"
 
-msgid "Mailrelay Step 3 - Sync finished"
-msgstr "Mailrelay Schritt 3 - Synchronisation beendet"
+#~ msgid "Mailrelay Step 3 - Sync finished"
+#~ msgstr "Mailrelay Schritt 3 - Synchronisation beendet"
 
-msgid "To retry the Mailrelay sync process please click <a href='%s'>here</a>."
-msgstr ""
-"Klicken Sie bitte <a href='%s'>hier</a>, um die Mailrelay-Synchronisation "
-"nochmals zu versuchen. "
+#~ msgid ""
+#~ "To retry the Mailrelay sync process please click <a href='%s'>here</a>."
+#~ msgstr ""
+#~ "Klicken Sie bitte <a href='%s'>hier</a>, um die Mailrelay-Synchronisation "
+#~ "nochmals zu versuchen. "

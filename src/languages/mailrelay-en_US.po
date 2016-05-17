@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mailrelay wordpress addon\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-09 20:01-0300\n"
-"PO-Revision-Date: 2015-08-09 21:19-0300\n"
+"POT-Creation-Date: 2016-05-13 14:12-0300\n"
+"PO-Revision-Date: 2016-05-17 10:45-0300\n"
 "Last-Translator: Micheli <mailrelay.teste@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -12,44 +12,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.7.6\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
-#: ../connection_settings.php:22 ../mailrelay.php:25
+#: ../connection_settings.php:30
+#: ../mailrelay.php:128
 msgid "Connection Settings"
 msgstr "Connection Settings"
 
-#: ../connection_settings.php:28
+#: ../connection_settings.php:36
 msgid "Host:"
 msgstr "Host:"
 
-#: ../connection_settings.php:30
-msgid ""
-"Please enter the host that you have in your Mairelay welcome email. Please "
-"enter it without the initial http:// (for example demo.ip-zone.com)"
-msgstr ""
-"Please enter the host that you have in your Mairelay welcome email. Please "
-"enter it without the initial http:// (for example demo.ip-zone.com)"
+#: ../connection_settings.php:38
+msgid "Please enter the host that you have in your Mairelay welcome email. Please enter it without the initial http:// (for example demo.ip-zone.com)"
+msgstr "Please enter the host that you have in your Mairelay welcome email. Please enter it without the initial http:// (for example demo.ip-zone.com)"
 
-#: ../connection_settings.php:32
+#: ../connection_settings.php:40
 msgid "API Key: "
 msgstr "API Key: "
 
-#: ../connection_settings.php:34
-msgid ""
-"Please enter your API key. You can generate your API key on your Mailrelay "
-"panel, Configuration -> API access -> Generate API key"
-msgstr ""
-"Please enter your API key. You can generate your API key on your Mailrelay "
-"panel, Configuration -> API access -> Generate API key"
+#: ../connection_settings.php:42
+msgid "Please enter your API key. You can generate your API key on your Mailrelay panel, Configuration -> API access -> Generate API key"
+msgstr "Please enter your API key. You can generate your API key on your Mailrelay panel, Configuration -> API access -> Generate API key"
 
-#: ../connection_settings.php:40 ../feeds_settings.php:150
+#: ../connection_settings.php:52
+msgid "Sync new users automatically"
+msgstr "Sync new users automatically"
+
+#: ../connection_settings.php:61
+msgid "Groups"
+msgstr "Groups"
+
+#: ../connection_settings.php:69
+msgid "Groups that new users will be automatically synced to."
+msgstr "Groups that new users will be automatically synced to."
+
+#: ../connection_settings.php:77
+#: ../feeds_settings.php:150
 #: ../posts_settings.php:129
 msgid "Save Changes"
 msgstr "Save Changes"
 
-#: ../feeds_settings.php:18 ../mailrelay.php:27
+#: ../feeds_settings.php:18
+#: ../mailrelay.php:130
 msgid "Feeds Settings"
 msgstr "Feeds Settings"
 
@@ -57,7 +64,8 @@ msgstr "Feeds Settings"
 msgid "Feeds like newsletters:"
 msgstr "Feeds as newsletters:"
 
-#: ../feeds_settings.php:83 ../feeds_settings.php:103
+#: ../feeds_settings.php:83
+#: ../feeds_settings.php:103
 msgid "To send feeds like newsletters"
 msgstr "To send feeds as newsletters"
 
@@ -65,31 +73,38 @@ msgstr "To send feeds as newsletters"
 msgid "Please select a group to send the feeds"
 msgstr "Please select a group to send the feeds"
 
-#: ../feeds_settings.php:105 ../posts_settings.php:84
+#: ../feeds_settings.php:105
+#: ../posts_settings.php:84
 msgid "Newsletter From:"
 msgstr "Newsletter From:"
 
-#: ../feeds_settings.php:116 ../posts_settings.php:95
+#: ../feeds_settings.php:116
+#: ../posts_settings.php:95
 msgid "Use this field like Newsletter From"
 msgstr "Use this field as Newsletter From"
 
-#: ../feeds_settings.php:118 ../posts_settings.php:97
+#: ../feeds_settings.php:118
+#: ../posts_settings.php:97
 msgid "Newsletter Reply To:"
 msgstr "Newsletter Reply To:"
 
-#: ../feeds_settings.php:129 ../posts_settings.php:108
+#: ../feeds_settings.php:129
+#: ../posts_settings.php:108
 msgid "Use this field like Newsletter Reply To"
 msgstr "Use this field as Newsletter Reply To"
 
-#: ../feeds_settings.php:131 ../posts_settings.php:110
+#: ../feeds_settings.php:131
+#: ../posts_settings.php:110
 msgid "Newsletter Report To:"
 msgstr "Newsletter Report To:"
 
-#: ../feeds_settings.php:142 ../posts_settings.php:121
+#: ../feeds_settings.php:142
+#: ../posts_settings.php:121
 msgid "Use this field like Newsletter Report To"
 msgstr "Use this field as Newsletter Report To"
 
-#: ../feeds_settings.php:144 ../posts_settings.php:123
+#: ../feeds_settings.php:144
+#: ../posts_settings.php:123
 msgid "Allow users to unsubscribe:"
 msgstr "Allow users to unsubscribe:"
 
@@ -97,41 +112,41 @@ msgstr "Allow users to unsubscribe:"
 msgid "Enable users to unsubscribe from the feeds"
 msgstr "Enable users to unsubscribe from the feeds"
 
-#: ../mailrelay.php:26 ../posts_settings.php:18
+#: ../mailrelay.php:129
+#: ../posts_settings.php:18
 msgid "Posts Settings"
 msgstr "Posts Settings"
 
-#: ../mailrelay.php:28 ../sync_users.php:22
+#: ../mailrelay.php:131
+#: ../sync_users.php:22
 msgid "Sync Users"
 msgstr "Sync Users"
 
-#: ../mailrelay.php:199
+#: ../mailrelay.php:237
 msgid "Please select a group to send this post"
 msgstr "Please select a group to send this post"
 
-#: ../mailrelay.php:202
+#: ../mailrelay.php:240
 msgid "- Don't send -"
 msgstr "- Don't send -"
 
-#: ../mailrelay.php:221
+#: ../mailrelay.php:259
 msgid "Alternative Title"
 msgstr "Alternative Title"
 
-#: ../mailrelay.php:223
-msgid ""
-"If you enter a value in this field it will be used instead of post title"
-msgstr ""
-"If you enter a value in this field it will be used instead of post title"
+#: ../mailrelay.php:261
+msgid "If you enter a value in this field it will be used instead of post title"
+msgstr "If you enter a value in this field it will be used instead of post title"
 
-#: ../mailrelay.php:436
+#: ../mailrelay.php:474
 msgid "Unsubscribe"
 msgstr "Unsubscribe"
 
-#: ../mailrelay.php:441
+#: ../mailrelay.php:479
 msgid "View more"
 msgstr "View more"
 
-#: ../mailrelay.php:442
+#: ../mailrelay.php:480
 msgid "Posted: "
 msgstr "Posted: "
 
@@ -152,26 +167,16 @@ msgid "Please Select Group"
 msgstr "Please Select Group"
 
 #: ../sync_users.php:79
-msgid ""
-"All your Wordpress users will be synced with the groups you are choosing now."
-msgstr ""
-"All your Wordpress users will be synced with the groups you are choosing now."
+msgid "All your Wordpress users will be synced with the groups you are choosing now."
+msgstr "All your Wordpress users will be synced with the groups you are choosing now."
 
 #: ../sync_users.php:80
-msgid ""
-"To create new groups in Mailrelay, you must login into the control panel and "
-"click into the Mail Relay > Subscribers groups"
-msgstr ""
-"To create new groups in Mailrelay, you must login on your control panel and "
-"click on Mailrelay > Subscribers groups"
+msgid "To create new groups in Mailrelay, you must login into the control panel and click into the Mail Relay > Subscribers groups"
+msgstr "To create new groups in Mailrelay, you must login on your control panel and click on Mailrelay > Subscribers groups"
 
 #: ../sync_users.php:81
-msgid ""
-"Once there you can add a new group for your Wordpress users, or edit an "
-"existing one"
-msgstr ""
-"Once there you can add a new group for your Wordpress users, or edit an "
-"existing one"
+msgid "Once there you can add a new group for your Wordpress users, or edit an existing one"
+msgstr "Once there you can add a new group for your Wordpress users, or edit an existing one"
 
 #: ../sync_users.php:88
 msgid "WooCommerce options"
