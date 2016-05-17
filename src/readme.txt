@@ -4,7 +4,7 @@ Donate link:
 Tags: mailrelay,newsletter,email marketing
 Requires at least: 3.3
 Tested up to: 4.4
-Stable tag: 1.7.4
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,11 @@ This information can be found in your Mailrelay's welcome email. Please note tha
 Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
+
+= 1.8.0 =
+*Release Date - 17 May 2016*
+
+* Add option to automatically sync new users
 
 = 1.7.4 =
 * Add German translation
