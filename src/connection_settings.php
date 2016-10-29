@@ -63,7 +63,7 @@ echo _e('Connection Settings', 'mailrelay') . '</h2>';
                 <td>
                     <select multiple="multiple" name="mailrelay_auto_sync_groups[]" id="mailrelay_auto_sync_groups" size="5" style="height:auto;">
                         <?php foreach($groups->data as $value) { ?>
-                        <option value="<?php echo $value->id; ?>" <?php echo in_array($value->id, $mailrelay_auto_sync_groups) ? 'selected' : '' ?>><?php echo esc_html($value->name); ?></option>
+                        <option value="<?php echo $value->id; ?>" <?php echo in_array($value->id, (array) $mailrelay_auto_sync_groups) ? 'selected' : '' ?>><?php echo esc_html($value->name); ?></option>
                         <?php } ?>
                     </select>
                     <p><?php _e('Groups that new users will be automatically synced to.', 'mailrelay') ?></p>
