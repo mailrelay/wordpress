@@ -3,8 +3,8 @@ Contributors: Mailrelay.com
 Donate link: 
 Tags: mailrelay,newsletter,email marketing
 Requires at least: 3.3
-Tested up to: 4.5
-Stable tag: 1.8.0
+Tested up to: 4.6
+Stable tag: 1.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,10 +38,17 @@ Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
 
+= 1.8.1 =
+*Release Date - 29 Oct 2016*
+
+* Fix a warning depending on error_reporting set in PHP
+
 = 1.8.0 =
 *Release Date - 17 May 2016*
 
 * Add option to automatically sync new users
 
 = 1.7.4 =
+*Release Date - 18 Nov 2015*
+
 * Add German translation
