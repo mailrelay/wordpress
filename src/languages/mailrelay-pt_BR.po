@@ -1,0 +1,150 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: mailrelay wordpress addon\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-13 14:13-0300\n"
+"PO-Revision-Date: 2016-05-17 10:34-0300\n"
+"Last-Translator: Micheli <mailrelay.teste@gmail.com>\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.7.6\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#. Author of the plugin
+msgid "ConsultorPC"
+msgstr "ConsultorPC"
+
+#. URI of the plugin
+msgid "http://mailrelay.com"
+msgstr "http://mailrelay.com"
+
+#. Name of the plugin
+msgid "Mailrelay"
+msgstr "Mailrelay"
+
+#. Description of the plugin
+msgid "Syncronize your wordpress users with Mailrelay"
+msgstr "Sincronize seus usuários WordPress com Mailrelay"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Authentication"
+msgstr "Autenticação"
+
+msgid "Settings Page"
+msgstr "Configurações"
+
+msgid "Manual Sync"
+msgstr "Sincronização Manual"
+
+msgid "Authentication Page"
+msgstr "Autenticação"
+
+msgid "Manual Subscriber Sync Page"
+msgstr "Página de Sincronização Manual"
+
+msgid "You are currently logged in as <strong>%s.ipzmarketing.com</strong> (<a href="%s">Change Account</a>"
+msgstr "Você esta logado como <strong>%s.ipzmarketing.com</strong> (<a href="%s">Trocar Conta</a>"
+
+msgid "%s was synced', '%s were synced"
+msgstr "%s foi sincronizado, '%s foram sincronizados"
+
+msgid "%s was updated', '%s were updated"
+msgstr "%s foi atualizado', '%s foram atualizados"
+
+msgid "No API KEY"
+msgstr "Nenhuma Chave de API"
+
+msgid "Invalid Account"
+msgstr "Conta inválida"
+
+msgid "Invalid API Key"
+msgstr "Chave de API inválida"
+
+msgid "Account or API KEY missing"
+msgstr "Conta ou Chave de API vazias"
+
+msgid "Data saved successfully"
+msgstr "Dados foram salvos com sucesso"
+
+msgid "Please Select Group"
+msgstr "Por favor selecione um grupo"
+
+msgid "Sync"
+msgstr "Sincronizar"
+
+msgid "Please select at least one Group"
+msgstr "Por favor selecione pelo menos um grupo"
+
+msgid "Please select Groups"
+msgstr "Por favor selecione um grupo"
+
+msgid "Account"
+msgstr "Conta"
+
+msgid "API Key"
+msgstr "Chave de API"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "You are currently not logged in. Enter in your <a href="%s">Account</a> to edit your settings"
+msgstr "Você não esta logado no momento. Entre em sua <a href="%s">Conta</a> para editar suas configurações"
+
+msgid "Automatically sync new users with Mailrelay"
+msgstr "Sincronizar novos usuários automaticamente com Mailrelay"
+
+msgid "Groups"
+msgstr "Grupos"
+
+msgid "Woocommerce options"
+msgstr "Opções do Woocommmerce"
+
+msgid "Sync all users and WooCommmerce customers"
+msgstr "Sincronizar todos os usuários e Consumidores do Woocommerce"
+
+msgid "Sync only WooCommerce customers"
+msgstr "Sincronizar apenas Consumidores do Woocommerce"
+
+msgid "Sync all users except WooCommerce customers"
+msgstr "Sincronizar todos os usuários exceto os Consumidores do Woocommerce"
+
+msgid "Something went wrong: %s"
+msgstr "Algo deu errado"
+
+msgid "%s was synced"
+msgstr "%s foi sincronizado"
+
+msgid "%s were synced"
+msgstr "%s foram sincronizados"
+
+msgid "%s was updated"
+msgstr "%s foi atualizado"
+
+msgid "%s were updated"
+msgstr "%s foram atualizados"
+
+msgid "%s has failed"
+msgstr "%s falhou"
+
+msgid "%s has failed"
+msgstr "%s falharam"
+
+msgid "Login using your account name and API Key."
+msgstr "Entre usando sua Conta e Chave de API"
+
+msgid "For example if your account name is demo.ipzmarketing.com write only "demo"."
+msgstr "Por exemplo, se a sua conta é demo.ipzmarketing.com, escreva apenas "demo"."
+
+msgid "Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access."
+msgstr "Sua Chave API pode ser encontrada e gerada em sua Conta Mailrelay -> Configurações Acesso API"
+
+msgid "Groups that you want to automatically syncronize"
+msgstr "Grupos que você deseja sincronizar automaticamente"
