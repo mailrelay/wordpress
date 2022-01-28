@@ -21,7 +21,7 @@ Upload the necessary files to the server or install it direct from WordPress rep
 ---------------------------------------------------------------------------------------
 
 The Mailrelay plugins comes into a .zip file. To upload it we will go to the left menu Plugins > Add new. Then you click on the Upload tab that will allow you to
-install a plugin from archive. A file box will appear where you can upload the mailrelay zip file. The plugin will be uploaded to your blog and installed.
+install a plugin from the archive. A file box will appear where you can upload the mailrelay zip file. The plugin will be uploaded to your blog and installed.
 Please note that you have to give write access to your wp-content/plugins folder.
 
 You can also install the Mailrelay plugin straight from the WordPress repository. In the left menu Plugins > Add new. Then you will search for Mailrelay in the Search Plugins area. Then you just need to click the Install Now button and wait for it to be installed, after that click on the Activate button.
@@ -42,8 +42,8 @@ Once this data is successfully saved we can start the user sync.
 Settings
 --------
 
-After the configuration, we will click on Save button. If settings are correct, this will take us to a screen where you can select if you want to 
-Automatically syncronize all your users to your Mailrelay account and with which group (from 1 to all).
+After the configuration, we will click on the Save button. If settings are correct, this will take us to a screen where you can select if you want to 
+Automatically synchronize all your users to your Mailrelay account and with which group (from 1 to all).
 
 -----------
 Manual Sync
@@ -52,7 +52,7 @@ Manual Sync
 In the Manual Sync tab you can select the groups of your Mailrelay account that you want your WordPress users synced to. 
 We will click them and will press the Sync button.
 
-We will see the following screen, that simply shows us the sync process. It shows the total users synced, total users updated and fails.
+We will see the following screen, which simply shows us the sync process. It shows the total users synced, total users updated and fails.
 
 [ NOTE: Depending on the number of users to sync, the process can take from some seconds to several minutes. ]
 
@@ -62,7 +62,7 @@ Uninstall
 
 Uninstalling the extension is as easy as installing it. You only have to go to Plugins > Installed plugins.
 You must search for the Mailrelay module and click on Deactivate. Selecting this option, the extension will be disabled.
-Next you can click on the Delete link to complete remove the extension.
+Next you can click on the Delete link to completely remove the extension.
 
 ----------------
 Additional notes
@@ -72,5 +72,5 @@ Additional notes
 - This software is provided by the copyright holders and contributors "AS IS" and any express or implied warranties, including, but not limited to,
 the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the copyright owner or contributors be liable for any direct,
 indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data or profits,
-or bussiness interruption) however caused and on any theory of liability, wether in contract, strict liability, or tort (including negligence or otherwise) arising in any
+or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any
 way out of the use of this software, even if advised of the possibility of such damage.
