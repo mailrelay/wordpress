@@ -18,133 +18,133 @@ msgstr ""
 
 #. Author of the plugin
 msgid "ConsultorPC"
-msgstr ""
+msgstr "ConsultorPC"
 
 #. URI of the plugin
 msgid "http://mailrelay.com"
-msgstr ""
+msgstr "http://mailrelay.com"
 
 #. Name of the plugin
 msgid "Mailrelay"
-msgstr ""
+msgstr "Mailrelay"
 
 #. Description of the plugin
 msgid "Syncronize your wordpress users with Mailrelay"
-msgstr ""
+msgstr "Syncronize your wordpress users with Mailrelay"
 
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
 msgid "Authentication"
-msgstr ""
+msgstr "Authentication"
 
 msgid "Settings Page"
-msgstr ""
+msgstr "Settings Page"
 
 msgid "Manual Sync"
-msgstr ""
+msgstr "Manual Sync"
 
 msgid "Authentication Page"
-msgstr ""
+msgstr "Authentication Page"
 
 msgid "Manual Subscriber Sync Page"
-msgstr ""
+msgstr "Manual Subscriber Sync Page"
 
-msgid "Authentication Page"
+msgid "You are currently logged in as <strong>%s.ipzmarketing.com</strong> (<a href="%s">Change Account</a>"
 msgstr "You are currently logged in as <strong>%s.ipzmarketing.com</strong> (<a href="%s">Change Account</a>"
 
 msgid "Manual Subscriber Sync Page"
-msgstr ""
+msgstr "Manual Subscriber Sync Page"
 
 msgid "%s was synced', '%s were synced"
-msgstr ""
+msgstr "%s was synced', '%s were synced"
 
 msgid "%s was updated', '%s were updated"
-msgstr ""
+msgstr "%s was updated', '%s were updated"
 
 msgid "No API KEY"
-msgstr ""
+msgstr "No API KEY"
 
 msgid "Invalid Account"
-msgstr ""
+msgstr "Invalid Account"
 
 msgid "Invalid API Key"
-msgstr ""
+msgstr "Invalid API Key"
 
 msgid "Account or API KEY missing"
-msgstr ""
+msgstr "Account or API KEY missing"
 
 msgid "Data saved successfully"
-msgstr ""
+msgstr "Data saved successfully"
 
 msgid "Please Select Group"
-msgstr ""
+msgstr "Please Select Group"
 
 msgid "Sync"
-msgstr ""
+msgstr "Sync"
 
 msgid "Please select at least one Group"
-msgstr ""
+msgstr "Please select at least one Group"
 
 msgid "Please select Groups"
-msgstr ""
+msgstr "Please select Groups"
 
 msgid "Account"
-msgstr ""
+msgstr "Account"
 
 msgid "API Key"
-msgstr ""
+msgstr "API Key"
 
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 msgid "You are currently not logged in. Enter in your <a href="%s">Account</a> to edit your settings"
-msgstr ""
+msgstr "You are currently not logged in. Enter in your <a href="%s">Account</a> to edit your settings"
 
 msgid "Automatically sync new users with Mailrelay"
-msgstr ""
+msgstr "Automatically sync new users with Mailrelay"
 
 msgid "Groups"
-msgstr ""
+msgstr "Groups"
 
 msgid "Woocommerce options"
-msgstr ""
+msgstr "Woocommerce options"
 
 msgid "Sync all users and WooCommmerce customers"
-msgstr ""
+msgstr "Sync all users and WooCommmerce customers"
 
 msgid "Sync only WooCommerce customers"
-msgstr ""
+msgstr "Sync only WooCommerce customers"
 
 msgid "Sync all users except WooCommerce customers"
-msgstr ""
+msgstr "Sync all users except WooCommerce customers"
 
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "Something went wrong: %s"
 
 msgid "%s was synced"
-msgstr ""
+msgstr "%s was synced"
 
 msgid "%s were synced"
-msgstr ""
+msgstr "%s were synced"
 
 msgid "%s was updated"
-msgstr ""
+msgstr "%s was updated"
 
 msgid "%s were updated"
-msgstr ""
+msgstr "%s were updated"
 
 msgid "%s has failed"
-msgstr ""
+msgstr "%s has failed"
 
 msgid "Login using your account name and API Key."
-msgstr ""
+msgstr "Login using your account name and API Key."
 
 msgid "For example if your account name is demo.ipzmarketing.com write only "demo"."
-msgstr ""
+msgstr "For example if your account name is demo.ipzmarketing.com write only "demo"."
 
 msgid "Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access."
-msgstr ""
+msgstr "Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access."
 
 msgid "Groups that you want to automatically syncronize"
-msgstr ""
+msgstr "Groups that you want to automatically syncronize"
