@@ -50,8 +50,10 @@ msgstr "Authentication Page"
 msgid "Manual Subscriber Sync Page"
 msgstr "Manual Subscriber Sync Page"
 
-msgid "You are currently logged in as <strong>%s.ipzmarketing.com</strong> (<a href="%s">Change Account</a>"
-msgstr "You are currently logged in as <strong>%s.ipzmarketing.com</strong> (<a href="%s">Change Account</a>"
+msgid ""
+"You are currently logged in as <strong>%s.ipzmarketing.com</strong> (<a href="%s">Change Account</a>"
+msgstr ""
+"You are currently logged in as <strong>%s.ipzmarketing.com</strong> (<a href="%s">Change Account</a>"
 
 msgid "Manual Subscriber Sync Page"
 msgstr "Manual Subscriber Sync Page"
@@ -77,8 +79,8 @@ msgstr "Account or API KEY missing"
 msgid "Data saved successfully"
 msgstr "Data saved successfully"
 
-msgid "Please Select Group"
-msgstr "Please Select Group"
+msgid "Please select Groups <br /><a href="%s">(refresh groups)</a>"
+msgstr "Please select Groups <br /><a href="%s">(refresh groups)</a>"
 
 msgid "Sync"
 msgstr "Sync"
@@ -98,8 +100,10 @@ msgstr "API Key"
 msgid "Save"
 msgstr "Save"
 
-msgid "You are currently not logged in. Enter in your <a href="%s">Account</a> to edit your settings"
-msgstr "You are currently not logged in. Enter in your <a href="%s">Account</a> to edit your settings"
+msgid ""
+"You are currently not logged in. Enter in your <a href="%s">Account</a> to edit your settings"
+msgstr ""
+"You are currently not logged in. Enter in your <a href="%s">Account</a> to edit your settings"
 
 msgid "Automatically sync new users with Mailrelay"
 msgstr "Automatically sync new users with Mailrelay"
@@ -107,8 +111,8 @@ msgstr "Automatically sync new users with Mailrelay"
 msgid "Groups"
 msgstr "Groups"
 
-msgid "Woocommerce options"
-msgstr "Woocommerce options"
+msgid "WooCommerce options"
+msgstr "WooCommerce options"
 
 msgid "Sync all users and WooCommmerce customers"
 msgstr "Sync all users and WooCommmerce customers"
@@ -140,11 +144,13 @@ msgstr "%s has failed"
 msgid "Login using your account name and API Key."
 msgstr "Login using your account name and API Key."
 
-msgid "For example if your account name is demo.ipzmarketing.com write only "demo"."
-msgstr "For example if your account name is demo.ipzmarketing.com write only "demo"."
+msgid 'For example if your account name is demo.ipzmarketing.com write only "demo".'
+msgstr 'For example if your account name is demo.ipzmarketing.com write only "demo".'
 
 msgid "Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access."
 msgstr "Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access."
 
-msgid "Groups that you want to automatically syncronize"
-msgstr "Groups that you want to automatically syncronize"
+msgid ""
+"Groups that you want to automatically syncronize <br /><a href="%s">(refresh groups)</a>"
+msgstr ""
+"Groups that you want to automatically syncronize <br /><a href="%s">(refresh groups)</a>"
