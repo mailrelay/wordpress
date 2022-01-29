@@ -136,7 +136,7 @@ class MailrelayPage {
                 <div id="tab-authentication">
                     <h3><?php sprintf(_e('Authentication', 'mailrelay')) ?></h3>
                     <p><?php sprintf(_e('Login using your account name and API Key.', 'mailrelay')) ?></p>
-                    <p><?php sprintf(_e('For example your account name is demo.ipzmarketing.com write only "demo".', 'mailrelay')) ?></p>
+                    <p><?php sprintf(_e('For example if your account name is demo.ipzmarketing.com write only "demo".', 'mailrelay')) ?></p>
                     <p><?php sprintf(_e('Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access.', 'mailrelay')) ?> 
                     <?php 
                         
