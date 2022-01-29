@@ -1,10 +1,8 @@
-msgid ""
-msgstr ""
 "Project-Id-Version: mailrelay wordpress addon\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-13 14:12-0300\n"
 "PO-Revision-Date: 2016-05-17 10:45-0300\n"
-"Last-Translator: Micheli <mailrelay.teste@gmail.com>\n"
+"Last-Translator: Bruno <bruno@mailrelay.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -144,8 +142,10 @@ msgstr "%s has failed"
 msgid "Login using your account name and API Key."
 msgstr "Login using your account name and API Key."
 
-msgid 'For example if your account name is demo.ipzmarketing.com write only "demo".'
-msgstr 'For example if your account name is demo.ipzmarketing.com write only "demo".'
+msgid ""
+"For example if your account name is demo.ipzmarketing.com write only "demo"."
+msgstr ""
+"For example if your account name is demo.ipzmarketing.com write only "demo"."
 
 msgid "Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access."
 msgstr "Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access."
