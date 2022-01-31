@@ -1,10 +1,10 @@
 === Mailrelay ===
 Contributors: Mailrelay.com
-Donate link: 
+Donate link:
 Tags: mailrelay,newsletter,email marketing
-Requires at least: 3.3
-Tested up to: 4.6
-Stable tag: 1.8.1
+Requires at least: 5.0
+Tested up to: 5.9
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,27 +16,32 @@ This plugin allows you to sync all Wordpress users with one or more groups in Ma
 
 == Installation ==
 
-Before starting, make sure you have an active Mailrelay.com account and your account have a valid Api Key. 
+Before starting, make sure you have an active Mailrelay.com account and your account has a valid Api Key.
 
-1. Upload mailrelay folder to the `/wp-content/plugins/` directory
+1. Upload mailrelay folder to the `/wp-content/plugins/` directory or download it from the Wordpress plugin repository
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Go to Settings -> Mailrelay and configure your account details
 
 == Configuration ==
 
-Once the extension is installed you will have a new settings option: Settings > Mailrelay
+Once the extension is installed you will have a new settings option:  Mailrelay -> Authentication
 
 At this page, you will need to fill in the following data:
 
-- Username
-- Password
-- Host
+- Account
+- API Key
 
-This information can be found in your Mailrelay's welcome email. Please note that the host must be entered without initial http://.
+The Account information can be found in your Mailrelay's welcome email.
+And your API Key can be created at your Mailrelay account under settings -> API Keys
 
 Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
+
+= 2.0 =
+*Release Date - 28 Jan 2022*
+
+* New version for WordPress 5.9
 
 = 1.8.1 =
 *Release Date - 29 Oct 2016*

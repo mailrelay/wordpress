@@ -1,101 +1,641 @@
 <?php
+
 /*
-Plugin Name: Mailrelay
-Plugin URI: http://mailrelay.com
-Description: Easily sync your Wordpress users with Mailrelay.
-Version: 1.8.1
-Author: Mailrelay.com
-*/
+ * Plugin Name: Mailrelay
+ * Plugin URI: http://mailrelay.com
+ * Description: Syncronize your wordpress users with Mailrelay
+ * Version: 2.0
+ * Author: Consultor-PC
+ * Text Domain: Mailrelay
+ * Domain Path: /languages
+ */
 
 if (!defined('ABSPATH')) {
-    die('Invalid access.');
+    die('Access Denied.');
 }
 
-if (!defined('MAILRELAY_PLUGIN_VERSION')) {
-    define('MAILRELAY_PLUGIN_VERSION', '1.8.1');
+define('MAILRELAY_PLUGIN_VERSION', '2.0');
+
+
+function style_css() {
+    wp_enqueue_style( 'admin_css', (plugins_url() . '/mailrelay/includes/css/style.css') );
+}
+add_action('admin_enqueue_scripts', 'style_css');
+
+add_action('init', 'mailrelay_init');
+function mailrelay_init() {
+    $result = load_plugin_textdomain('mailrelay', false, dirname(plugin_basename(__FILE__)) . '/languages');
 }
 
-function mailrelay_sync_user($user, $groups) {
-    $mailrelay_host = get_option('mailrelay_host');
-    $mailrelay_api_key = get_option('mailrelay_api_key');
-
-    $url = 'https://' . $mailrelay_host . '/ccm/admin/api/version/2/&type=json';
-    $curl = curl_init($url);
-
-    // Call getSubscribers
-    $params = array(
-        'function' => 'getSubscribers',
-        'apiKey' => $mailrelay_api_key,
-        'email' => $user->user_email,
+function mailrelay_global() {
+    global $mailrelayData;
+    $mailrelayData = array (
+        'host'        => get_option('mailrelay_host'),
+        'api_key'     => get_option('mailrelay_api_key'),
+        'auto_sync'   => get_option('mailrelay_auto_sync'),
+        'groups_sync' => get_option('mailrelay_auto_sync_groups'),
     );
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl, CURLOPT_POST, 1);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    
-    $headers = array(
-        'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-    );
-    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-    $result = curl_exec($curl);
-    $jsonResult = json_decode($result);
+}
+add_action('add_global', 'mailrelay_global', 10);
+do_action('add_global');
 
-    if (count($jsonResult->data) > 0) {
-        $params = array(
-            'function' => 'updateSubscriber',
-            'apiKey' => $mailrelay_api_key,
-            'id' => $jsonResult->data[0]->id,
-            'email' => $user->user_email,
-            'name' => $user->display_name,
-            'groups' => $groups
+class MailrelayPage {
+
+    private $mailrelay_page_options;
+
+    public function __construct() {
+        add_action( 'admin_menu', array( $this, 'mailrelay_page_add_plugin_page', ) );
+        add_action( 'admin_init', array( $this, 'mailrelay_page_page_init' ) );
+        add_action( 'admin_init', array( $this, 'settings_page_page_init' ) );
+        add_action( 'admin_init', array( $this, 'manual_page_page_init' ) );
+    }
+
+    public function mailrelay_page_add_plugin_page() {
+        add_menu_page(
+            'Mailrelay', // page_title
+            'Mailrelay', // menu_title
+            'manage_options', // capability
+            'mailrelay', // menu_slug
+            array( $this, 'mailrelay_page_create_admin_page' ), // function
+            plugins_url('mailrelay/mailrelay.png')
         );
-        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
-        $headers = array(
-            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-       );
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    }
+ 
+    public function mailrelay_page_create_admin_page() {
+        
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
 
-        $result = curl_exec($curl);
-        $jsonResult = json_decode($result);
+        global $testPing;
+        global $message;
+        global $mailrelayData;
 
-        if ($jsonResult->status == 1) {
-            return array(
-                'status' => 'updated'
-            );
-        } else {
-            return array(
-                'status' => 'failed'
+        if ($testPing == 204) {
+            $default_tab = "Settings";
+            $authenticated = 'hidden'; 
+        }
+        else {  
+            $default_tab = "Authentication";
+            $disconected = 'hidden';
+        }
+
+        $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
+        ?>
+
+        <div class="wrap">
+
+            <h1>Mailrelay</h1>
+
+            <?php
+                if (!empty($message)) {
+                            sprintf(_e($message, 'mailrelay'));
+                        }
+            ?>
+            
+            <nav class="nav-tab-wrapper">
+              <a href="?page=mailrelay&tab=Authentication" class="nav-tab <?php if (isset($authenticated) ) { echo $authenticated; }  ?><?php if($tab==='Authentication'):?>nav-tab-active<?php endif; ?>"><?php _e('Authentication', 'mailrelay') ?></a>
+              <a href="?page=mailrelay&tab=Settings" class="nav-tab <?php if (isset($disconected) ) { echo $disconected; }  ?> <?php if($tab==='Settings'):?>nav-tab-active<?php endif; ?>"><?php _e('Settings', 'mailrelay') ?></a>
+              <a href="?page=mailrelay&tab=Manual" class="nav-tab <?php if (isset($disconected) ) { echo $disconected; }  ?> <?php if($tab==='Manual'):?>nav-tab-active<?php endif; ?>"><?php _e('Manual Sync', 'mailrelay') ?></a>
+            </nav>
+            
+            <div class="tab-content">
+            <?php switch($tab) :
+                case 'Manual':
+                ?>
+                <div id="tab-manual">
+                    <h3><?php sprintf(_e('Manual Sync', 'mailrelay')); ?></h3>        
+
+
+                        <?php 
+                        settings_errors(); 
+                        ?>
+
+                        <form name="webservices_form" method="post" action="<?php echo str_replace('%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+                            <?php
+                                settings_fields( 'manual_page_option_group' );
+                                do_settings_sections( 'manual-page-admin' );
+                                $atributes = array('onclick' => 'return check_form();');
+                                $submit_text = __('Sync', 'mailrelay');
+                                submit_button($submit_text, 'primary', 'submit-manual', true, $atributes);
+                            ?>
+                        </form>
+                </div>    
+            </div>
+
+                <?php
+                break;
+
+                
+                case 'Authentication':
+
+                $link = site_url('/wp-admin/admin.php?page=mailrelay');
+                ?>
+                <div id="tab-authentication">
+                    <h3><?php sprintf(_e('Authentication', 'mailrelay')) ?></h3>
+                    <p><?php sprintf(_e('Login using your account name and API Key.', 'mailrelay')) ?></p>
+                    <p><?php sprintf(_e('For example if your account name is demo.ipzmarketing.com write only "demo".', 'mailrelay')) ?></p>
+                    <p><?php sprintf(_e('Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access.', 'mailrelay')) ?> 
+                    <?php 
+                        
+                        settings_errors(); 
+                        ?>
+                        <form name="webservices_form" id="form_conection <?php if (isset($testPing)) echo 'logged' ?>" method="post" action="<?php echo $link ?>">
+                            <?php
+                                settings_fields( 'mailrelay_page_option_group' );
+                                do_settings_sections( 'mailrelay-page-admin' );
+                                $submit_text = __('Save', 'mailrelay');
+                                submit_button($submit_text, 'primary', 'submit-authentication');
+                            ?>
+                        </form>
+                </div>
+            </div>
+                <?php
+                break;
+
+                
+                case 'Settings':
+                $link = site_url('/wp-admin/admin.php?page=mailrelay&tab=Authentication');
+                ?>  
+                <div id="tab-settings">
+                    <h3><?php sprintf(_e('Settings', 'mailrelay')); ?></h3> 
+                    <p><?php echo sprintf(__('You are currently logged in as <strong>%1$s.ipzmarketing.com</strong> (<a href="%2$s">Change Account</a>)', 'mailrelay'), $mailrelayData['host'], esc_url( $link)) ?></p>       
+                    <?php 
+         
+                        
+                        settings_errors(); 
+
+                        ?>
+
+                        <form name="webservices_form" id="form_conection" method="post" action="">
+                            <?php
+                                settings_fields( 'settings_page_option_group' );
+                                do_settings_sections( 'settings-page-admin' );
+                                $atributes = array('onclick' => 'return check_form();');
+                                $submit_text = __('Save', 'mailrelay');
+                                submit_button($submit_text, 'primary', 'submit-settings', true, $atributes);
+
+                                
+                            ?>
+                        </form>
+                </div>
+            </div>
+                <?php
+                break;
+            endswitch; ?>
+            </div>
+        </div>
+        <script type="text/javascript">
+                    
+            function check_form() {
+                var chk = check();
+                if (chk != false) {
+                    document.webservices_form.submit();
+                } else {
+                    return false;
+                }
+            }
+
+            function check() {
+                if(jQuery('#mailrelay_group').val() == '' || jQuery('#mailrelay_auto_sync_groups').val() == '') {
+                    alert("<?php sprintf(_e('Please select at least one Group.', 'mailrelay')); ?>");
+                    return false;
+                }
+                return true;
+            }
+
+        </script>
+           
+<?php }
+
+    public function mailrelay_page_page_init() {
+        register_setting(
+            'mailrelay_page_option_group', // option_group
+            'mailrelay_page_option_name', // option_name
+            array( $this, 'mailrelay_page_sanitize' ) // sanitize_callback
+        );
+
+        add_settings_section(
+            'mailrelay_page_setting_section', // id
+            '', // title
+            array( $this, 'mailrelay_page_section_info' ), // callback
+            'mailrelay-page-admin' // page
+        );
+
+        add_settings_field(
+            'account', // id
+            __('Account', 'mailrelay'), // title
+            array( $this, 'account_callback' ), // callback
+            'mailrelay-page-admin', // page
+            'mailrelay_page_setting_section' // section
+        );
+
+        add_settings_field(
+            'api_key', // id
+            __('API Key', 'mailrelay'), // title
+            array( $this, 'api_key_callback' ), // callback
+            'mailrelay-page-admin', // page
+            'mailrelay_page_setting_section' // section
+        );
+
+        add_settings_field(
+            'action', // id
+            '', // title
+            array( $this, 'action_callback' ), // callback
+            'mailrelay-page-admin', // page
+            'mailrelay_page_setting_section', // section
+            [
+                'class' => 'hidden'
+            ]
+        );
+
+    }
+
+
+    public function mailrelay_page_sanitize($input) {
+        $sanitary_values = array();
+        if ( isset( $input['account'] ) ) {
+            $sanitary_values['account'] = sanitize_text_field( $input['account'] );
+        }
+        if ( isset( $input['api_key'] ) ) {
+            $sanitary_values['api_key'] = sanitize_text_field( $input['api_key'] );
+        }
+        if ( isset( $input['action'] ) ) {
+            $sanitary_values['action'] = sanitize_text_field( $input['action'] );
+        }
+
+        return $sanitary_values;
+    }
+   
+    public function mailrelay_page_section_info() { }
+
+    public function settings_page_page_init() {
+        register_setting(
+            'settings_page_option_group', // option_group
+            'settings_page_option_name', // option_name
+            array( $this, 'settings_page_sanitize' ) // sanitize_callback
+        );
+
+        add_settings_section(
+            'settings_page_setting_section', // id
+            '', // title
+            array( $this, 'settings_page_section_info' ), // callback
+            'settings-page-admin' // page
+        );
+
+        add_settings_field(
+            'auto_sync', // id
+            __('Automatically sync new users with Mailrelay', 'mailrelay'), // title
+            array( $this, 'auto_sync_callback' ), // callback
+            'settings-page-admin', // page
+            'settings_page_setting_section'// section
+        );
+        $link = 'javascript:window.location.href=window.location.href';
+        add_settings_field(
+            'groups', // id
+            sprintf(__('Groups that you want to automatically syncronize <br /><a href="%s">(refresh groups)</a>', 'mailrelay'), $link), // title
+            array( $this, 'groups_callback' ), // callback
+            'settings-page-admin', // page
+            'settings_page_setting_section' // section
+        );
+
+        add_settings_field(
+            'action', // id
+            null, // title
+            array( $this, 'action_callback' ), // callback
+            'settings-page-admin', // page
+            'settings_page_setting_section', // section
+            [
+                'class' => 'hidden'
+            ]
+        );
+
+        add_settings_field(
+            'account', // id
+            '', // title
+            array( $this, 'account_settings' ), // callback
+            'settings-page-admin', // page
+            'settings_page_setting_section', // section
+            [
+                'class' => 'hidden'
+            ]
+        );
+
+        add_settings_field(
+            'api_key', // id
+            '', // title
+            array( $this, 'api_key_settings' ), // callback
+            'settings-page-admin', // page
+            'settings_page_setting_section', // section
+            [
+                'class' => 'hidden'
+            ]
+        );
+    }
+
+    public function settings_page_section_info() { }
+
+    public function settings_page_sanitize($input) {
+        $sanitary_values = array();
+        if ( isset( $input['groups'] ) ) {
+            $sanitary_values['groups'] = $input['groups'];
+        }
+        if ( isset( $input['auto_sync'] ) ) {
+            $sanitary_values['auto_sync'] = $input['auto_sync'];
+        }
+        if ( isset( $input['action'] ) ) {
+            $sanitary_values['action'] = sanitize_text_field( $input['action'] );
+        }
+        if ( isset( $input['account'] ) ) {
+            $sanitary_values['account'] = sanitize_text_field( $input['account'] );
+        }
+        if ( isset( $input['api_key'] ) ) {
+            $sanitary_values['api_key'] = sanitize_text_field( $input['api_key'] );
+        }
+        return $sanitary_values;
+    }
+
+    public function manual_page_page_init() {
+        register_setting(
+            'manual_page_option_group', // option_group
+            'manual_page_option_name', // option_name
+            array( $this, 'manual_page_sanitize' ) // sanitize_callback
+        );
+
+        add_settings_section(
+            'manual_page_setting_section', // id
+            '', // title
+            array( $this, 'manual_page_section_info' ), // callback
+            'manual-page-admin' // page
+        );
+
+        $link = 'javascript:window.location.href=window.location.href';
+        add_settings_field(
+            'groups', // id
+            sprintf(__('Please select Groups <br /><a href="%s">(refresh groups)</a>', 'mailrelay'), $link), // title
+            array( $this, 'manual_groups_callback' ), // callback
+            'manual-page-admin', // page
+            'manual_page_setting_section' // section
+        );
+
+        add_settings_field(
+            'action', // id
+            '', // title
+            array( $this, 'sync_callback' ), // callback
+            'manual-page-admin', // page
+            'manual_page_setting_section', // section
+            [
+                'class' => 'hidden'
+            ]
+        );
+
+        add_settings_field(
+            'account', // id
+            '', // title
+            array( $this, 'account_settings' ), // callback
+            'manual-page-admin', // page
+            'manual_page_setting_section', // section
+            [
+                'class' => 'hidden'
+            ]
+        );
+
+        add_settings_field(
+            'api_key', // id
+            '', // title
+            array( $this, 'api_key_settings' ), // callback
+            'manual-page-admin', // page
+            'manual_page_setting_section', // section
+            [
+                'class' => 'hidden'
+            ]
+        );
+
+        if (mailrelay_woo_commmerce_installed()) {
+            add_settings_field(
+            'woo_commerce', // id
+            __('WooCommerce options', 'mailrelay'), // title
+            array( $this, 'woocommerce_callback' ), // callback
+            'manual-page-admin', // page
+            'manual_page_setting_section' // section
             );
         }
+
+    }
+
+    public function manual_page_sanitize($input) {
+        $sanitary_values = array();
+        if ( isset( $input['groups'] ) ) {
+            $sanitary_values['groups'] = $input['groups'];
+        }
+        if ( isset( $input['auto_sync'] ) ) {
+            $sanitary_values['auto_sync'] = $input['auto_sync'];
+        }
+        if ( isset( $input['action'] ) ) {
+            $sanitary_values['action'] = sanitize_text_field( $input['action'] );
+        }
+        if ( isset( $input['account'] ) ) {
+            $sanitary_values['account'] = sanitize_text_field( $input['account'] );
+        }
+        if ( isset( $input['api_key'] ) ) {
+            $sanitary_values['api_key'] = sanitize_text_field( $input['api_key'] );
+        }
+        if ( isset( $input['woo_commerce'] ) ) {
+            $sanitary_values['woo_commerce'] = $input['woo_commerce'];
+        }
+        return $sanitary_values;
+    }
+
+    public function manual_page_section_info() { }
+    
+    public function account_callback() {
+        global $mailrelayData;
+        printf(
+            '<input class="regular-text"  type="text" name="mailrelay_host" id="host" value="%s"> <div class="ipz">.ipzmarketing.com</div>',
+            $mailrelayData['host']
+        );
+    }
+
+    public function account_settings() {
+        global $mailrelayData;
+        printf(
+            '<input class="regular-text"  type="hidden" name="mailrelay_host" id="host" value="%s">',
+            $mailrelayData['host']
+        );
+    }
+
+    public function api_key_callback() {
+        global $mailrelayData;
+        printf(
+            '<input class="regular-text" type="text" name="mailrelay_api_key" id="api_key" value="%s">',
+            $mailrelayData['api_key']
+        );
+    }
+
+    public function api_key_settings() {
+        global $mailrelayData;
+        printf(
+            '<input class="regular-text" type="hidden" name="mailrelay_api_key" id="api_key" value="%s">',
+            $mailrelayData['api_key']
+        );
+    }
+
+    public function action_callback() {
+        printf(
+            '<input class="regular-text" type="hidden" name="action" value="mailrelay_save_connection_settings" />'
+        );
+    }
+
+     public function sync_callback() {
+        printf(
+            '<input class="regular-text" type="hidden" name="action" value="mailrelay_sync_users_group" />'
+        );
+    }
+
+     public function sync_users() {
+        printf(
+            '<input class="regular-text" type="hidden" name="action" value="mailrelay_sync_users" />'
+        );
+    }
+
+    public function auto_sync_callback() {
+        $mailrelayData['auto_sync'] = get_option('mailrelay_auto_sync');
+        ?>
+            <input type="checkbox" name="mailrelay_auto_sync" id="mailrelay_auto_sync" <?php echo $mailrelayData['auto_sync'] ? 'checked' : '' ?>/>
+        <?php
+    }
+
+    public function groups_callback() {
+        global $mailrelayData;
+        if (!empty($mailrelayData['host']) && !empty($mailrelayData['api_key'])) {
+            $groups = mailrelay_get_groups();
+        }
+        $mailrelayData['groups_sync'] = get_option('mailrelay_auto_sync_groups');
+
+        ?> <select multiple name="mailrelay_auto_sync_groups[]" id="mailrelay_auto_sync_groups" class="form-select">
+            <?php foreach($groups as $value) { ?>
+
+                <option value="<?php echo $value['id']; ?>" <?php echo in_array($value['id'], (array) $mailrelayData['groups_sync']) ? 'selected' : '' ?>><?php echo esc_html($value['name']); ?></option>
+            <?php } ?>
+        </select> <?php
+    }
+
+    public function woocommerce_callback() {
+        ?> <select name="woo_commerce" id="woo_commmerce" class="form-select">
+                <option value=""><?php printf(__('Sync all users and WooCommmerce customers', 'mailrelay')) ?></option>
+                <option value="only"><?php printf(__('Sync only WooCommerce customers', 'mailrelay')) ?></option>
+                <option value="except"><?php printf(__('Sync all users except WooCommerce customers', 'mailrelay')) ?></option>
+        </select> <?php
+    }
+
+    public function manual_groups_callback() {
+        global $mailrelayData;
+        if (!empty($mailrelayData['host']) && !empty($mailrelayData['api_key'])) {
+            $groups = mailrelay_get_groups();
+        }
+        ?> <select multiple name="group[]" id="mailrelay_group" class="form-select">
+            <?php foreach($groups as $value) { ?>
+                <option value="<?php echo $value['id']; ?>" <?php echo in_array($value['id'], (array) $mailrelayData['groups_sync']) ? 'selected' : '' ?>><?php echo esc_html($value['name']); ?></option>
+            <?php } ?>
+        </select> <?php
+    }
+
+}
+
+function mailrelay_ping() {
+        
+    global $mailrelayData;
+    global $testPing;
+
+    $url = 'https://' . $mailrelayData['host'] . '.ipzmarketing.com/api/v1/ping';
+    $args = array(
+        'method'            => 'GET',
+        'timeout'           => 30,
+        'redirection'       => 10,
+        'httpversion'       => '1.1',
+        'returntransfer'    => true,
+        'sslverify'         => false,
+        'headers'           => array(
+            'x-auth-token'      => $mailrelayData['api_key'],
+            'content-type'      => 'application/json'),
+    );
+    //Get the API response ping
+    $response = wp_remote_request( $url, $args);
+    //Get the response ping code
+    $testPing = wp_remote_retrieve_response_code($response);
+    
+    if ( is_wp_error( $response ) ) {
+        $error_message = $response->get_error_message();
     } else {
-        $params = array(
-            'function' => 'addSubscriber',
-            'apiKey' => $mailrelay_api_key,
-            'email' => $user->user_email,
-            'name' => $user->display_name,
-            'groups' => $groups
-        );
+        if(isset($testPing)) {
+            return $testPing;
+        }
+        else {
+            return NULL;
+        }  
+    }  
+}
+add_action('ping', 'mailrelay_ping');
+do_action('ping');
 
-        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+add_action('mailrelay_counter', 'mailrelay_count');
 
-        $headers = array(
-            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-        );
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+function mailrelay_sync_user($user, $groups) {
 
-        $result = curl_exec($curl);
-        $jsonResult = json_decode($result);
+    global $mailrelayData;
 
-        if ($jsonResult->status == 1) {
+    $url = 'https://' . $mailrelayData['host'] . '.ipzmarketing.com/api/v1/subscribers/sync';
+    $full_name = $user->first_name . ' ' . $user->last_name;
+    $group_ids = '['. implode(', ', $groups) .']';
+    $data = array(
+        'email'                 => $user->user_email,
+        'name'                  => $full_name,
+        'replace_groups'        => false,
+        'restore_if_deleted'    => false,
+        'status'                => 'active',
+        'group_ids'            => $group_ids
+    );
+    $data = json_encode($data);
+    //Remove de "" from the Groups ids
+    $data = str_replace('"[','[', (string) $data);
+    $data = str_replace(']"',']', (string) $data);
+    $args = array(
+        'method'            => 'POST',
+        'timeout'           => 60,
+        'redirection'       => 10,
+        'httpversion'       => '1.1',
+        'post_data'         => 'body',
+        'body'              => $data,
+        'headers'           => array(
+            'x-auth-token'      => $mailrelayData['api_key'],
+            'content-type'      => 'application/json'),
+            'Expect'            => '',
+    );
+    //Post the API data
+    $response = wp_remote_post( $url, $args );
+    //Retrieve the headers response code
+    $code = wp_remote_retrieve_response_code($response);
+    
+    if ( is_wp_error( $response ) ) {
+            $error_message = $response->get_error_message();
+            sprintf(_e('Something went wrong: %s', 'mailrelay'), $error_message);
+    } else {
+        if ($code == "200") {
             return array(
-                'status' => 'added'
+               'status' => 'updated'
             );
-        } else {
+        } 
+        elseif ($code == "201") {
+            return array(
+                'status' => 'created'
+            );
+        } 
+        else {
             return array(
                 'status' => 'failed'
-            );
+                );
         }
     }
 }
@@ -118,40 +658,54 @@ if (get_option('mailrelay_auto_sync')) {
     add_action('user_register', 'mailrelay_new_user_registration');
 }
 
+
+
 if (function_exists('is_admin') && is_admin()) {
-    function mailrelay_init() {
-        $result = load_plugin_textdomain('mailrelay', false, dirname(plugin_basename(__FILE__)) . '/languages');
+
+    function mailrelay_woo_commmerce_installed() {
+        return in_array('woocommerce/woocommerce.php', apply_filters('  ', get_option('active_plugins')));
     }
 
-    function mailrelay_menu() {
-        add_menu_page('Mailrelay', 'Mailrelay', 'manage_options', 'mailrelay', null, plugins_url('mailrelay/mailrelay.png'));
-        add_submenu_page('mailrelay', __('Connection Settings', 'mailrelay'), __('Connection Settings', 'mailrelay'), 'manage_options', 'mailrelay_connection_settings', 'mailrelay_connection_settings');
-        add_submenu_page('mailrelay', __('Posts Settings', 'mailrelay'), __('Posts Settings', 'mailrelay'), 'manage_options', 'mailrelay_posts_settings', 'mailrelay_posts_settings');
-        add_submenu_page('mailrelay', __('Feeds Settings', 'mailrelay'), __('Feeds Settings', 'mailrelay'), 'manage_options', 'mailrelay_feeds_settings', 'mailrelay_feeds_settings');
-        add_submenu_page('mailrelay', __('Sync Users', 'mailrelay'), __('Sync Users', 'mailrelay'), 'manage_options', 'mailrelay_sync_users', 'mailrelay_sync_users');
-        remove_submenu_page('mailrelay', 'mailrelay');
+    function mailrelay_get_groups() {
+        
+        global $mailrelayData;
+
+        $url = 'https://'. $mailrelayData['host'].'.ipzmarketing.com/api/v1/groups?page=1';
+        
+        $args = array(
+            'method'            => 'GET',
+            'timeout'           => 30,
+            'redirection'       => 10,
+            'httpversion'       => '1.1',
+            'returntransfer'    => true,
+            'sslverify'         => false,
+            'headers'           => array(
+                'x-auth-token'      => $mailrelayData['api_key']),
+        );
+
+        $response = wp_remote_get( $url, $args);
+        $code = wp_remote_retrieve_response_code($response);
+        if ( is_wp_error( $response ) ) {
+            $error_message = $response->get_error_message();
+            sprintf(_e('Something went wrong: %s', 'mailrelay'), $error_message);
+        } else {
+            if ($code == '200') {
+                $response_body = json_decode( wp_remote_retrieve_body( $response ), true );
+                return $response_body;
+            } else {
+                sprintf(_e('Something went wrong: %s', 'mailrelay'), $code);
+            }
+        }
     }
 
-    function mailrelay_connection_settings() {
-        require 'connection_settings.php';
-    }
 
-    function mailrelay_posts_settings() {
-        require 'posts_settings.php';
-    }
+    if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'mailrelay_sync_users_group')) {
+            global $message;
 
-    function mailrelay_feeds_settings() {
-        require 'feeds_settings.php';
-    }
-
-    function mailrelay_sync_users() {
-        global $message;
-
-        if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'mailrelay_sync_users_group')) {
             if ($_REQUEST['woo_commerce'] == 'only') {
                 $users = get_users('role=customer');
             } elseif ($_REQUEST['woo_commerce'] == 'except') {
-                $roles = get_editable_roles();
+                $roles = wp_roles()->roles;
                 unset($roles['customer']);
 
                 $users = array();
@@ -161,17 +715,16 @@ if (function_exists('is_admin') && is_admin()) {
             } else {
                 $users = get_users();
             }
-            
-            $groups = $_REQUEST['group'];
 
+            $groups = $_REQUEST['group'];
             $added = 0;
             $updated = 0;
             $failed = 0;
 
             foreach ($users as $user) {
                 $return = mailrelay_sync_user($user, $groups);
-
-                if ($return['status'] == 'added') {
+               
+                if ($return['status'] == 'created') {
                     $added++;
                 } elseif ($return['status'] == 'updated') {
                     $updated++;
@@ -181,469 +734,54 @@ if (function_exists('is_admin') && is_admin()) {
                     throw new Exception('Invalid return status.');
                 }
             }
-
-            $message  = '<div class="updated"><p>The Mailrelay sync has finished successfully. Next you can check the results of the sync:<ul>';
-            $message .= '<li>New users synced:&nbsp;' . $added . '</li>';
-            $message .= '<li>Updated users:&nbsp;' . $updated . '</li>';
-            $message .= '<li>Failed users:&nbsp;' . $failed . '</li>';
-            $message .= '</ul></p></div>';
-        }
-
-        require 'sync_users.php';
-    }
-
-    function mailrelay_woo_commmerce_installed() {
-        return in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')));
-    }
-
-    function mailrelay_get_groups() {
-        // Initialize variables
-        $mailrelay_host = get_option('mailrelay_host');
-        $mailrelay_api_key = get_option('mailrelay_api_key');
-
-        // First thing, init
-        $url = 'https://'. $mailrelay_host .'/ccm/admin/api/version/2/&type=json';
-        $curl = curl_init($url);
-
-        // Call getGroups
-        $params = array(
-            'function' => 'getGroups',
-            'apiKey' => $mailrelay_api_key,
-            'sortField' => 'name',
-            'sortOrder' => 'ASC'
-        );
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         
-        $headers = array(
-            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-        );
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-        $result = curl_exec($curl);
-        return json_decode($result);
-    }
+            $message  = '<div class="updated"><ul>';
+            $message .= '<li>'. sprintf(  _n('%s was synced', '%s were synced', $added, 'mailrelay'), $added ) .'</li>';
+            $message .= '<li>'. sprintf( _n('%s was updated', '%s were updated', $updated, 'mailrelay'), $updated ) .'</li>';
+            $message .= '<li>'. sprintf(  _n('%s has failed', '%s has failed', $failed, 'mailrelay'), $failed ) .'</li>';
+            $message .= '</ul></div>';
+        }
+ 
+    if (isset($_POST['action']) && ($_POST['action'] == 'mailrelay_save_connection_settings')) {
 
-    function mailrelay_create_post_meta_box() {
-        add_meta_box('mailrelay-meta-box', 'Mailrelay', 'mailrelay_post_meta_box', 'post', 'normal', 'high');
-    }
+        $mailrelayData['host'] = $_POST['mailrelay_host'];
+        if (strpos($mailrelayData['host'], 'http://') === 0 || strpos($mailrelayData['host'], 'https://') === 0 ) {
+            $mailrelayData['host'] = parse_url($mailrelayData['host'], PHP_URL_HOST);
+        }
+        if (strpos($mailrelayData['host'], '.ipzmarketing.com') != false ) {
+            $mailrelayData['host'] = str_replace('.ipzmarketing.com', '', $mailrelayData['host']);
+        }
+        $mailrelayData['api_key'] = $_POST['mailrelay_api_key'];
+        $mailrelayData['mailrelay_auto_sync'] = $_POST['mailrelay_auto_sync'];
+        $mailrelayData['mailrelay_auto_sync_groups'] = $_POST['mailrelay_auto_sync_groups'];
 
-    function mailrelay_post_meta_box($object, $box) {
-        $mailrelay_group = get_post_meta($object->ID, 'mailrelay-group', true);
-    ?>
-    <p>
-        <label for="mailrelay-group"><?php echo _e('Please select a group to send this post', 'mailrelay'); ?></label>
-        <br /><br />
-        <select name="mailrelay-group" id="mailrelay-group" onchange="if (this.value != '') {document.getElementById('spanMailrelayTitle').style.display = '';} else {document.getElementById('spanMailrelayTitle').style.display = 'none';}">
-        <option value=""><?php echo _e("- Don't send -", 'mailrelay'); ?></option>
-        <?php
-        $result = mailrelay_get_groups();
-        if ($result && $result->status == 1) {
-            if (is_object($result)) {
-                $data = $result->data;
-                if (is_array($data)) {
-                    foreach($data as $key => $value) {
-                    ?>
-                    <option value="<?php echo $data[$key]->id; ?>"<?php echo $mailrelay_group == $data[$key]->id ? ' selected="selected"' : ''; ?>><?php echo $data[$key]->name; ?></option>
-                    <?php
-                    }
-                }
+        $ping = mailrelay_ping();
+        global $message;
+        global $testPing;
+
+        if(isset($ping)) {
+            if ($ping == 401) {
+                $message = '<div class="error"><p>'. sprintf(__('Invalid API KEY', 'mailrelay')) .'</p></div>';
+            } elseif($ping == 404) {
+                $message = '<div class="error"><p>'. sprintf(__('Invalid Account', 'mailrelay')) .'</p></div>';
+            }
+            elseif($ping == 204) {
+
+                //Form data sent
+                
+                update_option('mailrelay_host', trim($mailrelayData['host']));
+                update_option('mailrelay_api_key', trim($mailrelayData['api_key']));
+                update_option('mailrelay_auto_sync',$mailrelayData['mailrelay_auto_sync']);
+                update_option('mailrelay_auto_sync_groups', $mailrelayData['mailrelay_auto_sync_groups']);
+                $message = '<div class="updated"><p>'. sprintf(__('Data saved successfully', 'mailrelay')) .'</p></div>';
             }
         }
-        ?>
-        </select>
-        <span id="spanMailrelayTitle" style="<?php echo $mailrelay_group == '' ? 'display:none;' : '' ?>">
-        <br /><br />
-        <label for="mailrelay-title"><?php echo _e('Alternative Title', 'mailrelay'); ?></label>
-        <br /><br />
-        <input type="text" name="mailrelay-title" value="<?php echo get_post_meta($object->ID, 'mailrelay-title', true); ?>" size="70" placeholder="<?php echo _e('If you enter a value in this field it will be used instead of post title', 'mailrelay'); ?>" />
-        </span>
-        <input type="hidden" name="mailrelay_meta_box_nonce" value="<?php echo wp_create_nonce(plugin_basename(__FILE__)); ?>" />
-    </p>
-    <?php
+        else {
+            $message = '<div class="error"><p>'. sprintf(__('Account or API KEY missing', 'mailrelay')) .'</p></div>';
+        }
+
+
     }
-
-    function mailrelay_save_post_meta_box($post_id) {
-        // AJAX? Not used here
-        if (defined('DOING_AJAX') && DOING_AJAX) {
-            return;
-        }
-        // Check user permissions
-        if (!current_user_can('edit_post', $post_id)) {
-            return;
-        }
-        // Return if it's a post revision
-        if (false !== wp_is_post_revision($post_id)) {
-            return;
-        }
-        // Sanitizing the alternative title
-        $_REQUEST['mailrelay-title'] = trim($_REQUEST['mailrelay-title']);
-
-        if ($_REQUEST['mailrelay-group'] == '')
-        {
-            delete_post_meta($post_id, 'mailrelay-group');
-            delete_post_meta($post_id, 'mailrelay-title');
-        }
-        else
-        {
-            $post_meta = get_post_meta($post_id);
-            if (empty($post_meta))
-            {
-                add_post_meta($post_id, 'mailrelay-group', $_REQUEST['mailrelay-group'], true);
-                add_post_meta($post_id, 'mailrelay-title', $_REQUEST['mailrelay-title'], true);
-            }
-            else
-            {
-                update_post_meta($post_id, 'mailrelay-group', $_REQUEST['mailrelay-group']);
-                update_post_meta($post_id, 'mailrelay-title', $_REQUEST['mailrelay-title']);
-            }
-        }
-    }
-
-    function mailrelay_publish_post($post_id, $post) {
-        // Get custom field value
-        $mailrelay_group = (int)stripslashes(get_post_meta($post_id, 'mailrelay-group', true));
-        if ($mailrelay_group == 0) {
-            return;
-        }
-        $mailrelay_title = get_post_meta($post_id, 'mailrelay-title', true);
-
-        // These will be entered by user.
-        $mailrelay_host = get_option('mailrelay_host');
-        $mailrelay_api_key = get_option('mailrelay_api_key');
-        $mailrelay_unsubscribe = get_option('mailrelay_newsletter_unsubscribe');
-
-        // First thing, ger config
-        $url = 'https://'. $mailrelay_host .'/ccm/admin/api/version/2/&type=json';
-        $curl = curl_init($url);
-
-        // Post title
-        $post_title = $mailrelay_title != '' ? $mailrelay_title : get_the_title();
-
-        // Post content
-        $post_content = apply_filters('the_content', $post->post_content);
-        $post_content = trim(str_replace(']]>', ']]&gt;', $post_content));
-
-        // Call addCampaign
-        $params = array(
-            'function' => 'addCampaign',
-            'apiKey' => $mailrelay_api_key,
-            'subject' => $post_title,
-            'mailboxFromId' => (int)get_option('mailrelay_newsletter_from'),
-            'mailboxReplyId' => (int)get_option('mailrelay_newsletter_reply_to'),
-            'mailboxReportId' => (int)get_option('mailrelay_newsletter_report_to'),
-            'emailReport' => true,
-            'groups' => $mailrelay_group,
-            'text' => null,
-            'html' => mailrelay_build_template($post_id, $post_title, $post_content, $mailrelay_unsubscribe),
-            'packageId' => 6,
-            'campaignFolderId' => 1
-        );
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        
-        $headers = array(
-            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-        );
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($curl);
-        $jsonResult = json_decode($result);
-
-        if (is_object($jsonResult)) {
-            if (isset($jsonResult->data) && $jsonResult->data != '') {
-                // Call sendCampaign
-                $params = array(
-                    'function' => 'sendCampaign',
-                    'apiKey' => $mailrelay_api_key,
-                    'id' => $jsonResult->data
-                );
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-                $headers = array(
-                    'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-                );
-                curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-                $result = curl_exec($curl);
-            }
-        }
-    }
-
-    function mailrelay_publish_feed($post_id, $post) {
-        // These will be entered by user.
-        $mailrelay_host = get_option('mailrelay_host');
-        $mailrelay_api_key = get_option('mailrelay_api_key');
-        $mailrelay_feeds_group = (int)get_option('mailrelay_feeds_group');
-        $mailrelay_unsubscribe = get_option('mailrelay_feed_unsubscribe');
-        if ($mailrelay_feeds_group == 0) {
-            return;
-        }
-
-        // First thing, ger config
-        $url = 'https://'. $mailrelay_host .'/ccm/admin/api/version/2/&type=json';
-        $curl = curl_init($url);
-
-        // Post title
-        $post_title = get_the_title();
-
-        // Post content
-        $post_content = apply_filters('the_content', $post->post_content);
-        $post_content = trim(str_replace(']]>', ']]&gt;', $post_content));
-
-        // Call addCampaign
-        $params = array(
-            'function' => 'addCampaign',
-            'apiKey' => $mailrelay_api_key,
-            'subject' => $post_title,
-            'mailboxFromId' => (int)get_option('mailrelay_feed_from'),
-            'mailboxReplyId' => (int)get_option('mailrelay_feed_reply_to'),
-            'mailboxReportId' => (int)get_option('mailrelay_feed_report_to'),
-            'emailReport' => true,
-            'groups' => $mailrelay_feeds_group,
-            'text' => null,
-            'html' => mailrelay_build_template($post_id, $post_title, $post_content, $mailrelay_unsubscribe),
-            'packageId' => 6,
-            'campaignFolderId' => 1
-        );
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        
-        $headers = array(
-            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-        );
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($curl);
-        $jsonResult = json_decode($result);
-
-        if (is_object($jsonResult)) {
-            if (isset($jsonResult->data) && $jsonResult->data != '') {
-                // Call sendCampaign
-                $params = array(
-                    'function' => 'sendCampaign',
-                    'apiKey' => $mailrelay_api_key,
-                    'id' => $jsonResult->data
-                );
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-                $headers = array(
-                    'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-                );
-                curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-                $result = curl_exec($curl);
-            }
-        }
-    }
-
-    function mailrelay_do_feed($post_id, $post) {
-        $post_meta = get_post_meta($post_id);
-        if (!empty($post_meta)) {
-            if (get_post_meta($post_id, 'mailrelay-feed-processed', true) == '1') {
-                $is_new = false;
-            } else {
-                $is_new = true;
-            }
-        } else {
-            add_post_meta($post_id, 'mailrelay-feed-processed', '0', true);
-            $is_new = true;
-        }
-        if ($is_new) {
-            mailrelay_publish_feed($post_id, $post);
-            update_post_meta($post_id, 'mailrelay-feed-processed', '1');
-        }
-    }
-
-    function mailrelay_build_template($post_id, $post_title, $post_content, $mailrelay_unsubscribe) {
-        $post_content = substrhtml(nl2br($post_content), 0, 300) . '...';
-        $post_link = get_permalink($post_id);
-        if (strpos($post_link, '?') === false)
-        {
-            $post_link .= '?';
-        }
-        else
-        {
-            $post_link .= '&';
-        }
-        $post_link .= 'utm_source=newsletter&utm_medium=articulo&utm_campaign=blog';
-
-        if ($mailrelay_unsubscribe == '1') {
-            $unsubscribe_link = '<a href="[unsubscribe_url_direct]">' . __('Unsubscribe', 'mailrelay') . '</a>';
-        } else {
-            $unsubscribe_link = '';
-        }
-        
-        $more = '' . __('View more', 'mailrelay') . '';
-        $date = '' . __('Posted: ', 'mailrelay') . date('Y-m-d H:i:s');
-
-        $aux     = pathinfo(__FILE__);
-        $content = file_get_contents($aux['dirname'] . '/newletter.html');
-        $content = str_replace('{$title}', $post_title, $content);
-        $content = str_replace('{$date}', $date, $content);
-        $content = str_replace('{$content}', $post_content, $content);
-        $content = str_replace('{$link}', $post_link, $content);
-        $content = str_replace('{$more}', $more, $content);
-        $content = str_replace('{$unsubscribe}', $unsubscribe_link, $content);
-
-        return $content;
-    }
-
-    function substrhtml($str, $start, $len) {
-        $str_clean = substr(strip_tags($str),$start,$len);
-        $pos = strrpos($str_clean, ' ');
-        if ($pos === false)
-        {
-            $str_clean = substr(strip_tags($str),$start,$len);
-        }
-        else
-        {
-            $str_clean = substr(strip_tags($str),$start,$pos);
-        }
-
-        if (preg_match_all('/\<[^>]+>/is',$str,$matches,PREG_OFFSET_CAPTURE))
-        {
-            for($i=0;$i<count($matches[0]);$i++)
-            {
-                if($matches[0][$i][1] < $len)
-                {
-                    $str_clean = substr($str_clean,0,$matches[0][$i][1]) . $matches[0][$i][0] . substr($str_clean,$matches[0][$i][1]);
-                }
-                else if(preg_match('/\<[^>]+>$/is',$matches[0][$i][0]))
-                {
-                    $str_clean = substr($str_clean,0,$matches[0][$i][1]) . $matches[0][$i][0] . substr($str_clean,$matches[0][$i][1]);
-                    break;
-                }
-            }
-            return $str_clean;
-        }
-        else
-        {
-            $string = substr($str,$start,$len);
-            $pos = strrpos($string, ' ');
-            if ($pos === false)
-            {
-                return substr($str,$start,$len);
-            }
-            return substr($str,$start,$pos);
-        }
-    }
-
-    add_action('init', 'mailrelay_init');
-    add_action('admin_menu', 'mailrelay_menu');
-
-    if (get_option('mailrelay_newsletter_post') == '1') {
-        add_action('admin_menu', 'mailrelay_create_post_meta_box');
-        add_action('save_post', 'mailrelay_save_post_meta_box', 10, 1);
-        add_action('publish_post', 'mailrelay_publish_post', 10, 2);
-    }
-
-    if (get_option('mailrelay_newsletter_feed') == '1') {
-        add_action('publish_post', 'mailrelay_do_feed', 10, 2);
-    }
-
-    if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'mailrelay_save_connection_settings')) {
-        //Form data sent
-        $mailrelay_host = $_REQUEST['mailrelay_host'];
-        update_option('mailrelay_host', trim($mailrelay_host));
-
-        $mailrelay_api_key = $_REQUEST['mailrelay_api_key'];
-        update_option('mailrelay_api_key', trim($mailrelay_api_key));
-
-        $mailrelay_auto_sync = $_REQUEST['mailrelay_auto_sync'] == 'on';
-        update_option('mailrelay_auto_sync', $mailrelay_auto_sync);
-
-        if (!empty($_REQUEST['mailrelay_auto_sync_groups'])) {
-            $mailrelay_auto_sync_groups = $_REQUEST['mailrelay_auto_sync_groups'];
-            update_option('mailrelay_auto_sync_groups', $mailrelay_auto_sync_groups);
-        }
-
-        // These will be entered by user.
-        $mailrelay_host = get_option('mailrelay_host');
-        $mailrelay_api_key = get_option('mailrelay_api_key');
-
-        // First thing, init
-        $url = 'https://' . $mailrelay_host . '/ccm/admin/api/version/2/&type=json';
-        $curl = curl_init($url);
-
-        // Call getGroups
-        $params = array(
-            'function' => 'getGroups',
-            'apiKey' => $mailrelay_api_key,
-            'sortField' => 'name',
-            'sortOrder' => 'ASC'
-        );
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        
-        $headers = array(
-            'X-Request-Origin: Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version')
-        );
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($curl);
-        $jsonResult = json_decode($result);
-
-        if (!$jsonResult || trim($jsonResult->status) != 1) {
-            global $message;
-            if (is_object($jsonResult)) {
-                if ($jsonResult->error != '') {
-                    $message = '<div class="error"><p>' . $jsonResult->error . '</p></div>';
-                } else {
-                    $message = '<div class="error"><p>Your account does not have an API key. Please, generate one in your Mailrelay\'s account: Settings -> API access -> Generate new API key.</p></div>';
-                }
-            } else {
-                $message = '<div class="error"><p>Invalid host. Please Retry.</p></div>';
-            }
-        } else {
-            $message = '<div class="updated"><p>Data saved succesfully.</p></div>';
-        }
-    }
-
-    if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'mailrelay_save_posts_settings')) {
-        //Form data sent
-        $mailrelay_newsletter_post = isset($_REQUEST['mailrelay_newsletter_post']) ? $_REQUEST['mailrelay_newsletter_post'] : '';
-        update_option('mailrelay_newsletter_post', $mailrelay_newsletter_post);
-
-        $mailrelay_newsletter_from = isset($_REQUEST['mailrelay_newsletter_from']) ? $_REQUEST['mailrelay_newsletter_from'] : '';
-        update_option('mailrelay_newsletter_from', $mailrelay_newsletter_from);
-
-        $mailrelay_newsletter_reply_to = isset($_REQUEST['mailrelay_newsletter_reply_to']) ? $_REQUEST['mailrelay_newsletter_reply_to'] : '';
-        update_option('mailrelay_newsletter_reply_to', $mailrelay_newsletter_reply_to);
-
-        $mailrelay_newsletter_report_to = isset($_REQUEST['mailrelay_newsletter_report_to']) ? $_REQUEST['mailrelay_newsletter_report_to'] : '';
-        update_option('mailrelay_newsletter_report_to', $mailrelay_newsletter_report_to);
-
-        $mailrelay_newsletter_unsubscribe = isset($_REQUEST['mailrelay_newsletter_unsubscribe']) ? $_REQUEST['mailrelay_newsletter_unsubscribe'] : '';
-        update_option('mailrelay_newsletter_unsubscribe', $mailrelay_newsletter_unsubscribe);
-
-        $message = '<div class="updated"><p>Data saved succesfully.</p></div>';
-    }
-
-    if (isset($_REQUEST['action']) && ($_REQUEST['action'] == 'mailrelay_save_feeds_settings')) {
-        //Form data sent
-        $mailrelay_newsletter_feed = isset($_REQUEST['mailrelay_newsletter_feed']) ? $_REQUEST['mailrelay_newsletter_feed'] : '';
-        update_option('mailrelay_newsletter_feed', $mailrelay_newsletter_feed);
-
-        $mailrelay_feeds_group = isset($_REQUEST['mailrelay_feeds_group']) ? $_REQUEST['mailrelay_feeds_group'] : '';
-        update_option('mailrelay_feeds_group', $mailrelay_feeds_group);
-
-        $mailrelay_feed_from = isset($_REQUEST['mailrelay_feed_from']) ? $_REQUEST['mailrelay_feed_from'] : '';
-        update_option('mailrelay_feed_from', $mailrelay_feed_from);
-
-        $mailrelay_feed_reply_to = isset($_REQUEST['mailrelay_feed_reply_to']) ? $_REQUEST['mailrelay_feed_reply_to'] : '';
-        update_option('mailrelay_feed_reply_to', $mailrelay_feed_reply_to);
-
-        $mailrelay_feed_report_to = isset($_REQUEST['mailrelay_feed_report_to']) ? $_REQUEST['mailrelay_feed_report_to'] : '';
-        update_option('mailrelay_feed_report_to', $mailrelay_feed_report_to);
-
-        $mailrelay_feed_unsubscribe = isset($_REQUEST['mailrelay_feed_unsubscribe']) ? $_REQUEST['mailrelay_feed_unsubscribe'] : '';
-        update_option('mailrelay_feed_unsubscribe', $mailrelay_feed_unsubscribe);
-
-        $message = '<div class="updated"><p>Data saved succesfully.</p></div>';
-    }
+    $MailrelayPage = new MailrelayPage();
 }
