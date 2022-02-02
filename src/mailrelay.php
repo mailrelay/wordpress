@@ -73,12 +73,12 @@ class MailrelayPage {
 		global $message;
 		global $mailrelay_data;
 
-		if ( $test_ping == 204 ) {
+		if ( $test_ping === 204 ) {
 			$default_tab   = 'Settings';
-			$authenticated = 'hidden';
+			$authenticated = true;
 		} else {
-			$default_tab = 'Authentication';
-			$disconected = 'hidden';
+            $default_tab = 'Authentication';
+			$disconnected = true;
 		}
 
 		$tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $default_tab;
@@ -90,39 +90,14 @@ class MailrelayPage {
 
 			<?php
 			if ( ! empty( $message ) ) {
-						sprintf( _e( $message, 'mailrelay' ) );
+                sprintf( _e( $message, 'mailrelay' ) );
 			}
 			?>
 
 			<nav class="nav-tab-wrapper">
-			  <a href="?page=mailrelay&tab=Authentication" class="nav-tab
-			  <?php
-				if ( isset( $authenticated ) ) {
-					echo $authenticated; }
-				?>
-
-				<?php
-				if ( $tab === 'Authentication' ) :
-					?>
-				nav-tab-active<?php endif; ?>"><?php _e( 'Authentication', 'mailrelay' ); ?></a>
-			  <a href="?page=mailrelay&tab=Settings" class="nav-tab
-			  <?php
-				if ( isset( $disconected ) ) {
-					echo $disconected; }
-				?>
-				 <?php
-					if ( $tab === 'Settings' ) :
-						?>
-				nav-tab-active<?php endif; ?>"><?php _e( 'Settings', 'mailrelay' ); ?></a>
-			  <a href="?page=mailrelay&tab=Manual" class="nav-tab
-			  <?php
-				if ( isset( $disconected ) ) {
-					echo $disconected; }
-				?>
-				 <?php
-					if ( $tab === 'Manual' ) :
-						?>
-				nav-tab-active<?php endif; ?>"><?php _e( 'Manual Sync', 'mailrelay' ); ?></a>
+                <a href="?page=mailrelay&tab=Authentication" class="nav-tab <?php if ($authenticated) echo 'hidden'?> <?php if ($tab === 'Authentication') echo 'nav-tab-active' ?>"><?php _e( 'Authentication', 'mailrelay' ); ?></a>
+                <a href="?page=mailrelay&tab=Settings" class="nav-tab <?php if ($disconnected) echo 'hidden'?> <?php if ($tab === 'Settings') echo 'nav-tab-active' ?>"><?php esc_html_e( 'Settings', 'mailrelay' ); ?></a>
+                <a href="?page=mailrelay&tab=Manual" class="nav-tab <?php if ($disconnected) echo 'hidden'?> <?php if ($tab === 'Manual') echo 'nav-tab-active' ?>"><?php esc_html_e( 'Manual Sync', 'mailrelay' ); ?></a>
 			</nav>
 
 			<div class="tab-content">
@@ -215,7 +190,7 @@ class MailrelayPage {
 
 			function check_form() {
 				var chk = check();
-				if (chk != false) {
+				if (chk) {
 					document.webservices_form.submit();
 				} else {
 					return false;
@@ -223,7 +198,7 @@ class MailrelayPage {
 			}
 
 			function check() {
-				if(jQuery('#mailrelay_group').val() == '' || jQuery('#mailrelay_auto_sync_groups').val() == '') {
+				if(jQuery('#mailrelay_group').val() === '' || jQuery('#mailrelay_auto_sync_groups').val() === '') {
 					alert("<?php sprintf( _e( 'Please select at least one Group.', 'mailrelay' ) ); ?>");
 					return false;
 				}
@@ -576,7 +551,6 @@ class MailrelayPage {
 }
 
 function mailrelay_ping() {
-
 	global $mailrelay_data;
 	global $test_ping;
 
@@ -792,11 +766,11 @@ if ( function_exists( 'is_admin' ) && is_admin() ) {
 		global $test_ping;
 
 		if ( isset( $ping ) ) {
-			if ( $ping == 401 ) {
+			if ( $ping === 401 ) {
 				$message = '<div class="error"><p>' . sprintf( __( 'Invalid API KEY', 'mailrelay' ) ) . '</p></div>';
-			} elseif ( $ping == 404 ) {
+			} elseif ( $ping === 404 ) {
 				$message = '<div class="error"><p>' . sprintf( __( 'Invalid Account', 'mailrelay' ) ) . '</p></div>';
-			} elseif ( $ping == 204 ) {
+			} elseif ( $ping === 204 ) {
 
 				// Form data sent
 
