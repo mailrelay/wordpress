@@ -157,14 +157,11 @@ class MailrelayPage {
 					$link = site_url( '/wp-admin/admin.php?page=mailrelay' );
 					?>
 				<div id="tab-authentication">
-					<h3><?php sprintf( _e( 'Authentication', 'mailrelay' ) ); ?></h3>
-					<p><?php sprintf( _e( 'Login using your account name and API Key.', 'mailrelay' ) ); ?></p>
-					<p><?php sprintf( _e( 'For example if your account name is demo.ipzmarketing.com write only "demo".', 'mailrelay' ) ); ?></p>
-					<p><?php sprintf( _e( 'Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access.', 'mailrelay' ) ); ?>
-					<?php
-
-						settings_errors();
-					?>
+					<h3><?php sprintf( esc_html_e( 'Authentication', 'mailrelay' ) ); ?></h3>
+					<p><?php sprintf( esc_html_e( 'Login using your account name and API Key.', 'mailrelay' ) ); ?></p>
+					<p><?php sprintf( esc_html_e( 'For example if your account name is demo.ipzmarketing.com write only "demo".', 'mailrelay' ) ); ?></p>
+					<p><?php sprintf( esc_html_e( 'Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access.', 'mailrelay' ) ); ?>
+					<?php settings_errors(); ?>
 						<form name="webservices_form" id="form_conection
 						<?php
 						if ( isset( $test_ping ) ) {
@@ -554,10 +551,10 @@ class MailrelayPage {
 
 	public function woocommerce_callback() {
 		?>
-		 <select name="woo_commerce" id="woo_commmerce" class="form-select">
-				<option value=""><?php printf( __( 'Sync all users and WooCommmerce customers', 'mailrelay' ) ); ?></option>
-				<option value="only"><?php printf( __( 'Sync only WooCommerce customers', 'mailrelay' ) ); ?></option>
-				<option value="except"><?php printf( __( 'Sync all users except WooCommerce customers', 'mailrelay' ) ); ?></option>
+		<select name="woo_commerce" id="woo_commmerce" class="form-select">
+				<option value=""><?php printf( esc_html_e( 'Sync all users and WooCommmerce customers', 'mailrelay' ) ); ?></option>
+				<option value="only"><?php printf( esc_html_e( 'Sync only WooCommerce customers', 'mailrelay' ) ); ?></option>
+				<option value="except"><?php printf( esc_html_e( 'Sync all users except WooCommerce customers', 'mailrelay' ) ); ?></option>
 		</select>
 		<?php
 	}
