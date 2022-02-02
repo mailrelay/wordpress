@@ -41,7 +41,9 @@ Once this data is successfully saved you can run the user sync.
 = 2.0 =
 *Release Date - 28 Jan 2022*
 
-* New version for WordPress 5.9
+* Add option to sync WooCommerce customers
+* Plugin is compatible with Wordpress 5.9.
+* Removed support for legacy API
 
 = 1.8.1 =
 *Release Date - 29 Oct 2016*
