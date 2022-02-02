@@ -1,4 +1,4 @@
- #toplevel_page_mailrelay .wp-submenu { display: none;  }
+#toplevel_page_mailrelay .wp-submenu { display: none;  }
 
 .form-line { margin-top: 20px; }
 
@@ -9,8 +9,8 @@
 #tab-authentication th { width: 100px;  }
 
 .ipz {
-    display: inline-block;
-    background: #ccc;
-    padding: 5px;
-    margin-left: -129px;
+	display: inline-block;
+	background: #ccc;
+	padding: 5px;
+	margin-left: -129px;
 }
