@@ -568,9 +568,9 @@ class MailrelayPage {
 			$groups = mailrelay_get_groups();
 		}
 		?>
-		 <select multiple name="group[]" id="mailrelay_group" class="form-select">
+		<select multiple name="group[]" id="mailrelay_group" class="form-select">
 			<?php foreach ( $groups as $value ) { ?>
-				<option value="<?php echo $value['id']; ?>" <?php echo in_array( $value['id'], (array) $mailrelay_data['groups_sync'] ) ? 'selected' : ''; ?>><?php echo esc_html( $value['name'] ); ?></option>
+				<option value="<?php echo $value['id']; ?>" <?php selected(in_array( $value['id'], (array) $mailrelay_data['groups_sync'] ))?>><?php echo esc_html( $value['name'] ); ?></option>
 			<?php } ?>
 		</select>
 		<?php
