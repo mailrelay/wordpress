@@ -635,7 +635,12 @@ function mailrelay_sync_user( $user, $groups ) {
 	}
 }
 
-function mailrelay_new_user_registration( $user_id ) {
+function mailrelay_new_user_auto_sync( $user_id ) {
+	if ( !get_option( 'mailrelay_auto_sync' ) ) {
+		// Autosync isn't enabled
+		return;
+	}
+
 	$user = new WP_User( $user_id );
 
 	$groups = get_option( 'mailrelay_auto_sync_groups' );
@@ -648,10 +653,7 @@ function mailrelay_new_user_registration( $user_id ) {
 		}
 	}
 }
-
-if ( get_option( 'mailrelay_auto_sync' ) ) {
-	add_action( 'user_register', 'mailrelay_new_user_registration' );
-}
+add_action( 'user_register', 'mailrelay_new_user_auto_sync' );
 
 if ( function_exists( 'is_admin' ) && is_admin() ) {
 
