@@ -39,7 +39,7 @@ Once this data is successfully saved you can run the user sync.
 == Changelog ==
 
 = 2.0 =
-*Release Date - 28 Jan 2022*
+*Release Date - 04 Feb 2022*
 
 * Add option to sync WooCommerce customers
 * Plugin is compatible with Wordpress 5.9.
