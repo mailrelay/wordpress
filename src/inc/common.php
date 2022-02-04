@@ -23,7 +23,8 @@ if ( ! function_exists( 'mailrelay_api_request' ) ) {
 			array(
 				'method'  => $method,
 				'headers' => array(
-					'x-auth-token' => $mailrelay_data['api_key'],
+					'x-auth-token' 	   => $mailrelay_data['api_key'],
+					'x-request-origin' => 'Wordpress|'. MAILRELAY_PLUGIN_VERSION .'|'. get_bloginfo('version'),
 				),
 			)
 		);
