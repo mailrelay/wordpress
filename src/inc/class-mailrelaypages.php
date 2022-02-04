@@ -60,9 +60,11 @@ class MailrelayPages {
 		if ( $this->is_api_key_setup_and_valid() ) {
 			$default_tab   = 'Settings';
 			$authenticated = true;
+			$disconnected  = false;
 		} else {
-			$default_tab  = 'Authentication';
-			$disconnected = true;
+			$default_tab   = 'Authentication';
+			$disconnected  = true;
+			$authenticated = false;
 		}
 
 		$tab = isset( $_GET['tab'] ) ? wp_unslash( $_GET['tab'] ) : $default_tab; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
