@@ -1,157 +1,162 @@
-"Project-Id-Version: mailrelay wordpress addon\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-13 14:13-0300\n"
-"PO-Revision-Date: 2016-05-17 10:34-0300\n"
-"Last-Translator: Micheli <mailrelay.teste@gmail.com>\n"
+# Copyright (C) 2022 Mailrelay
+# This file is distributed under the same license as the Mailrelay plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Mailrelay 2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mailrelay\n"
+"POT-Creation-Date: 2022-02-04T20:33:20+00:00\n"
+"PO-Revision-Date: 2022-02-04 17:53-0300\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
-"X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.7.6\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Domain: mailrelay\n"
 
+#. Plugin Name of the plugin
 #. Author of the plugin
-msgid "ConsultorPC"
-msgstr "ConsultorPC"
-
-#. URI of the plugin
-msgid "http://mailrelay.com"
-msgstr "http://mailrelay.com"
-
-#. Name of the plugin
 msgid "Mailrelay"
 msgstr "Mailrelay"
 
+#. Plugin URI of the plugin
+msgid "https://mailrelay.com"
+msgstr "https://mailrelay.com"
+
 #. Description of the plugin
-msgid "Syncronize your wordpress users with Mailrelay"
+msgid "Synchronize your WordPress users with Mailrelay"
 msgstr "Sincronize seus usuários WordPress com Mailrelay"
 
-msgid "Settings"
-msgstr "Configurações"
-
+#: inc/class-mailrelaypages.php:90 inc/class-mailrelaypages.php:126
 msgid "Authentication"
 msgstr "Autenticação"
 
-msgid "Settings Page"
+#: inc/class-mailrelaypages.php:91 inc/class-mailrelaypages.php:148
+msgid "Settings"
 msgstr "Configurações"
 
+#: inc/class-mailrelaypages.php:92 inc/class-mailrelaypages.php:103
 msgid "Manual Sync"
 msgstr "Sincronização Manual"
 
-msgid "Authentication Page"
-msgstr "Autenticação"
-
-msgid "Manual Subscriber Sync Page"
-msgstr "Página de Sincronização Manual"
-
-#: mailrelay.php:164
-msgid ""
-"You are currently logged in as <strong>%1$s.ipzmarketing.com</strong> (<a href="%2$s">Change Account</a>)"
-msgstr ""
-"Você esta logado como <strong> %1$s.ipzmarketing.com</strong> (<a href='%2$s'>Trocar Conta</a>)"
-
-msgid "%s was synced', '%s were synced"
-msgstr "%s foi sincronizado, '%s foram sincronizados"
-
-msgid "%s was updated', '%s were updated"
-msgstr "%s foi atualizado', '%s foram atualizados"
-
-msgid "No API KEY"
-msgstr "Nenhuma Chave de API"
-
-msgid "Invalid Account"
-msgstr "Conta inválida"
-
-msgid "Invalid API Key"
-msgstr "Chave de API inválida"
-
-msgid "Account or API KEY missing"
-msgstr "Conta ou Chave de API vazias"
-
-msgid "Data saved successfully"
-msgstr "Dados foram salvos com sucesso"
-
-msgid "Please Select Group"
-msgstr "Por favor selecione um grupo"
-
+#: inc/class-mailrelaypages.php:113
 msgid "Sync"
 msgstr "Sincronizar"
 
-msgid "Please select at least one Group"
-msgstr "Por favor selecione pelo menos um grupo"
+#: inc/class-mailrelaypages.php:127
+msgid "Login using your account name and API Key."
+msgstr "Entre usando sua conta e chave API."
 
-msgid "Please select Groups <br /><a href="%s">(refresh groups)</a>"
-msgstr "Por favor selecione grupos <br /><a href="%s">(recarregar grupos)</a>"
+#: inc/class-mailrelaypages.php:128
+msgid ""
+"For example if your account name is demo.ipzmarketing.com write only \"demo"
+"\"."
+msgstr ""
+"Por exemplo, se a sua conta é demo.ipzmarketing.com, escreva apenas “demo”."
 
-msgid "Account"
-msgstr "Conta"
+#: inc/class-mailrelaypages.php:129
+msgid ""
+"Your API Key can be found or generated at your Mailrelay Account -> Settings "
+"-> API Access."
+msgstr ""
+"Sua chave API pode ser encontrada e gerada em sua conta Mailrelay -> "
+"Configurações -> Acesso API."
 
-msgid "API Key"
-msgstr "Chave de API"
-
+#: inc/class-mailrelaypages.php:134 inc/class-mailrelaypages.php:163
 msgid "Save"
 msgstr "Salvar"
 
+#. translators: %1: host  %2: authentication link
+#: inc/class-mailrelaypages.php:152
 msgid ""
-"You are currently not logged in. Enter in your <a href="%s">Account</a> to edit your settings"
+"You are currently logged in as <strong>%1$s.ipzmarketing.com</strong> (<a "
+"href=\"%2$s\">Change Account</a>)"
 msgstr ""
-"Você não esta logado no momento. Entre em sua <a href='%s'>Conta</a> para editar suas configurações"
+"Você não esta logado no momento. Entre em sua <a href=‘%s’>Conta</a> para "
+"editar suas configurações"
 
+#: inc/class-mailrelaypages.php:187
+msgid "Account"
+msgstr "Conta"
+
+#: inc/class-mailrelaypages.php:195
+msgid "API Key"
+msgstr "Chave de API"
+
+#: inc/class-mailrelaypages.php:225
 msgid "Automatically sync new users with Mailrelay"
 msgstr "Sincronizar novos usuários automaticamente com Mailrelay"
 
-msgid "Groups"
-msgstr "Grupos"
-
-msgid "WooCommerce options"
-msgstr "Opções do WooCommmerce"
-
-msgid "Sync all users and WooCommmerce customers"
-msgstr "Sincronizar todos os usuários e Consumidores do Woocommerce"
-
-msgid "Sync only WooCommerce customers"
-msgstr "Sincronizar apenas Consumidores do Woocommerce"
-
-msgid "Sync all users except WooCommerce customers"
-msgstr "Sincronizar todos os usuários exceto os Consumidores do Woocommerce"
-
-msgid "Something went wrong: %s"
-msgstr "Algo deu errado"
-
-msgid "%s was synced"
-msgstr "%s foi sincronizado"
-
-msgid "%s were synced"
-msgstr "%s foram sincronizados"
-
-msgid "%s was updated"
-msgstr "%s foi atualizado"
-
-msgid "%s were updated"
-msgstr "%s foram atualizados"
-
-msgid "%s has failed"
-msgstr "%s falhou"
-
-msgid "%s has failed"
-msgstr "%s falharam"
-
-msgid "Login using your account name and API Key."
-msgstr "Entre usando sua Conta e Chave de API"
-
+#. translators: %s link
+#: inc/class-mailrelaypages.php:235
 msgid ""
-"For example if your account name is demo.ipzmarketing.com write only "demo"."
+"Groups that you want to automatically syncronize <br /><a href=\"%s"
+"\">(refresh groups)</a>"
 msgstr ""
-"Por exemplo, se a sua conta é demo.ipzmarketing.com, escreva apenas "demo"."
+"Grupos para sincronização automatica<br /><a href=“%s”>(recarregar grupos)</"
+"a>"
 
-msgid "Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access."
-msgstr "Sua Chave API pode ser encontrada e gerada em sua Conta Mailrelay -> Configurações Acesso API"
+#. translators: %s link
+#: inc/class-mailrelaypages.php:267
+msgid "Please select Groups <br /><a href=\"%s\">(refresh groups)</a>"
+msgstr "Por favor selecione grupos <br /><a href=“%s”>(atualizar grupos)</a>"
 
-msgid "" 
-"Groups that you want to automatically syncronize <br /><a href="%s">(refresh groups)</a>"
-msgstr ""
-"Grupos para sincronização automatica<br /><a href="%s">(recarregar grupos)</a>"
+#: inc/class-mailrelaypages.php:287
+msgid "WooCommerce options"
+msgstr "Opções do WooCommerce"
+
+#: inc/class-mailrelaypages.php:353
+msgid "Sync all users and WooCommmerce customers"
+msgstr "Sincronizar usuários Wordpress e clientes do Woocommerce"
+
+#: inc/class-mailrelaypages.php:354
+msgid "Sync only WooCommerce customers"
+msgstr "Sincronizar apenas clientes do Woocommerce"
+
+#: inc/class-mailrelaypages.php:355
+msgid "Sync all users except WooCommerce customers"
+msgstr "Sincronizar apenas usuários Wordpress"
+
+#: inc/class-mailrelaypages.php:425 inc/class-mailrelaypages.php:460
+msgid "Data saved successfully"
+msgstr "Dados foram salvos com sucesso"
+
+#: inc/class-mailrelaypages.php:434
+msgid "Invalid API KEY"
+msgstr "Chave de API inválida"
+
+#: inc/class-mailrelaypages.php:439
+msgid "Invalid Account"
+msgstr "Conta inválida"
+
+#: inc/class-mailrelaypages.php:444
+msgid "Account or API KEY missing"
+msgstr "Conta ou chave de API vazias"
+
+#. translators: %s: number
+#: inc/class-mailrelaypages.php:502
+msgid "%s was synced"
+msgid_plural "%s were synced"
+msgstr[0] "%s foi sincronizado"
+msgstr[1] "%s foram sincronizados"
+
+#. translators: %s: number
+#: inc/class-mailrelaypages.php:504
+msgid "%s was updated"
+msgid_plural "%s were updated"
+msgstr[0] "%s foi atualizado"
+msgstr[1] "%s foram atualizados"
+
+#. translators: %s: number
+#: inc/class-mailrelaypages.php:506
+msgid "%s has failed"
+msgid_plural "%s has failed"
+msgstr[0] "%s falhou"
+msgstr[1] "%s falharam"
+
+#. translators: %s error message
+#: inc/common.php:60 inc/common.php:67 inc/common.php:104
+msgid "Something went wrong: %s"
+msgstr "Algo deu errado: %s"

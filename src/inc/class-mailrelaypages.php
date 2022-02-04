@@ -37,7 +37,7 @@ class MailrelayPages {
 			return;
 		}
 
-		load_plugin_textdomain( 'mailrelay', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'mailrelay', false, 'mailrelay/languages/' );
 
 		if ( isset( $_POST['action'] ) ) {
 			if ( 'mailrelay_save_connection_settings' === $_POST['action'] ) {
