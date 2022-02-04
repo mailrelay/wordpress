@@ -1,0 +1,16 @@
+#toplevel_page_mailrelay .wp-submenu { display: none;  }
+
+.form-line { margin-top: 20px; }
+
+.form-select { min-width: 200px; margin-top: 4px}
+
+#logged .mailrelay_login { display: none; }
+
+#tab-authentication th { width: 100px;  }
+
+.ipz {
+	display: inline-block;
+	background: #ccc;
+	padding: 5px;
+	margin-left: -129px;
+}
