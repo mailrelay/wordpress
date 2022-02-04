@@ -1,10 +1,10 @@
 <?php  // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
  * Plugin Name: Mailrelay
- * Plugin URI: http://mailrelay.com
- * Description: Syncronize your WordPress users with Mailrelay
+ * Plugin URI: https://mailrelay.com
+ * Description: Synchronize your WordPress users with Mailrelay
  * Version: 2.0
- * Author: Consultor-PC
+ * Author: Mailrelay
  * Text Domain: Mailrelay
  * Domain Path: /languages
  */
