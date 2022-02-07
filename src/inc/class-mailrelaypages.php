@@ -40,7 +40,7 @@ class MailrelayPages {
 		load_plugin_textdomain( 'mailrelay', false, 'mailrelay/languages/' );
 
 		if ( isset( $_POST['action'] ) ) {
-			if ( 'mailrelay_save_connection_settings' === $_POST['action'] ) {
+			if ( 'mailrelay_save_authentication_settings' === $_POST['action'] ) {
 				$response = $this->process_save_connection_settings();
 			} elseif ( 'mailrelay_save_settings' === $_POST['action'] ) {
 				$response = $this->process_save_settings();
@@ -295,16 +295,20 @@ class MailrelayPages {
 	public function manual_page_section_info() { }
 
 	public function account_callback() {
+		$data = $this->mailrelay_data();
+
 		printf(
 			'<input class="regular-text" type="text" name="mailrelay_host" id="host" required="required" value="%s"> <div class="ipz">.ipzmarketing.com</div>',
-			esc_attr( $this->mailrelay_data()['host'] )
+			esc_attr( $data ? $data['host'] : '' )
 		);
 	}
 
 	public function api_key_callback() {
+		$data = $this->mailrelay_data();
+
 		printf(
 			'<input class="regular-text" type="text" name="mailrelay_api_key" id="api_key" required="required" value="%s">',
-			esc_attr( $this->mailrelay_data()['api_key'] )
+			esc_attr( $data ? $data['api_key'] : '' )
 		);
 	}
 

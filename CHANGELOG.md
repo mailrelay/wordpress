@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.1] - 2022-02-07
+
+### Fixed
+- Fix issue with connection settings not being saved
+
 ## [2.0] - 2022-02-04
 
 ### Added
@@ -30,6 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add German translation
 
+[2.0.1]: https://github.com/mailrelay/wordpress/compare/v2.0...v2.0.1
 [2.0]: https://github.com/mailrelay/wordpress/compare/v1.8.1...v2.0
 [1.8.1]: https://github.com/mailrelay/wordpress/compare/v1.8.0...v1.8.1
 [1.8.0]: https://github.com/mailrelay/wordpress/compare/v1.7.4...v1.8.0

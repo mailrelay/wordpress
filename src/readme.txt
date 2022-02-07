@@ -38,6 +38,11 @@ Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
 
+= 2.0.1 =
+*Release Date - 07 Feb 2022*
+
+* Fix issue with connection settings not being saved
+
 = 2.0 =
 *Release Date - 04 Feb 2022*
 
