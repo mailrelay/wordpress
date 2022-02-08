@@ -77,6 +77,9 @@ if ( ! function_exists( 'mailrelay_sync_user' ) ) {
 		}
 
 		$full_name = $user->first_name . ' ' . $user->last_name;
+		if ( $full_name == ' ') {
+			$full_name = $user->display_name;
+		}
 		$data      = array(
 			'email'              => $user->user_email,
 			'name'               => $full_name,
