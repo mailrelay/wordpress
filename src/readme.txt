@@ -4,7 +4,7 @@ Donate link:
 Tags: mailrelay,newsletter,email marketing
 Requires at least: 5.0
 Tested up to: 5.9
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,11 @@ And your API Key can be created at your Mailrelay account under settings -> API 
 Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
+
+= 2.0.2 =
+*Release Date - 08 Feb 2022*
+
+- Fix issue with empty subscriber name being synced in certain cases
 
 = 2.0.1 =
 *Release Date - 07 Feb 2022*
