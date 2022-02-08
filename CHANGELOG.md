@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+- Fix issue with empty subscriber name being synced in certain cases
+
 ## [2.0.1] - 2022-02-07
 
 ### Fixed
@@ -35,6 +40,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add German translation
 
+[Unreleased]: https://github.com/mailrelay/wordpress/compare/v2.0.1...master
 [2.0.1]: https://github.com/mailrelay/wordpress/compare/v2.0...v2.0.1
 [2.0]: https://github.com/mailrelay/wordpress/compare/v1.8.1...v2.0
 [1.8.1]: https://github.com/mailrelay/wordpress/compare/v1.8.0...v1.8.1

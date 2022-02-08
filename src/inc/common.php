@@ -76,16 +76,15 @@ if ( ! function_exists( 'mailrelay_sync_user' ) ) {
 			$mailrelay_data = mailrelay_data();
 		}
 
-		$full_name = $user->first_name . ' ' . $user->last_name;
-		$data      = array(
+		$data = array(
 			'email'              => $user->user_email,
-			'name'               => $full_name,
+			'name'               => $user->display_name,
 			'replace_groups'     => false,
 			'restore_if_deleted' => false,
 			'status'             => 'active',
 			'group_ids'          => (array) $groups,
 		);
-		$data      = wp_json_encode( $data );
+		$data = wp_json_encode( $data );
 
 		$response = mailrelay_api_request(
 			'POST',
