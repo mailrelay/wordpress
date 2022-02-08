@@ -75,7 +75,7 @@ if ( ! function_exists( 'mailrelay_sync_user' ) ) {
 		if ( is_null( $mailrelay_data ) ) {
 			$mailrelay_data = mailrelay_data();
 		}
-		
+
 		$data = array(
 			'email'              => $user->user_email,
 			'name'               => $user->display_name,
