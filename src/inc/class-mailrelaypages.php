@@ -30,6 +30,7 @@ class MailrelayPages {
 		}
 
 		wp_enqueue_style( 'mailrelay-admin-css', ( plugins_url( 'mailrelay/css/style.css' ) ), array(), MAILRELAY_PLUGIN_VERSION );
+		wp_enqueue_script( 'mailrelay-admin-js', (plugins_url( 'mailrelay/js/main.js') ), array(), MAILRELAY_PLUGIN_VERSION ) ;
 	}
 
 	public function render_admin_page() {
