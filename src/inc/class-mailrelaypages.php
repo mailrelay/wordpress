@@ -85,8 +85,9 @@ class MailrelayPages {
 				<div class="updated"><?php echo $success_message; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 				<?php
 			}
-			?>
 
+
+			?>
 			<nav class="nav-tab-wrapper">
 				<a href="?page=mailrelay&tab=Authentication" class="nav-tab <?php echo ( $authenticated ? 'hidden' : '' ); ?> <?php echo ( 'Authentication' === $tab ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e( 'Authentication', 'mailrelay' ); ?></a>
 				<a href="?page=mailrelay&tab=Settings" class="nav-tab <?php echo ( $disconnected ? 'hidden' : '' ); ?> <?php echo ( 'Settings' === $tab ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e( 'Settings', 'mailrelay' ); ?></a>
@@ -157,9 +158,14 @@ class MailrelayPages {
 							settings_errors();
 							?>
 
-							<form method="post">
+							<form method="post" id="manual-form">
+								<div id="mailrelay_autosync">
+									<?php do_settings_sections( 'mailrelay-settings-page' ); ?>		
+								</div>
+								<div id="mailrelay_groups">
+									<?php do_settings_sections( 'mailrelay-settings-page2' ); ?>	
+								</div> 
 								<?php
-								do_settings_sections( 'mailrelay-settings-page' );
 								$attributes  = array( 'onclick' => 'return check_form();' );
 								$submit_text = __( 'Save', 'mailrelay' );
 								submit_button( $submit_text, 'primary', 'submit-settings', true, $attributes );
@@ -229,16 +235,6 @@ class MailrelayPages {
 			'settings_page_setting_section'// section
 		);
 
-		$link = 'javascript:window.location.href=window.location.href';
-		add_settings_field(
-			'groups', // id
-			/* translators: %s link */
-			sprintf( __( 'Groups that you want to automatically syncronize <br /><a href="%s">(refresh groups)</a>', 'mailrelay' ), $link ), // title
-			array( $this, 'groups_callback' ), // callback
-			'mailrelay-settings-page', // page
-			'settings_page_setting_section' // section
-		);
-
 		add_settings_field(
 			'action', // id
 			null, // title
@@ -249,6 +245,24 @@ class MailrelayPages {
 				'class' => 'hidden',
 			)
 		);
+
+		add_settings_section(
+			'settings_page_setting_section2', // id
+			'', // title
+			array( $this, 'settings_page_section_info' ), // callback
+			'mailrelay-settings-page2' // page
+		);
+
+		$link = 'javascript:window.location.href=window.location.href';
+		add_settings_field(
+			'groups', // id
+			/* translators: %s link */
+			sprintf( __( 'Groups that you want to automatically syncronize <br /><a href="%s">(refresh groups)</a>', 'mailrelay' ), $link ), // title
+			array( $this, 'groups_callback' ), // callback
+			'mailrelay-settings-page2', // page
+			'settings_page_setting_section2' // section
+		);
+
 	}
 
 	public function settings_page_section_info() { }
@@ -365,6 +379,7 @@ class MailrelayPages {
 	public function manual_groups_callback() {
 		$groups = mailrelay_get_groups();
 
+		$selected_groups = [];
 		$selected_groups = isset( $_POST['group'] ) ? (array) wp_unslash( $_POST['group'] ) : array();  // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		?>
