@@ -38,6 +38,11 @@ Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
 
+= UNREALESED =
+
+- Add main.js file
+- Add checks to alert the user if he tries to submit without selection a Group
+
 = 2.0.2 =
 *Release Date - 08 Feb 2022*
 
