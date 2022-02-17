@@ -106,7 +106,7 @@ class MailrelayPages {
 							settings_errors();
 							?>
 
-							<form method="post">
+							<form method="post" id="manual-sync">
 								<?php
 									do_settings_sections( 'manual-page-admin' );
 									$attributes   = array( 'onclick' => 'return check_form();' );
@@ -156,9 +156,14 @@ class MailrelayPages {
 							settings_errors();
 							?>
 
-							<form method="post">
+							<form method="post" id="manual-form">
+								<div id="mailrelay_autosync">
+									<?php do_settings_sections( 'mailrelay-settings-page' ); ?>		
+								</div>
+								<div id="mailrelay_groups">
+									<?php do_settings_sections( 'mailrelay-settings-page2' ); ?>	
+								</div> 
 								<?php
-								do_settings_sections( 'mailrelay-settings-page' );
 								$attributes  = array( 'onclick' => 'return check_form();' );
 								$submit_text = __( 'Save', 'mailrelay' );
 								submit_button( $submit_text, 'primary', 'submit-settings', true, $attributes );
@@ -228,16 +233,6 @@ class MailrelayPages {
 			'settings_page_setting_section'// section
 		);
 
-		$link = 'javascript:window.location.href=window.location.href';
-		add_settings_field(
-			'groups', // id
-			/* translators: %s link */
-			sprintf( __( 'Groups that you want to automatically syncronize <br /><a href="%s">(refresh groups)</a>', 'mailrelay' ), $link ), // title
-			array( $this, 'groups_callback' ), // callback
-			'mailrelay-settings-page', // page
-			'settings_page_setting_section' // section
-		);
-
 		add_settings_field(
 			'action', // id
 			null, // title
@@ -248,6 +243,24 @@ class MailrelayPages {
 				'class' => 'hidden',
 			)
 		);
+
+		add_settings_section(
+			'settings_page_setting_section2', // id
+			'', // title
+			array( $this, 'settings_page_section_info' ), // callback
+			'mailrelay-settings-page2' // page
+		);
+
+		$link = 'javascript:window.location.href=window.location.href';
+		add_settings_field(
+			'groups', // id
+			/* translators: %s link */
+			sprintf( __( 'Groups that you want to automatically syncronize <br /><a href="%s">(refresh groups)</a>', 'mailrelay' ), $link ), // title
+			array( $this, 'groups_callback' ), // callback
+			'mailrelay-settings-page2', // page
+			'settings_page_setting_section2' // section
+		);
+
 	}
 
 	public function settings_page_section_info() { }
