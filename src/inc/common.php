@@ -132,6 +132,30 @@ if ( ! function_exists( 'mailrelay_ping' ) ) {
 	}
 }
 
+if ( ! function_exists( 'mailrelay_get_signup_forms' ) ) {
+	function mailrelay_get_signup_forms($form_id = 0) {
+		
+		$url = "signup_forms";
+		if((int)$form_id > 0) {
+			$url = $url . "?q[id_eq]=" . (int)$form_id;
+		}
+		
+		$response = mailrelay_api_request( 'GET', $url );
+
+		if ( $response['wp_error'] ) {
+			/* translators: %s error message */
+			wp_die( sprintf( esc_html__( 'Something went wrong: %s', 'mailrelay' ), esc_html( $response['error_message'] ) ) );
+		}
+
+		if ( 200 === $response['code'] ) {
+			return $response['body'];
+		} else {
+			/* translators: %s error message */
+			wp_die( sprintf( esc_html__( 'Something went wrong: %s', 'mailrelay' ), esc_html( $response['body'] ) ) );
+		}
+	}
+}
+
 if ( ! function_exists( 'mailrelay_data' ) ) {
 	function mailrelay_data() {
 		$api_key = get_option( 'mailrelay_api_key' );
