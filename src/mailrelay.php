@@ -25,12 +25,12 @@ if ( function_exists( 'is_admin' ) && is_admin() ) {
 
 	$mailrelay_pages = new MailrelayPages();
 	$mailrelay_pages->setup_hooks();
-	
+
 }
 
 function mailrelay_wpforms() {
 
-    require_once __DIR__ . '/inc/class-mailrelay-wpforms.php';
+	require_once __DIR__ . '/inc/class-mailrelay-wpforms.php';
 
 }
 add_action( 'wpforms_loaded', 'mailrelay_wpforms' );

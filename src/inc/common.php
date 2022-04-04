@@ -82,14 +82,16 @@ if ( ! function_exists( 'mailrelay_sync_user' ) ) {
 			'status'             => 'active',
 			'group_ids'          => (array) $groups,
 		);
-		
-		if($user) {
+
+		if ( $user ) {
 			$data['email'] = $user->user_email;
 			$data['name'] = $user->user_email;
 		}
-		
-		if(count($extra) > 0 && is_array($extra)) $data = array_merge($data, $extra);
-		
+
+		if ( count( $extra ) > 0 && is_array( $extra ) ) {
+			$data = array_merge( $data, $extra );
+		}
+
 		$data = wp_json_encode( $data );
 
 		$response = mailrelay_api_request(
@@ -139,13 +141,13 @@ if ( ! function_exists( 'mailrelay_ping' ) ) {
 }
 
 if ( ! function_exists( 'mailrelay_get_signup_forms' ) ) {
-	function mailrelay_get_signup_forms($form_id = 0) {
-		
-		$url = "signup_forms";
-		if((int)$form_id > 0) {
-			$url = $url . "?q[id_eq]=" . (int)$form_id;
+	function mailrelay_get_signup_forms( $form_id = 0 ) {
+
+		$url = 'signup_forms';
+		if ( (int) $form_id > 0 ) {
+			$url = $url . '?q[id_eq]=' . (int) $form_id;
 		}
-		
+
 		$response = mailrelay_api_request( 'GET', $url );
 
 		if ( $response['wp_error'] ) {
