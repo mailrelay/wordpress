@@ -71,19 +71,25 @@ if ( ! function_exists( 'mailrelay_get_groups' ) ) {
 }
 
 if ( ! function_exists( 'mailrelay_sync_user' ) ) {
-	function mailrelay_sync_user( $user, $groups, $mailrelay_data = null ) {
+	function mailrelay_sync_user( $user = null, $groups, $mailrelay_data = null, $extra = array() ) {
 		if ( is_null( $mailrelay_data ) ) {
 			$mailrelay_data = mailrelay_data();
 		}
 
 		$data = array(
-			'email'              => $user->user_email,
-			'name'               => $user->display_name,
 			'replace_groups'     => false,
 			'restore_if_deleted' => false,
 			'status'             => 'active',
 			'group_ids'          => (array) $groups,
 		);
+		
+		if($user) {
+			$data['email'] = $user->user_email;
+			$data['name'] = $user->user_email;
+		}
+		
+		if(count($extra) > 0 && is_array($extra)) $data = array_merge($data, $extra);
+		
 		$data = wp_json_encode( $data );
 
 		$response = mailrelay_api_request(
