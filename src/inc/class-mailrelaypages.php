@@ -339,8 +339,10 @@ class MailrelayPages {
 
 	public function groups_callback() {
 		$groups = mailrelay_get_groups();
+		$auto_groups = get_option( 'mailrelay_auto_sync_groups' );
+		$auto_groups = $auto_groups ? $auto_groups : array();
 
-		$mailrelay_auto_sync_groups = isset( $_POST['mailrelay_auto_sync_groups'] ) ? (array) wp_unslash( $_POST['mailrelay_auto_sync_groups'] ) : get_option( 'mailrelay_auto_sync_groups' );  // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$mailrelay_auto_sync_groups = isset( $_POST['mailrelay_auto_sync_groups'] ) ? (array) wp_unslash( $_POST['mailrelay_auto_sync_groups'] ) : $auto_groups;  // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		?>
 		<select multiple name="mailrelay_auto_sync_groups[]" id="mailrelay_auto_sync_groups" class="form-select">
