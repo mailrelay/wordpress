@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'MAILRELAY_PLUGIN_VERSION', '2.0.2' );
 
 require_once __DIR__ . '/inc/common.php';
-require_once __DIR__ . '/inc/class-widgets.php';
+require_once __DIR__ . '/inc/block-widgets.php';
 require_once __DIR__ . '/inc/global-hooks.php';
 
 if ( function_exists( 'is_admin' ) && is_admin() ) {
