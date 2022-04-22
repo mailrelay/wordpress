@@ -15,8 +15,8 @@
     </rule>
 
     <file>.</file>
-	
-	<arg name="extensions" value="php"/>
+
+    <arg name="extensions" value="php"/>
     <!-- Show progress and sniff codes in all reports -->
     <arg value="ps"/>
 
