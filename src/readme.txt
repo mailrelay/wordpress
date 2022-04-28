@@ -38,6 +38,12 @@ Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
 
+= 2.1.0-beta =
+*Release Date - 28 Apr 2022*
+
+- Added Gutenberg block to display Mailrelay signup forms
+- Added WPForms Mailrelay integration
+
 = 2.0.2 =
 *Release Date - 08 Feb 2022*
 
