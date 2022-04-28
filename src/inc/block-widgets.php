@@ -4,9 +4,14 @@ function mailrelay_wpforms_init() {
 	$js_file = '../js/mailrelay-wpforms-block.js';
 	wp_register_script( 'mailrelay-wpforms-block', plugin_dir_url( __FILE__ ) . $js_file, array( 'wp-blocks', 'wp-i18n' ), filemtime( plugin_dir_path( __FILE__ ) . $js_file ), false );
 
-	$all_forms['forms'] = mailrelay_get_signup_forms();
-
-	wp_localize_script( 'mailrelay-wpforms-block', 'mailrelay_wpforms_forms', $all_forms );
+	wp_localize_script(
+		'mailrelay-wpforms-block',
+		'mailrelay_wpforms_forms',
+		array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce'    => wp_create_nonce( 'mailrelay_wpforms_block' ),
+		)
+	);
 	register_block_type(
 		'mailrelay/mailrelay-wpforms',
 		array(
@@ -15,3 +20,9 @@ function mailrelay_wpforms_init() {
 	);
 }
 add_action( 'init', 'mailrelay_wpforms_init' );
+
+function mailrelay_get_signup_forms_ajax() {
+	echo wp_json_encode( mailrelay_get_signup_forms() );
+	wp_die();
+}
+add_action( 'wp_ajax_mailrelay_get_signup_forms', 'mailrelay_get_signup_forms_ajax' );

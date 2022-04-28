@@ -8,17 +8,62 @@ wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squ
 		form_id: {
 			type: 'integer',
 			default: 0
+		},
+		embedded_form_code: {
+			type: 'string'
 		}
 	},
 	keywords: ['mailrelay'],
-	edit: function (props) {
+	edit: wp.compose.compose(wp.compose.withState({ data_loaded: false, error: false }))(function (props) {
+		if (!props.data_loaded) {
+			const data = new FormData();
+			data.append( 'action', 'mailrelay_get_signup_forms' );
+			data.append( 'nonce', mailrelay_wpforms_forms.nonce );
+
+			fetch(mailrelay_wpforms_forms.ajax_url, {
+				method: "POST",
+				credentials: 'same-origin',
+				body: data
+			})
+			.then(function(response) {
+				return response.json();
+			})
+			.then(function(data) {
+				mailrelay_wpforms_forms.forms = data
+				props.setState({ data_loaded: true, error: false });
+			})
+			.catch(function(err) {
+				if(!props.error) {
+					props.setState({ error: true });
+				}
+			});
+			
+			message = wp.components.Spinner();
+			if (props.error) {
+				message = wp.element.createElement( 'p', null, "Connection error, check the plugin configuration.");
+			}
+			
+			return wp.element.createElement( 'div', wp.blockEditor.useBlockProps({ style: { backgroundColor: 'white', textAlign: 'center' } }), message );
+		}
+
 		let blockProps = wp.blockEditor.useBlockProps();
-		let form_id = props.attributes.form_id;
 		let all_forms = mailrelay_wpforms_forms.forms;
-		let all_options = [{label: 'Select a Form', value: 0}];
+		let form_id = props.attributes.form_id;
 		
+		let all_options = [{label: 'Select a Form', value: 0}];
+
 		for(let i=0;i<all_forms.length;i++) {
 			all_options.push({label: all_forms[i].name, value: all_forms[i].id});
+		}
+
+		let select_form_on_change = function(value) {
+			let form_id = parseInt(value)
+			let selected_form = mailrelay_wpforms_forms.forms.find(function(v) { return v.id === form_id })
+			if (selected_form) {
+				let embedded_form_code = selected_form.embedded_form_code
+
+				props.setAttributes({ form_id: form_id, embedded_form_code: embedded_form_code });
+			}
 		}
 		
 		let display = wp.element.createElement('div', { className: 'wpforms-gutenberg-form-selector-wrap'},
@@ -26,9 +71,7 @@ wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squ
 				{
 					value: form_id,
 					options: all_options,
-					onChange: function( value ) {
-						props.setAttributes({ form_id: Number(value) });
-					}
+					onChange: select_form_on_change
 				}
 			)
 		);
@@ -45,7 +88,7 @@ wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squ
 			}
 		}
 		
-		let selected_form = mailrelay_wpforms_forms.forms.find(function(v) { return v.id === props.attributes.form_id });
+		let selected_form = all_forms.find(function(v) { return v.id === props.attributes.form_id });
 		if(selected_form) {
 			display = [wp.element.createElement( 'div', blockProps, wp.element.RawHTML( { children: selected_form.embedded_form_code } ) )];
 			display.push([wp.element.createElement(
@@ -59,9 +102,7 @@ wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squ
 							value: form_id,
 							label: 'Select a Form',
 							options: all_options,
-							onChange: function( value ) {
-								props.setAttributes({ form_id: Number(value) });
-							}
+							onChange: select_form_on_change
 						} 
 					)
 				)
@@ -70,15 +111,12 @@ wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squ
 		
 		return display;
 	
-	},
+	}),
 	save: function( props ) {
-		let blockProps = wp.blockEditor.useBlockProps.save();
+		if (props.attributes.embedded_form_code) {
+			let blockProps = wp.blockEditor.useBlockProps.save();
 
-		let selected_form = mailrelay_wpforms_forms.forms.find(function(v) { return v.id === props.attributes.form_id });
-		if (!selected_form) {
-			return;
+			return wp.element.createElement( 'div', blockProps, wp.element.RawHTML( { children: props.attributes.embedded_form_code } ) );
 		}
-
-		return wp.element.createElement( 'div', blockProps, wp.element.RawHTML( { children: selected_form.embedded_form_code } ) );
 	}
 })
