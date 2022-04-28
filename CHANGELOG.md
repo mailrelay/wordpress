@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Added
-- Added widget to display Mailrelay signup forms
+- Added Gutenberg block to display Mailrelay signup forms
 - Added WPForms Mailrelay integration
 
 ## [2.0.2] - 2022-02-08
