@@ -85,7 +85,7 @@ if ( ! function_exists( 'mailrelay_sync_user' ) ) {
 
 		if ( $user ) {
 			$data['email'] = $user->user_email;
-			$data['name'] = $user->user_email;
+			$data['name'] = $user->display_name;
 		}
 
 		if ( count( $extra ) > 0 && is_array( $extra ) ) {
