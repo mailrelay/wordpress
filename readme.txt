@@ -38,6 +38,11 @@ Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
 
+= 2.1.0-beta.2=
+*Release Date - 21 Jun 2022*
+
+- Fix issue with subscriber name not being synced correctly.
+
 = 2.1.0-beta =
 *Release Date - 28 Apr 2022*
 
