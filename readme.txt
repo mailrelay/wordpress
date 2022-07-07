@@ -3,8 +3,8 @@ Contributors: Mailrelay.com
 Donate link:
 Tags: mailrelay,newsletter,email marketing
 Requires at least: 5.0
-Tested up to: 5.9
-Stable tag: 2.0.2
+Tested up to: 6.0
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,16 +38,12 @@ Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
 
-= 2.1.0-beta.2=
-*Release Date - 21 Jun 2022*
-
-- Fix issue with subscriber name not being synced correctly.
-
-= 2.1.0-beta =
-*Release Date - 28 Apr 2022*
+= 2.1.0 =
+*Release Date - 07 Jul 2022*
 
 - Added Gutenberg block to display Mailrelay signup forms
 - Added WPForms Mailrelay integration
+- Fix issue with subscriber name not being synced correctly.
 
 = 2.0.2 =
 *Release Date - 08 Feb 2022*
