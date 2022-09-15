@@ -4,7 +4,7 @@ Donate link:
 Tags: mailrelay,newsletter,email marketing
 Requires at least: 5.0
 Tested up to: 6.0
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,13 @@ And your API Key can be created at your Mailrelay account under settings -> API 
 Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
+
+= 2.1.1 =
+*Release Date - 15 Sep 2022*
+
+- Disable clicks in Mailrelay form iframe when displaying it in Gutenberg editor
+- Fix form widget not working on newer Gutenberg editor versions
+- Fix issue with only part of groups being displayed
 
 = 2.1.0 =
 *Release Date - 07 Jul 2022*

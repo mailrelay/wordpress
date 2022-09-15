@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.1.1] - 2022-09-15
 
 ### Fixed
 - Disable clicks in Mailrelay form iframe when displaying it in Gutenberg editor 
@@ -56,7 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add German translation
 
-[Unreleased]: https://github.com/mailrelay/wordpress/compare/v2.1.0...HEAD
+[2.1.1]: https://github.com/mailrelay/wordpress/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/mailrelay/wordpress/compare/v2.0.2...v2.1.0
 [2.0.2]: https://github.com/mailrelay/wordpress/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/mailrelay/wordpress/compare/v2.0...v2.0.1
