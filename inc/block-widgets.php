@@ -2,7 +2,7 @@
 
 function mailrelay_wpforms_init() {
 	$js_file = '../js/mailrelay-wpforms-block.js';
-	wp_register_script( 'mailrelay-wpforms-block', plugin_dir_url( __FILE__ ) . $js_file, array( 'wp-blocks', 'wp-i18n' ), filemtime( plugin_dir_path( __FILE__ ) . $js_file ), false );
+	wp_register_script( 'mailrelay-wpforms-block', plugins_url($js_file, __FILE__), array( 'wp-blocks', 'wp-i18n', 'wp-components' ), filemtime( plugin_dir_path( __FILE__ ) . $js_file ), false );
 
 	wp_localize_script(
 		'mailrelay-wpforms-block',
@@ -12,10 +12,15 @@ function mailrelay_wpforms_init() {
 			'nonce'    => wp_create_nonce( 'mailrelay_wpforms_block' ),
 		)
 	);
+
+	$editor_css_file = '../css/editor.css';
+	wp_register_style('mailrelay-wpforms-block-editor-style', plugins_url($editor_css_file, __FILE__), null, filemtime( plugin_dir_path( __FILE__ ) . $editor_css_file ));
+
 	register_block_type(
 		'mailrelay/mailrelay-wpforms',
 		array(
 			'editor_script' => 'mailrelay-wpforms-block',
+			'editor_style'  => 'mailrelay-wpforms-block-editor-style'
 		)
 	);
 }
