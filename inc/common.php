@@ -54,19 +54,38 @@ if ( ! function_exists( 'mailrelay_api_request' ) ) {
 
 if ( ! function_exists( 'mailrelay_get_groups' ) ) {
 	function mailrelay_get_groups() {
-		$response = mailrelay_api_request( 'GET', 'groups' );
+		$groups = array();
 
-		if ( $response['wp_error'] ) {
-			/* translators: %s error message */
-			wp_die( sprintf( esc_html__( 'Something went wrong: %s', 'mailrelay' ), esc_html( $response['error_message'] ) ) );
-		}
+		$page = 1;
+		$per_page = 1000;
 
-		if ( 200 === $response['code'] ) {
-			return $response['body'];
-		} else {
-			/* translators: %s error message */
-			wp_die( sprintf( esc_html__( 'Something went wrong: %s', 'mailrelay' ), esc_html( $response['body'] ) ) );
-		}
+		do {
+			$query_parameters = array(
+				'q' => array(
+					's' => 'name'
+				),
+				'page' => $page,
+				'per_page' => $per_page
+			);
+
+			$response = mailrelay_api_request( 'GET', 'groups?'. http_build_query($query_parameters) );
+
+			if ( $response['wp_error'] ) {
+				/* translators: %s error message */
+				wp_die( sprintf( esc_html__( 'Something went wrong: %s', 'mailrelay' ), esc_html( $response['error_message'] ) ) );
+			}
+
+			if ( 200 !== $response['code'] ) {
+				/* translators: %s error message */
+				wp_die( sprintf( esc_html__( 'Something went wrong: %s', 'mailrelay' ), esc_html( $response['body'] ) ) );
+			}
+
+			$groups = array_merge($groups, $response['body']);
+
+			$page += 1;
+		} while(count($response['body']) >= $per_page);
+
+		return $groups;
 	}
 }
 
@@ -142,25 +161,42 @@ if ( ! function_exists( 'mailrelay_ping' ) ) {
 
 if ( ! function_exists( 'mailrelay_get_signup_forms' ) ) {
 	function mailrelay_get_signup_forms( $form_id = 0 ) {
+		$signup_forms = array();
 
-		$url = 'signup_forms';
-		if ( (int) $form_id > 0 ) {
-			$url = $url . '?q[id_eq]=' . (int) $form_id;
-		}
+		$page = 1;
+		$per_page = 1000;
 
-		$response = mailrelay_api_request( 'GET', $url );
+		do {
+			$query_parameters = array(
+				'q' => array(
+					's' => 'name'
+				),
+				'page' => $page,
+				'per_page' => $per_page
+			);
 
-		if ( $response['wp_error'] ) {
-			/* translators: %s error message */
-			wp_die( sprintf( esc_html__( 'Something went wrong: %s', 'mailrelay' ), esc_html( $response['error_message'] ) ) );
-		}
+			if ( (int) $form_id > 0 ) {
+				$query_parameters['q']['id_eq'] = (int) $form_id;
+			}
 
-		if ( 200 === $response['code'] ) {
-			return $response['body'];
-		} else {
-			/* translators: %s error message */
-			wp_die( sprintf( esc_html__( 'Something went wrong: %s', 'mailrelay' ), esc_html( $response['body'] ) ) );
-		}
+			$response = mailrelay_api_request( 'GET', 'signup_forms?'. http_build_query($query_parameters) );
+
+			if ( $response['wp_error'] ) {
+				/* translators: %s error message */
+				wp_die( sprintf( esc_html__( 'Something went wrong: %s', 'mailrelay' ), esc_html( $response['error_message'] ) ) );
+			}
+
+			if ( 200 !== $response['code'] ) {
+				/* translators: %s error message */
+				wp_die( sprintf( esc_html__( 'Something went wrong: %s', 'mailrelay' ), esc_html( $response['body'] ) ) );
+			}
+
+			$signup_forms = array_merge($signup_forms, $response['body']);
+
+			$page += 1;
+		} while(count($response['body']) >= $per_page);
+
+		return $signup_forms;
 	}
 }
 

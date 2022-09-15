@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Disable clicks in Mailrelay form iframe when displaying it in Gutenberg editor 
 - Fix form widget not working on newer Gutenberg editor versions
+- Fix issue with only part of groups being displayed 
 
 ## [2.1.0] - 2022-07-07
 
