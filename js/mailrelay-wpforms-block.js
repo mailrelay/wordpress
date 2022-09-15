@@ -37,8 +37,9 @@ wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squ
 					props.setState({ error: true });
 				}
 			});
-			
-			message = wp.components.Spinner();
+
+			let message = (typeof(wp.components.Spinner) === 'function') ? wp.components.Spinner : wp.components.Spinner.render
+
 			if (props.error) {
 				message = wp.element.createElement( 'p', null, "Connection error, check the plugin configuration.");
 			}
