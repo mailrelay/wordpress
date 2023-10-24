@@ -3,9 +3,6 @@
     <description>Generally-applicable sniffs for WordPress plugins</description>
 
     <rule ref="WordPress">
-        <exclude name="WordPress.Security.NonceVerification.Recommended" />
-        <exclude name="WordPress.Security.NonceVerification.Missing" />
-
         <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning" />
 
         <exclude name="Squiz.Commenting.ClassComment.Missing" />

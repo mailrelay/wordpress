@@ -39,7 +39,18 @@ class MailrelayPages {
 
 		load_plugin_textdomain( 'mailrelay', false, 'mailrelay/languages/' );
 
-		if ( isset( $_POST['action'] ) ) {
+        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+		if ( isset($_SERVER['REQUEST_METHOD']) && 'POST' === $_SERVER['REQUEST_METHOD'] && ! wp_verify_nonce(sanitize_key($_POST['_mailrelay_nonce']), '_mailrelay_nonce') ) {
+			wp_die(
+				'Invalid Nonce',
+				'Invalid Nonce',
+				array(
+					'back_link' => true,
+				)
+			);
+		}
+
+		if ( isset($_POST['action']) ) {
 			if ( 'mailrelay_save_authentication_settings' === $_POST['action'] ) {
 				$response = $this->process_save_connection_settings();
 			} elseif ( 'mailrelay_save_settings' === $_POST['action'] ) {
@@ -108,10 +119,11 @@ class MailrelayPages {
 
 							<form method="post">
 								<?php
-									do_settings_sections( 'manual-page-admin' );
-									$attributes   = array( 'onclick' => 'return check_form();' );
-									$submit_text = __( 'Sync', 'mailrelay' );
-									submit_button( $submit_text, 'primary', 'submit-manual', true, $attributes );
+								wp_nonce_field('_mailrelay_nonce', '_mailrelay_nonce');
+								do_settings_sections( 'manual-page-admin' );
+								$attributes   = array( 'onclick' => 'return check_form();' );
+								$submit_text = __( 'Sync', 'mailrelay' );
+								submit_button( $submit_text, 'primary', 'submit-manual', true, $attributes );
 								?>
 							</form>
 						</div>
@@ -130,6 +142,7 @@ class MailrelayPages {
 							<?php settings_errors(); ?>
 							<form method="post">
 								<?php
+								wp_nonce_field('_mailrelay_nonce', '_mailrelay_nonce');
 								do_settings_sections( 'mailrelay-authentication-page' );
 								$submit_text = __( 'Save', 'mailrelay' );
 								submit_button( $submit_text, 'primary', 'submit-authentication' );
@@ -158,6 +171,7 @@ class MailrelayPages {
 
 							<form method="post">
 								<?php
+								wp_nonce_field('_mailrelay_nonce', '_mailrelay_nonce');
 								do_settings_sections( 'mailrelay-settings-page' );
 								$attributes  = array( 'onclick' => 'return check_form();' );
 								$submit_text = __( 'Save', 'mailrelay' );
@@ -331,7 +345,8 @@ class MailrelayPages {
 	}
 
 	public function auto_sync_callback() {
-		$value = isset( $_POST['mailrelay_auto_sync'] ) ? wp_unslash( $_POST['mailrelay_auto_sync'] ) : get_option( 'mailrelay_auto_sync' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: Nonce verification happens at render_admin_page.
+		$value = isset( $_POST['mailrelay_auto_sync'] ) ? filter_var( wp_unslash( $_POST['mailrelay_auto_sync'] ), FILTER_SANITIZE_NUMBER_INT ) : get_option( 'mailrelay_auto_sync' );
 		?>
 		<input type="checkbox" name="mailrelay_auto_sync" id="mailrelay_auto_sync" value="1" <?php checked( 1, $value ); ?>/>
 		<?php
@@ -342,7 +357,8 @@ class MailrelayPages {
 		$auto_groups = get_option( 'mailrelay_auto_sync_groups' );
 		$auto_groups = $auto_groups ? $auto_groups : array();
 
-		$mailrelay_auto_sync_groups = isset( $_POST['mailrelay_auto_sync_groups'] ) ? (array) wp_unslash( $_POST['mailrelay_auto_sync_groups'] ) : $auto_groups;  // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing -- Reason: Nonce verification happens at render_admin_page.
+		$mailrelay_auto_sync_groups = isset( $_POST['mailrelay_auto_sync_groups'] ) ? (array) wp_unslash( $_POST['mailrelay_auto_sync_groups'] ) : $auto_groups;
 
 		?>
 		<select multiple name="mailrelay_auto_sync_groups[]" id="mailrelay_auto_sync_groups" class="form-select">
@@ -366,7 +382,8 @@ class MailrelayPages {
 	public function manual_groups_callback() {
 		$groups = mailrelay_get_groups();
 
-		$selected_groups = isset( $_POST['group'] ) ? (array) wp_unslash( $_POST['group'] ) : array();  // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing -- Reason: Nonce verification happens at render_admin_page.
+		$selected_groups = isset( $_POST['group'] ) ? (array) wp_unslash( $_POST['group'] ) : array();
 
 		?>
 		<select multiple name="group[]" id="mailrelay_group" class="form-select">
@@ -405,14 +422,17 @@ class MailrelayPages {
 	public function process_save_connection_settings() {
 		$mailrelay_data = array();
 
-		$mailrelay_data['host'] = isset( $_POST['mailrelay_host'] ) ? wp_unslash( $_POST['mailrelay_host'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: Nonce verification happens at render_admin_page.
+		$mailrelay_data['host'] = isset( $_POST['mailrelay_host'] ) ? sanitize_text_field( wp_unslash( $_POST['mailrelay_host'] ) ) : '';
 		if ( strpos( $mailrelay_data['host'], 'http://' ) === 0 || strpos( $mailrelay_data['host'], 'https://' ) === 0 ) {
 			$mailrelay_data['host'] = wp_parse_url( $mailrelay_data['host'], PHP_URL_HOST );
 		}
 		if ( strpos( $mailrelay_data['host'], '.ipzmarketing.com' ) !== false ) {
 			$mailrelay_data['host'] = str_replace( '.ipzmarketing.com', '', $mailrelay_data['host'] );
 		}
-		$mailrelay_data['api_key'] = ( isset( $_POST['mailrelay_api_key'] ) ) ? wp_unslash( $_POST['mailrelay_api_key'] ) : '';  // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: Nonce verification happens at render_admin_page.
+		$mailrelay_data['api_key'] = ( isset( $_POST['mailrelay_api_key'] ) ) ? sanitize_text_field( wp_unslash( $_POST['mailrelay_api_key'] ) ) : '';
 
 		$ping_response_code = mailrelay_ping( $mailrelay_data );
 
@@ -455,8 +475,11 @@ class MailrelayPages {
 	public function process_save_settings() {
 		$mailrelay_data = array();
 
-		$mailrelay_data['mailrelay_auto_sync']        = ( isset( $_POST['mailrelay_auto_sync'] ) ) ? wp_unslash( $_POST['mailrelay_auto_sync'] ) : false; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$mailrelay_data['mailrelay_auto_sync_groups'] = ( isset( $_POST['mailrelay_auto_sync_groups'] ) ) ? wp_unslash( $_POST['mailrelay_auto_sync_groups'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: Nonce verification happens at render_admin_page.
+		$mailrelay_data['mailrelay_auto_sync'] = ( isset( $_POST['mailrelay_auto_sync'] ) ) ? filter_var( wp_unslash( $_POST['mailrelay_auto_sync'] ), FILTER_SANITIZE_NUMBER_INT ) : false;
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing -- Reason: Nonce verification happens at render_admin_page.
+		$mailrelay_data['mailrelay_auto_sync_groups'] = ( isset( $_POST['mailrelay_auto_sync_groups'] ) ) ? wp_unslash( $_POST['mailrelay_auto_sync_groups'] ) : array();
 
 		update_option( 'mailrelay_auto_sync', $mailrelay_data['mailrelay_auto_sync'] );
 		update_option( 'mailrelay_auto_sync_groups', $mailrelay_data['mailrelay_auto_sync_groups'] );
@@ -468,6 +491,7 @@ class MailrelayPages {
 	}
 
 	public function process_manual_sync() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Nonce verification happens at render_admin_page.
 		$woo_commerce_option = ( isset( $_REQUEST['woo_commerce'] ) ) ? sanitize_key( wp_unslash( $_REQUEST['woo_commerce'] ) ) : '';
 
 		if ( 'only' === $woo_commerce_option ) {
@@ -484,6 +508,7 @@ class MailrelayPages {
 			$users = get_users();
 		}
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: Nonce verification happens at render_admin_page.
 		$groups  = isset( $_REQUEST['group'] ) ? array_map( 'intval', wp_unslash( $_REQUEST['group'] ) ) : array();
 		$added   = 0;
 		$updated = 0;
