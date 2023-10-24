@@ -4,7 +4,7 @@ Donate link:
 Tags: mailrelay,newsletter,email marketing
 Requires at least: 5.0
 Tested up to: 6.0
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,11 @@ And your API Key can be created at your Mailrelay account under settings -> API 
 Once this data is successfully saved you can run the user sync.
 
 == Changelog ==
+
+= 2.1.2 =
+*Release Date - 24 Oct 2023*
+
+- Added nonce validation in admin pages
 
 = 2.1.1 =
 *Release Date - 15 Sep 2022*
