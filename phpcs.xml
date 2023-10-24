@@ -12,6 +12,11 @@
         <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
         <exclude name="Squiz.Commenting.FunctionComment.Missing" />
         <exclude name="Squiz.Commenting.VariableComment.Missing" />
+
+        <exclude name="Universal.Operators.DisallowStandalonePostIncrementDecrement.PostIncrementFound" />
+
+        <exclude name="PEAR.Functions.FunctionCallSignature.SpaceBeforeCloseBracket" />
+        <exclude name="PEAR.Functions.FunctionCallSignature.SpaceAfterOpenBracket" />
     </rule>
 
     <file>.</file>

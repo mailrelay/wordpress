@@ -3,14 +3,12 @@
 class Mailrelay_WPForms {
 
 	public function __construct() {
-
 		add_filter( 'wpforms_builder_settings_sections', array( $this, 'settings_section' ), 20, 2 );
 		add_filter( 'wpforms_form_settings_panel_content', array( $this, 'settings_section_content' ), 20 );
 		add_action( 'wpforms_process_complete', array( $this, 'send_data_to_mailrelay' ), 10, 4 );
-
 	}
 
-	public function settings_section( $sections, $form_data ) {
+	public function settings_section( $sections ) {
 		$sections['mailrelay'] = __( 'Mailrelay', 'mailrelay' );
 		return $sections;
 	}
@@ -134,9 +132,7 @@ class Mailrelay_WPForms {
 				)
 			);
 		}
-
 	}
-
 }
 
 new Mailrelay_WPForms();

@@ -61,14 +61,14 @@ if ( ! function_exists( 'mailrelay_get_groups' ) ) {
 
 		do {
 			$query_parameters = array(
-				'q' => array(
-					's' => 'name'
+				'q'        => array(
+					's' => 'name',
 				),
-				'page' => $page,
-				'per_page' => $per_page
+				'page'     => $page,
+				'per_page' => $per_page,
 			);
 
-			$response = mailrelay_api_request( 'GET', 'groups?'. http_build_query($query_parameters) );
+			$response = mailrelay_api_request( 'GET', 'groups?' . http_build_query($query_parameters) );
 
 			if ( $response['wp_error'] ) {
 				/* translators: %s error message */
@@ -82,8 +82,8 @@ if ( ! function_exists( 'mailrelay_get_groups' ) ) {
 
 			$groups = array_merge($groups, $response['body']);
 
-			$page += 1;
-		} while(count($response['body']) >= $per_page);
+			++$page;
+		} while ( count($response['body']) >= $per_page ); // phpcs:ignore Squiz.PHP.DisallowSizeFunctionsInLoops.Found
 
 		return $groups;
 	}
@@ -168,18 +168,18 @@ if ( ! function_exists( 'mailrelay_get_signup_forms' ) ) {
 
 		do {
 			$query_parameters = array(
-				'q' => array(
-					's' => 'name'
+				'q'        => array(
+					's' => 'name',
 				),
-				'page' => $page,
-				'per_page' => $per_page
+				'page'     => $page,
+				'per_page' => $per_page,
 			);
 
 			if ( (int) $form_id > 0 ) {
 				$query_parameters['q']['id_eq'] = (int) $form_id;
 			}
 
-			$response = mailrelay_api_request( 'GET', 'signup_forms?'. http_build_query($query_parameters) );
+			$response = mailrelay_api_request( 'GET', 'signup_forms?' . http_build_query($query_parameters) );
 
 			if ( $response['wp_error'] ) {
 				/* translators: %s error message */
@@ -193,8 +193,8 @@ if ( ! function_exists( 'mailrelay_get_signup_forms' ) ) {
 
 			$signup_forms = array_merge($signup_forms, $response['body']);
 
-			$page += 1;
-		} while(count($response['body']) >= $per_page);
+			++$page;
+		} while ( count($response['body']) >= $per_page ); // phpcs:ignore Squiz.PHP.DisallowSizeFunctionsInLoops.Found
 
 		return $signup_forms;
 	}

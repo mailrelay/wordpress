@@ -149,7 +149,7 @@ class MailrelayPages {
 							<p>
 								<?php
 								/* translators: %1: host  %2: authentication link */
-								echo sprintf( __( 'You are currently logged in as <strong>%1$s.ipzmarketing.com</strong> (<a href="%2$s">Change Account</a>)', 'mailrelay' ), esc_html( $this->mailrelay_data()['host'] ), esc_url( $link ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								printf( __( 'You are currently logged in as <strong>%1$s.ipzmarketing.com</strong> (<a href="%2$s">Change Account</a>)', 'mailrelay' ), esc_html( $this->mailrelay_data()['host'] ), esc_url( $link ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								?>
 							</p>
 							<?php

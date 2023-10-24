@@ -20,7 +20,7 @@ function mailrelay_wpforms_init() {
 		'mailrelay/mailrelay-wpforms',
 		array(
 			'editor_script' => 'mailrelay-wpforms-block',
-			'editor_style'  => 'mailrelay-wpforms-block-editor-style'
+			'editor_style'  => 'mailrelay-wpforms-block-editor-style',
 		)
 	);
 }
