@@ -3,7 +3,7 @@
  * Plugin Name: Mailrelay
  * Plugin URI: https://mailrelay.com
  * Description: Synchronize your WordPress users with Mailrelay
- * Version: 2.1.2
+ * Version: 2.1.3
  * Author: Mailrelay
  * Text Domain: Mailrelay
  * Domain Path: /languages
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Access Denied.' );
 }
 
-define( 'MAILRELAY_PLUGIN_VERSION', '2.1.2' );
+define( 'MAILRELAY_PLUGIN_VERSION', '2.1.3' );
 
 require_once __DIR__ . '/inc/common.php';
 require_once __DIR__ . '/inc/block-widgets.php';
