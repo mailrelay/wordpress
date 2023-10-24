@@ -90,7 +90,7 @@ if ( ! function_exists( 'mailrelay_get_groups' ) ) {
 }
 
 if ( ! function_exists( 'mailrelay_sync_user' ) ) {
-	function mailrelay_sync_user( $user = null, $groups, $mailrelay_data = null, $extra = array() ) {
+	function mailrelay_sync_user( $user, $groups, $mailrelay_data = null, $extra = array() ) {
 		if ( is_null( $mailrelay_data ) ) {
 			$mailrelay_data = mailrelay_data();
 		}
