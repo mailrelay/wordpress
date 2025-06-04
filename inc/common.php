@@ -16,7 +16,7 @@ if ( ! function_exists( 'mailrelay_api_request' ) ) {
 			$mailrelay_data = mailrelay_data();
 		}
 
-		$url = 'https://' . $mailrelay_data['host'] . '.ipzmarketing.com/api/v1/' . $url;
+		$url = 'https://' . $mailrelay_data['host'] . '.' . MAILRELAY_BASE_DOMAIN . '/api/v1/' . $url;
 
 		$args = array_merge_recursive(
 			$args,

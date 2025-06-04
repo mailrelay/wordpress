@@ -98,7 +98,7 @@ class MailrelayPages {
 			?>
 
 			<nav class="nav-tab-wrapper">
-				<a href="?page=mailrelay&tab=Authentication" class="nav-tab <?php echo ( $authenticated ? 'hidden' : '' ); ?> <?php echo ( 'Authentication' === $tab ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e( 'Authentication', 'mailrelay' ); ?></a>
+				<a href="?page=mailrelay&tab=Authentication" class="nav-tab <?php echo ( $authenticated && 'Authentication' !== $tab ) ? 'hidden' : ''; ?> <?php echo ( 'Authentication' === $tab ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e( 'Authentication', 'mailrelay' ); ?></a>
 				<a href="?page=mailrelay&tab=Settings" class="nav-tab <?php echo ( $disconnected ? 'hidden' : '' ); ?> <?php echo ( 'Settings' === $tab ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e( 'Settings', 'mailrelay' ); ?></a>
 				<a href="?page=mailrelay&tab=Manual" class="nav-tab <?php echo ( $disconnected ? 'hidden' : '' ); ?> <?php echo ( 'Manual' === $tab ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e( 'Manual Sync', 'mailrelay' ); ?></a>
 			</nav>
@@ -201,7 +201,10 @@ class MailrelayPages {
 			__( 'Account', 'mailrelay' ), // title
 			array( $this, 'account_callback' ), // callback
 			'mailrelay-authentication-page', // page
-			'mailrelay_page_setting_section' // section
+			'mailrelay_page_setting_section', // section
+			array(
+				'class' => 'mailrelay-account-field',
+			)
 		);
 
 		add_settings_field(
@@ -312,8 +315,9 @@ class MailrelayPages {
 		$data = $this->mailrelay_data();
 
 		printf(
-			'<input class="regular-text" type="text" name="mailrelay_host" id="host" required="required" value="%s"> <div class="ipz">.ipzmarketing.com</div>',
-			esc_attr( $data ? $data['host'] : '' )
+			'<input class="regular-text" type="text" name="mailrelay_host" id="host" required="required" value="%s"> <div class="input-addon">.%s</div>',
+			esc_attr( $data ? $data['host'] : '' ),
+			esc_html( MAILRELAY_BASE_DOMAIN )
 		);
 	}
 
@@ -427,8 +431,8 @@ class MailrelayPages {
 		if ( strpos( $mailrelay_data['host'], 'http://' ) === 0 || strpos( $mailrelay_data['host'], 'https://' ) === 0 ) {
 			$mailrelay_data['host'] = wp_parse_url( $mailrelay_data['host'], PHP_URL_HOST );
 		}
-		if ( strpos( $mailrelay_data['host'], '.ipzmarketing.com' ) !== false ) {
-			$mailrelay_data['host'] = str_replace( '.ipzmarketing.com', '', $mailrelay_data['host'] );
+		if ( strpos( $mailrelay_data['host'], '.' . MAILRELAY_BASE_DOMAIN ) !== false ) {
+			$mailrelay_data['host'] = str_replace( '.' . MAILRELAY_BASE_DOMAIN, '', $mailrelay_data['host'] );
 		}
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: Nonce verification happens at render_admin_page.
