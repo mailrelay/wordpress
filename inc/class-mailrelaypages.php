@@ -30,6 +30,7 @@ class MailrelayPages {
 		}
 
 		wp_enqueue_style( 'mailrelay-admin-css', ( plugins_url( 'mailrelay/css/style.css' ) ), array(), MAILRELAY_PLUGIN_VERSION );
+		wp_enqueue_script( 'mailrelay-admin-js', ( plugins_url( 'mailrelay/js/admin.js' ) ), array(), MAILRELAY_PLUGIN_VERSION, true );
 	}
 
 	public function render_admin_page() {
@@ -252,7 +253,10 @@ class MailrelayPages {
 			sprintf( __( 'Groups that you want to automatically syncronize <br /><a href="%s">(refresh groups)</a>', 'mailrelay' ), $link ), // title
 			array( $this, 'groups_callback' ), // callback
 			'mailrelay-settings-page', // page
-			'settings_page_setting_section' // section
+			'settings_page_setting_section', // section
+			array(
+				'class' => 'mailrelay-auto-sync-groups-field',
+			)
 		);
 
 		add_settings_field(
