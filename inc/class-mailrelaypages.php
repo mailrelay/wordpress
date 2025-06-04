@@ -109,78 +109,18 @@ class MailrelayPages {
 				switch ( $tab ) :
 					case 'Manual':
 						$this->setup_manual_sync_fields();
-
-						?>
-						<div id="tab-manual">
-							<h3><?php esc_html_e( 'Manual Sync', 'mailrelay' ); ?></h3>
-
-							<?php
-							settings_errors();
-							?>
-
-							<form method="post">
-								<?php
-								wp_nonce_field('_mailrelay_nonce', '_mailrelay_nonce');
-								do_settings_sections( 'manual-page-admin' );
-								$attributes   = array( 'onclick' => 'return check_form();' );
-								$submit_text = __( 'Sync', 'mailrelay' );
-								submit_button( $submit_text, 'primary', 'submit-manual', true, $attributes );
-								?>
-							</form>
-						</div>
-						<?php
+						include_once __DIR__ . '/partials/tab-manual.php';
 						break;
 
 					case 'Authentication':
 						$this->setup_authentication_page_fields();
-
-						?>
-						<div id="tab-authentication">
-							<h3><?php esc_html_e( 'Authentication', 'mailrelay' ); ?></h3>
-							<p><?php esc_html_e( 'Login using your account name and API Key.', 'mailrelay' ); ?></p>
-							<p><?php esc_html_e( 'For example if your account name is demo.ipzmarketing.com write only "demo".', 'mailrelay' ); ?></p>
-							<p><?php esc_html_e( 'Your API Key can be found or generated at your Mailrelay Account -> Settings -> API Access.', 'mailrelay' ); ?>
-							<?php settings_errors(); ?>
-							<form method="post">
-								<?php
-								wp_nonce_field('_mailrelay_nonce', '_mailrelay_nonce');
-								do_settings_sections( 'mailrelay-authentication-page' );
-								$submit_text = __( 'Save', 'mailrelay' );
-								submit_button( $submit_text, 'primary', 'submit-authentication' );
-								?>
-							</form>
-						</div>
-						<?php
+						include_once __DIR__ . '/partials/tab-authentication.php';
 						break;
 
 					case 'Settings':
 						$this->setup_settings_page_fields();
 						$link = admin_url( '/admin.php?page=mailrelay&tab=Authentication' );
-						?>
-
-						<div id="tab-settings">
-							<h3><?php esc_html_e( 'Settings', 'mailrelay' ); ?></h3>
-							<p>
-								<?php
-								/* translators: %1: host  %2: authentication link */
-								printf( __( 'You are currently logged in as <strong>%1$s.ipzmarketing.com</strong> (<a href="%2$s">Change Account</a>)', 'mailrelay' ), esc_html( $this->mailrelay_data()['host'] ), esc_url( $link ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								?>
-							</p>
-							<?php
-							settings_errors();
-							?>
-
-							<form method="post">
-								<?php
-								wp_nonce_field('_mailrelay_nonce', '_mailrelay_nonce');
-								do_settings_sections( 'mailrelay-settings-page' );
-								$attributes  = array( 'onclick' => 'return check_form();' );
-								$submit_text = __( 'Save', 'mailrelay' );
-								submit_button( $submit_text, 'primary', 'submit-settings', true, $attributes );
-								?>
-							</form>
-						</div>
-						<?php
+						include_once __DIR__ . '/partials/tab-settings.php';
 						break;
 				endswitch;
 				?>
