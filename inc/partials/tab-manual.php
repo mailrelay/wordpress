@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-    die( 'Access Denied.' );
+	die( 'Access Denied.' );
 }
 ?>
 <div id="tab-manual">

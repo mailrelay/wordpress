@@ -25,7 +25,7 @@ require_once __DIR__ . '/inc/global-hooks.php';
 
 if ( function_exists( 'is_admin' ) && is_admin() ) {
 
-	require_once __DIR__ . '/inc/class-mailrelaypages.php';
+	require_once __DIR__ . '/inc/class-mailrelay-pages.php';
 
 	$mailrelay_pages = new MailrelayPages();
 	$mailrelay_pages->setup_hooks();

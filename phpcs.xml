@@ -7,8 +7,12 @@
 
         <exclude name="Squiz.Commenting.ClassComment.Missing" />
         <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
+        <exclude name="Squiz.Commenting.FileComment.Missing" />
+        <exclude name="Squiz.Commenting.FileComment.WrongStyle" />
         <exclude name="Squiz.Commenting.FunctionComment.Missing" />
         <exclude name="Squiz.Commenting.VariableComment.Missing" />
+
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 
         <exclude name="Universal.Operators.DisallowStandalonePostIncrementDecrement.PostIncrementFound" />
 

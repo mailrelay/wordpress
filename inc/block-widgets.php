@@ -1,4 +1,4 @@
-<?php // phpcs:ignore Squiz.Commenting.FileComment.Missing
+<?php
 
 function mailrelay_wpforms_init() {
 	$js_file = '../js/mailrelay-wpforms-block.js';

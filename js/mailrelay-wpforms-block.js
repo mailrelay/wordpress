@@ -1,4 +1,4 @@
-wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squiz.Commenting.FileComment.Missing
+wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', {
 	apiVersion: 2,
 	title: 'Mailrelay forms',
 	category: 'widgets',
@@ -43,14 +43,14 @@ wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squ
 			if (props.error) {
 				message = wp.element.createElement( 'p', null, "Connection error, check the plugin configuration.");
 			}
-			
+
 			return wp.element.createElement( 'div', wp.blockEditor.useBlockProps({ style: { backgroundColor: 'white', textAlign: 'center' } }), message );
 		}
 
 		let blockProps = wp.blockEditor.useBlockProps();
 		let all_forms = mailrelay_wpforms_forms.forms;
 		let form_id = props.attributes.form_id;
-		
+
 		let all_options = [{label: 'Select a Form', value: 0}];
 
 		for(let i=0;i<all_forms.length;i++) {
@@ -66,7 +66,7 @@ wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squ
 				props.setAttributes({ form_id: form_id, embedded_form_code: embedded_form_code });
 			}
 		}
-		
+
 		let display = wp.element.createElement('div', { className: 'wpforms-gutenberg-form-selector-wrap'},
 			wp.element.createElement(wp.components.SelectControl,
 				{
@@ -88,7 +88,7 @@ wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squ
 				document.head.appendChild(script_el);
 			}
 		}
-		
+
 		let selected_form = all_forms.find(function(v) { return v.id === props.attributes.form_id });
 		if(selected_form) {
 			display = [wp.element.createElement( 'div', blockProps, wp.element.RawHTML( { children: selected_form.embedded_form_code } ) )];
@@ -98,20 +98,20 @@ wp.blocks.registerBlockType('mailrelay/mailrelay-wpforms', { // phpcs:ignore Squ
 				wp.element.createElement(
 					wp.components.PanelBody,
 					null,
-					wp.element.createElement( wp.components.SelectControl, 
+					wp.element.createElement( wp.components.SelectControl,
 						{
 							value: form_id,
 							label: 'Select a Form',
 							options: all_options,
 							onChange: select_form_on_change
-						} 
+						}
 					)
 				)
 			)]);
 		}
-		
+
 		return display;
-	
+
 	}),
 	save: function( props ) {
 		if (props.attributes.embedded_form_code) {

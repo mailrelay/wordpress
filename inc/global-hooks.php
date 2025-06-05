@@ -1,4 +1,4 @@
-<?php // phpcs:ignore Squiz.Commenting.FileComment.Missing
+<?php
 
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Access Denied.' );

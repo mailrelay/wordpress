@@ -1,4 +1,4 @@
-<?php // phpcs:ignore Squiz.Commenting.FileComment.Missing
+<?php
 
 class Mailrelay_WPForms {
 
