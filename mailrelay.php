@@ -19,6 +19,8 @@ if ( ! defined( 'MAILRELAY_BASE_DOMAIN' ) ) {
 	define( 'MAILRELAY_BASE_DOMAIN', 'ipzmarketing.com' );
 }
 
+require_once __DIR__ . '/libraries/action-scheduler/action-scheduler.php';
+
 require_once __DIR__ . '/inc/common.php';
 require_once __DIR__ . '/inc/block-widgets.php';
 require_once __DIR__ . '/inc/global-hooks.php';
