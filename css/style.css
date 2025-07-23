@@ -69,3 +69,39 @@
     padding: 16px 8px;
   }
 }
+
+/* Sync Status Box Styling */
+.mailrelay-sync-status {
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mailrelay-sync-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  min-width: 180px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.mailrelay-sync-box:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #0073aa;
+}
+
+.mailrelay-sync-count {
+  font-size: 32px;
+  font-weight: bold;
+  color: #23282d;
+  margin: 5px 0;
+}
+
+.mailrelay-sync-label {
+  color: #646970;
+  font-size: 14px;
+}

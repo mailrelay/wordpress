@@ -58,6 +58,12 @@ class MailrelayPages {
 				$response = $this->process_save_settings();
 			} elseif ( 'mailrelay_manual_sync' === $_POST['action'] ) {
 				$response = $this->process_manual_sync();
+			} elseif ( 'mailrelay_save_woocommerce_sync_settings' === $_POST['action'] ) {
+				$response = $this->process_save_woocommerce_sync_settings();
+			} elseif ( 'mailrelay_manual_woocommerce_sync' === $_POST['action'] ) {
+				$response = $this->process_manual_woocommerce_sync();
+			} elseif ( 'mailrelay_connect_woocommerce_store' === $_POST['action'] ) {
+				$response = $this->process_connect_woocommerce_store();
 			}
 
 			if ( isset( $response ) ) {
@@ -78,6 +84,8 @@ class MailrelayPages {
 			$disconnected  = true;
 			$authenticated = false;
 		}
+
+		$display_woocommerce_tab = ! $disconnected && mailrelay_woo_commerce_installed();
 
 		$tab = isset( $_GET['tab'] ) ? wp_unslash( $_GET['tab'] ) : $default_tab; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		?>
@@ -102,6 +110,9 @@ class MailrelayPages {
 				<a href="?page=mailrelay&tab=Authentication" class="nav-tab <?php echo ( $authenticated && 'Authentication' !== $tab ) ? 'hidden' : ''; ?> <?php echo ( 'Authentication' === $tab ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e( 'Authentication', 'mailrelay' ); ?></a>
 				<a href="?page=mailrelay&tab=Settings" class="nav-tab <?php echo ( $disconnected ? 'hidden' : '' ); ?> <?php echo ( 'Settings' === $tab ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e( 'Settings', 'mailrelay' ); ?></a>
 				<a href="?page=mailrelay&tab=Manual" class="nav-tab <?php echo ( $disconnected ? 'hidden' : '' ); ?> <?php echo ( 'Manual' === $tab ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e( 'Manual Sync', 'mailrelay' ); ?></a>
+				<?php if ( $display_woocommerce_tab ) : ?>
+					<a href="?page=mailrelay&tab=WooCommerce" class="nav-tab <?php echo ( 'WooCommerce' === $tab ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e( 'WooCommerce Sync', 'mailrelay' ); ?></a>
+				<?php endif; ?>
 			</nav>
 
 			<div class="tab-content">
@@ -121,6 +132,11 @@ class MailrelayPages {
 						$this->setup_settings_page_fields();
 						$link = admin_url( '/admin.php?page=mailrelay&tab=Authentication' );
 						include_once __DIR__ . '/partials/tab-settings.php';
+						break;
+
+					case 'WooCommerce':
+						$this->setup_woocommerce_page_fields();
+						include_once __DIR__ . '/partials/tab-woocommerce.php';
 						break;
 				endswitch;
 				?>
@@ -488,6 +504,141 @@ class MailrelayPages {
 		return array(
 			'valid'   => true,
 			'message' => $message,
+		);
+	}
+
+	public function setup_woocommerce_page_fields() {
+		add_settings_section(
+			'mailrelay_woocommerce_sync_section', // id
+			'', // title
+			function () { }, // callback
+			'mailrelay-woocommerce-sync-page' // page
+		);
+
+		$store_id = MailrelayWoocommerce::instance()->get_store_id();
+
+		if ( $store_id ) {
+			add_settings_field(
+				'woocommerce_auto_sync', // id
+				__( 'Automatically sync WooCommerce with Mailrelay', 'mailrelay' ), // title
+				array( $this, 'woocommerce_auto_sync_callback' ), // callback
+				'mailrelay-woocommerce-sync-page', // page
+				'mailrelay_woocommerce_sync_section'// section
+			);
+
+			add_settings_field(
+				'action', // id
+				'', // title
+				array( $this, 'action_woocommerce_settings_callback' ), // callback
+				'mailrelay-woocommerce-sync-page', // page
+				'mailrelay_woocommerce_sync_section', // section
+				array(
+					'class' => 'hidden',
+				)
+			);
+		}
+	}
+
+	public function action_woocommerce_settings_callback() {
+		printf(
+			'<input type="hidden" name="action" value="mailrelay_save_woocommerce_sync_settings" />'
+		);
+	}
+
+	public function woocommerce_auto_sync_callback() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: Nonce verification happens at render_admin_page.
+		$value = isset( $_POST['mailrelay_woocommerce_auto_sync'] ) ? filter_var( wp_unslash( $_POST['mailrelay_woocommerce_auto_sync'] ), FILTER_SANITIZE_NUMBER_INT ) : get_option( 'mailrelay_woocommerce_auto_sync' );
+		?>
+		<input type="checkbox" name="mailrelay_woocommerce_auto_sync" id="mailrelay_woocommerce_auto_sync" value="1" <?php checked( 1, $value ); ?>/>
+		<p class="description"><?php esc_html_e( 'When enabled, products, orders and carts will be automatically synced to Mailrelay.', 'mailrelay' ); ?></p>
+		<?php
+	}
+
+	public function process_save_woocommerce_sync_settings() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: Nonce verification happens at render_admin_page.
+		$auto_sync = isset( $_POST['mailrelay_woocommerce_auto_sync'] ) ? filter_var( wp_unslash( $_POST['mailrelay_woocommerce_auto_sync'] ), FILTER_SANITIZE_NUMBER_INT ) : 0;
+		update_option( 'mailrelay_woocommerce_auto_sync', $auto_sync );
+
+		if ( $auto_sync ) {
+			MailrelayWoocommerce::instance()->enqueue_sync_all_products();
+		}
+
+		return array(
+			'valid'   => true,
+			'message' => __( 'WooCommerce Sync settings saved successfully.', 'mailrelay' ),
+		);
+	}
+
+	public function process_connect_woocommerce_store() {
+		// First, try to find a store with the same URL as the current site
+		$site_url = home_url();
+
+		$query_parameters = array(
+			'q' => array(
+				'url_eq' => $site_url,
+			),
+		);
+
+		$response = mailrelay_api_request( 'GET', 'ecommerce/stores?' . http_build_query( $query_parameters ) );
+
+		if ( $response['wp_error'] || 200 !== $response['code'] ) {
+			return array(
+				'valid'   => false,
+				'message' => __( 'Failed to connect to Mailrelay API. Please try again.', 'mailrelay' ),
+			);
+		}
+
+		$existing_store = $response['body'][0];
+
+		if ( $existing_store ) {
+			// Store found, save the ID
+			update_option( 'mailrelay_woocommerce_store_id', $existing_store['id'] );
+			return array(
+				'valid'   => true,
+				'message' => __( 'Successfully connected to existing store in Mailrelay.', 'mailrelay' ),
+			);
+		} else {
+			// Create a new store
+			$store_data = array(
+				'name'     => get_bloginfo( 'name' ) . ' - WooCommerce',
+				'url'      => $site_url,
+				'currency' => get_woocommerce_currency(),
+			);
+
+			$response = mailrelay_api_request(
+				'POST',
+				'ecommerce/stores',
+				array(
+					'body'    => wp_json_encode( $store_data ),
+					'headers' => array( 'content-type' => 'application/json' ),
+				)
+			);
+
+			if ( $response['wp_error'] || ( 200 !== $response['code'] && 201 !== $response['code'] ) ) {
+				return array(
+					'valid'   => false,
+					'message' => __( 'Failed to create store in Mailrelay. Please try again.', 'mailrelay' ),
+				);
+			}
+
+			update_option( 'mailrelay_woocommerce_store_id', $response['body']['id'] );
+			update_option( 'mailrelay_woocommerce_auto_sync', 1 );
+
+			MailrelayWoocommerce::instance()->enqueue_sync_all_products();
+
+			return array(
+				'valid'   => true,
+				'message' => __( 'Successfully created and connected to a new store in Mailrelay.', 'mailrelay' ),
+			);
+		}
+	}
+
+	public function process_manual_woocommerce_sync() {
+		MailrelayWoocommerce::instance()->enqueue_sync_all_products();
+
+		return array(
+			'valid'   => true,
+			'message' => __( 'Products are being synced to Mailrelay. It may take a few minutes to complete.', 'mailrelay' ),
 		);
 	}
 }
