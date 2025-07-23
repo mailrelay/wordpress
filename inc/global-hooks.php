@@ -14,8 +14,7 @@ function mailrelay_user_register_hook( $user_id ) {
 	as_enqueue_async_action(
 		'mailrelay_sync_user_background',
 		array( $user_id ),
-		'mailrelay',
-		true
+		'mailrelay'
 	);
 }
 add_action( 'user_register', 'mailrelay_user_register_hook' );

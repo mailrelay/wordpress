@@ -34,7 +34,18 @@ if ( function_exists( 'is_admin' ) && is_admin() ) {
 
 }
 
-function mailrelay_wpforms() {
-	require_once __DIR__ . '/inc/class-mailrelay-wpforms.php';
-}
-add_action( 'wpforms_loaded', 'mailrelay_wpforms' );
+
+add_action(
+	'wpforms_loaded',
+	function () {
+		require_once __DIR__ . '/inc/class-mailrelay-wpforms.php';
+	}
+);
+
+require_once __DIR__ . '/inc/class-mailrelay-woocommerce.php';
+add_action(
+	'plugins_loaded',
+	function () {
+		MailrelayWoocommerce::instance()->setup_hooks();
+	}
+);

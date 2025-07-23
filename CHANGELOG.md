@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- Added WooCommerce integration with product and cart synchronization
+
 ### Changed
 - Changed plugin to sync subscribers using background tasks avoiding errors if API isn't available
 
