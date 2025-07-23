@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Changed
+- Changed plugin to sync subscribers using background tasks avoiding errors if API isn't available
+
 ## [2.1.3] - 2023-10-24
 
 ### Fixed
@@ -17,9 +22,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [2.1.1] - 2022-09-15
 
 ### Fixed
-- Disable clicks in Mailrelay form iframe when displaying it in Gutenberg editor 
+- Disable clicks in Mailrelay form iframe when displaying it in Gutenberg editor
 - Fix form widget not working on newer Gutenberg editor versions
-- Fix issue with only part of groups being displayed 
+- Fix issue with only part of groups being displayed
 
 ## [2.1.0] - 2022-07-07
 
@@ -46,7 +51,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add option to sync WooCommerce customers
 
 ### Fixed
-- Plugin is compatible with Wordpress 5.9. 
+- Plugin is compatible with Wordpress 5.9.
 
 ### Removed
 - Removed support for legacy API
@@ -66,6 +71,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add German translation
 
+[Unreleased]: https://github.com/mailrelay/wordpress/compare/v2.1.3...HEAD
 [2.1.3]: https://github.com/mailrelay/wordpress/compare/v2.1.2...v2.1.3
 [2.1.2]: https://github.com/mailrelay/wordpress/compare/v2.1.1...v2.1.2
 [2.1.1]: https://github.com/mailrelay/wordpress/compare/v2.1.0...v2.1.1
