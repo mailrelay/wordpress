@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [3.0.1] - 2025-08-07
 
 ### Fixed
 - Fixed fatal error when WooCommerce session is not initialized during cart and order sync operations
@@ -79,6 +79,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add German translation
 
+[3.0.1]: https://github.com/mailrelay/wordpress/compare/v3.0...v3.0.1
 [3.0]: https://github.com/mailrelay/wordpress/compare/v2.1.3...v3.0
 [2.1.3]: https://github.com/mailrelay/wordpress/compare/v2.1.2...v2.1.3
 [2.1.2]: https://github.com/mailrelay/wordpress/compare/v2.1.1...v2.1.2
