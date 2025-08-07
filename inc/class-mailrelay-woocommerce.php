@@ -167,8 +167,9 @@ class MailrelayWoocommerce {
 		}
 
 		$email = $order->get_billing_email();
+
 		// The cart_id is the user session.
-		$cart_id = WC()->session->get_customer_id();
+		$cart_id = WC()->session ? WC()->session->get_customer_id() : null;
 
 		if ( empty( $email ) || empty( $cart_id ) ) {
 			return;
@@ -225,6 +226,16 @@ class MailrelayWoocommerce {
 			return;
 		}
 
+		// Check if session exists and we can get a cart_id
+		if ( ! WC()->session ) {
+			return;
+		}
+
+		$cart_id = WC()->session->get_customer_id();
+		if ( empty( $cart_id ) ) {
+			return;
+		}
+
 		// Prevent duplicate jobs using a transient based on cart hash.
 		$transient_name = 'mailrelay_cart_sync_' . $cart->get_cart_hash();
 		if ( get_transient( $transient_name ) ) {
@@ -250,7 +261,7 @@ class MailrelayWoocommerce {
 		$cart_data = array(
 			'email'          => $email,
 			'user_id'        => get_current_user_id(),
-			'cart_id'        => WC()->session->get_customer_id(),
+			'cart_id'        => $cart_id,
 			'cart_total'     => $cart->get_total( 'edit' ),
 			'cart_tax_total' => $cart->get_total_tax(),
 			'cart_items'     => $cart_contents_for_queue,

@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+- Fixed fatal error when WooCommerce session is not initialized during cart and order sync operations
+
 ## [3.0] - 2025-07-23
 
 ### Added
