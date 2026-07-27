@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+- Fixed fatal error on PHP 8 when marking a WooCommerce cart as completed after an order is placed
+
 ## [3.0.1] - 2025-08-07
 
 ### Fixed
