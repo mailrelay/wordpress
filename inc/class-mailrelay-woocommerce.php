@@ -93,12 +93,12 @@ class MailrelayWoocommerce {
 
 		add_action(
 			'mailrelay_sync_cart_completed_background',
-			function ( $data ) {
+			function ( $cart_id, $email ) {
 				$service = new MailrelayWoocommerceCart();
-				$service->set_completed( $data['cart_id'], $data['email'] );
+				$service->set_completed( $cart_id, $email );
 			},
 			10,
-			1
+			2
 		);
 	}
 
