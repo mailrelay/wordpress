@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [3.0.2] - 2026-07-27
 
 ### Fixed
 - Fixed fatal error on PHP 8 when marking a WooCommerce cart as completed after an order is placed
@@ -84,6 +84,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add German translation
 
+[3.0.2]: https://github.com/mailrelay/wordpress/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/mailrelay/wordpress/compare/v3.0...v3.0.1
 [3.0]: https://github.com/mailrelay/wordpress/compare/v2.1.3...v3.0
 [2.1.3]: https://github.com/mailrelay/wordpress/compare/v2.1.2...v2.1.3
